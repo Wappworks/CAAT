@@ -2963,7 +2963,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
      *
      * <p>
      * For am exponential interpolation, the getPosition function would look like this:
-     * <code>function getPosition(time) { return { x:time, y: Math.pow(time,2) }Ê}</code>.
+     * <code>function getPosition(time) { return { x:time, y: Math.pow(time,2) }}</code>.
      * meaning that for time=0.5, a value of 0,5*0,5 should use instead.
      *
      * <p>
@@ -15026,7 +15026,7 @@ CAAT.modules.CircleManager = CAAT.modules.CircleManager || {};/**
          * Transparent means that every scan pixel is alpha=0.
          * @param image
          * @param threshold {integer} any value below or equal to this will be optimized.
-         * @param !areas { object{ top<boolean>, bottom<boolean>, left<boolean, right<boolean> }Ê}
+         * @param !areas { object{ top<boolean>, bottom<boolean>, left<boolean, right<boolean> }}
          */
     CAAT.modules.ImageUtil.optimize= function(image, threshold, areas ) {
         threshold>>=0;
