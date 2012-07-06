@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 102
+Version: 0.4 build: 116
 
 Created on:
-DATE: 2012-06-06
-TIME: 12:09:56
+DATE: 2012-07-05
+TIME: 22:28:02
 */
 
 
@@ -7413,7 +7413,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
              * @ignore
              */
             this.actionPerformed= function(event) {
-                if ( this.enabled && null!==this.fnOnClick ) {
+                if ( this.enabled && typeof this.fnOnClick !== 'undefined') {
                     this.fnOnClick(this);
                 }
             };

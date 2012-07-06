@@ -25,7 +25,8 @@ echo "" > "${FILE_CAAT}"
 echo "" > "${FILE_CAAT_CSS}"
 echo "" > "${FILE_CAAT_BOX2D}"
 
-SOURCE_DIR=/Users/ibon/js/CAAT/src
+SOURCE_DIR=./src
+COMPILER_JAR=../../../thirdparty/closure-compiler-20120430/compiler.jar
 
 #
 # set compilation level
@@ -89,7 +90,7 @@ echo -e "*/\n\n" >> "${FILE_CAAT_BOX2D}"
 # Compile canvas/GL
 #
 echo -e "\nCreating CAAT canvas/webGL"
-/usr/bin/java -jar /Users/ibon/applications/closure/compiler.jar --compilation_level "${COMPILATION_LEVEL}" \
+java -jar ${COMPILER_JAR} --compilation_level "${COMPILATION_LEVEL}" \
  --js "${SOURCE_DIR}"/CAAT.js \
  --js "${SOURCE_DIR}"/core/browserdetect.js \
  --js "${SOURCE_DIR}"/core/class.js \
@@ -131,14 +132,14 @@ echo -e "\nCreating CAAT canvas/webGL"
 # Compile box2d
 #
 echo "Creating CAAT Box2d"
-/usr/bin/java -jar /Users/ibon/applications/closure/compiler.jar --compilation_level "${COMPILATION_LEVEL}" --js "${SOURCE_DIR}"/box2d/box2Dactor.js >> "${FILE_CAAT_BOX2D}"
+java -jar ${COMPILER_JAR} --compilation_level "${COMPILATION_LEVEL}" --js "${SOURCE_DIR}"/box2d/box2Dactor.js >> "${FILE_CAAT_BOX2D}"
 
 #
 # Compile css
 #
 echo "Creating CAAT CSS"
 echo -e "CAAT.__CSS__=1;" >> /tmp/__css.js
-java -jar /Users/ibon/applications/closure/compiler.jar --compilation_level "${COMPILATION_LEVEL}" \
+java -jar ${COMPILER_JAR} --compilation_level "${COMPILATION_LEVEL}" \
  --js "${SOURCE_DIR}"/CAAT.js \
  --js /tmp/__css.js \
  --js "${SOURCE_DIR}"/core/browserdetect.js \

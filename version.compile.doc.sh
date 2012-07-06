@@ -1,6 +1,7 @@
-SOURCE_DIR=/Users/ibon/js/CAAT/src
+SOURCE_DIR=./src
+JSRUN_DIR=../../../thirdparty/jsdoc-toolkit-2.4.0
 
-/usr/bin/java -jar /Users/ibon/applications/jsdoc-toolkit/jsrun.jar /Users/ibon/applications/jsdoc-toolkit/app/run.js -a -v -p -r=4 -t=/Users/ibon/applications/jsdoc-toolkit/templates/jsdoc \
+java -jar ${JSRUN_DIR}/jsrun.jar ${JSRUN_DIR}/app/run.js -a -v -p -r=4 -t=${JSRUN_DIR}/templates/jsdoc \
 "${SOURCE_DIR}"/CAAT.js \
 "${SOURCE_DIR}"/core/browserdetect.js \
 "${SOURCE_DIR}"/core/class.js \
@@ -36,4 +37,4 @@ SOURCE_DIR=/Users/ibon/js/CAAT/src
 "${SOURCE_DIR}"/webgl/ShaderUtil.js \
 "${SOURCE_DIR}"/webgl/glu.js \
 "${SOURCE_DIR}"/webgl/glTexturePage.js \
-  -d=/Users/ibon/js/CAAT/documentation/jsdoc
+  -d=./documentation/jsdoc

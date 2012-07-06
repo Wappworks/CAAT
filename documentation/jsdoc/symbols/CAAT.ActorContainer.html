@@ -317,7 +317,7 @@ ul.inheritsList
 				
 				
 				
-					<br /><i>Defined in: </i> <a href="../symbols/src/_Users_ibon_js_CAAT_src_model_actor.js.html">actor.js</a>.
+					<br /><i>Defined in: </i> <a href="../symbols/src/src_model_actor.js.html">actor.js</a>.
 				
 			</p>
 
@@ -475,8 +475,7 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.ActorContainer.html#findChild">findChild</a></b>(child)
 								</div>
-								<div class="description">Private
-Gets a contained Actor z-index on this ActorContainer.</div>
+								<div class="description">PrivateGets a contained Actor z-index on this ActorContainer.</div>
 							</td>
 						</tr>
 					
@@ -512,8 +511,7 @@ Gets a contained Actor z-index on this ActorContainer.</div>
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.ActorContainer.html#paintActor">paintActor</a></b>(director, time)
 								</div>
-								<div class="description">Private
-Paints this container and every contained children.</div>
+								<div class="description">PrivatePaints this container and every contained children.</div>
 							</td>
 						</tr>
 					
@@ -587,12 +585,7 @@ Paints this container and every contained children.</div>
 				</div>
 				
 				<div class="description">
-					This class is a general container of CAAT.Actor instances. It extends the concept of an Actor
-from a single entity on screen to a set of entities with a parent/children relationship among
-them.
-<p>
-This mainly overrides default behavior of a single entity and exposes methods to manage its children
-collection.
+					This class is a general container of CAAT.Actor instances. It extends the concept of an Actorfrom a single entity on screen to a set of entities with a parent/children relationship amongthem.<p>This mainly overrides default behavior of a single entity and exposes methods to manage its childrencollection.
 					
 				</div>
 				
@@ -680,15 +673,7 @@ collection.
 					
 					</div>
 					<div class="description">
-						Adds an Actor to this ActorContainer.
-The Actor will be added to the container AFTER frame animation, and not on method call time.
-Except the Director and in orther to avoid visual artifacts, the developer SHOULD NOT call this
-method directly.
-
-If the container has addingHint as CAAT.ActorContainer.AddHint.CONFORM, new continer size will be
-calculated by summing up the union of every client actor bounding box.
-This method will not take into acount actor's affine transformations, so the bounding box will be
-AABB.
+						Adds an Actor to this ActorContainer.The Actor will be added to the container AFTER frame animation, and not on method call time.Except the Director and in orther to avoid visual artifacts, the developer SHOULD NOT call thismethod directly.If the container has addingHint as CAAT.ActorContainer.AddHint.CONFORM, new continer size will becalculated by summing up the union of every client actor bounding box.This method will not take into acount actor's affine transformations, so the bounding box will beAABB.
 						
 						
 					</div>
@@ -816,11 +801,7 @@ AABB.
 					
 					</div>
 					<div class="description">
-						Adds an Actor to this Container.
-The Actor will be added ON METHOD CALL, despite the rendering pipeline stage being executed at
-the time of method call.
-
-This method is only used by CAAT.Director's transitionScene.
+						Adds an Actor to this Container.The Actor will be added ON METHOD CALL, despite the rendering pipeline stage being executed atthe time of method call.This method is only used by CAAT.Director's transitionScene.
 						
 						
 					</div>
@@ -863,8 +844,7 @@ This method is only used by CAAT.Director's transitionScene.
 					
 					</div>
 					<div class="description">
-						Private.
-Performs the animate method for this ActorContainer and every contained Actor.
+						Private.Performs the animate method for this ActorContainer and every contained Actor.
 						
 						
 					</div>
@@ -913,8 +893,7 @@ Performs the animate method for this ActorContainer and every contained Actor.
 					
 					</div>
 					<div class="description">
-						Destroys this ActorContainer.
-The process falls down recursively for each contained Actor into this ActorContainer.
+						Destroys this ActorContainer.The process falls down recursively for each contained Actor into this ActorContainer.
 						
 						
 					</div>
@@ -1105,8 +1084,7 @@ The process falls down recursively for each contained Actor into this ActorConta
 					
 					</div>
 					<div class="description">
-						Find the first actor with the supplied ID.
-This method is not recommended to be used since executes a linear search.
+						Find the first actor with the supplied ID.This method is not recommended to be used since executes a linear search.
 						
 						
 					</div>
@@ -1142,8 +1120,7 @@ This method is not recommended to be used since executes a linear search.
 					
 					</div>
 					<div class="description">
-						Private
-Gets a contained Actor z-index on this ActorContainer.
+						PrivateGets a contained Actor z-index on this ActorContainer.
 						
 						
 					</div>
@@ -1286,8 +1263,7 @@ Gets a contained Actor z-index on this ActorContainer.
 					
 					</div>
 					<div class="description">
-						Private
-Paints this container and every contained children.
+						PrivatePaints this container and every contained children.
 						
 						
 					</div>
@@ -1396,8 +1372,7 @@ Paints this container and every contained children.
 					
 					</div>
 					<div class="description">
-						Removed an Actor form this ActorContainer.
-If the Actor is not contained into this Container, nothing happends.
+						Removed an Actor form this ActorContainer.If the Actor is not contained into this Container, nothing happends.
 						
 						
 					</div>
@@ -1486,8 +1461,7 @@ If the Actor is not contained into this Container, nothing happends.
 									<b>index</b>
 									
 								</dt>
-								<dd>an integer indicating the new ZOrder. a value greater than children list size means to be the
-last ZOrder Actor.</dd>
+								<dd>an integer indicating the new ZOrder. a value greater than children list size means to be thelast ZOrder Actor.</dd>
 							
 							</dl>
 						
@@ -1512,7 +1486,7 @@ last ZOrder Actor.</dd>
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Wed Jun 06 2012 11:59:20 GMT+0200 (CEST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Jul 05 2012 22:28:38 GMT-0700 (PDT)
 		</div>
 	</body>
 </html>
