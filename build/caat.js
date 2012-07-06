@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 116
+Version: 0.4 build: 118
 
 Created on:
 DATE: 2012-07-05
-TIME: 22:28:02
+TIME: 22:36:59
 */
 
 
@@ -8533,22 +8533,25 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * @param time an integer with the Scene time the Actor is being drawn.
          */
         paintCircle : function(director,time) {
-            var ctx= director.crc;
+            var ctx= director.crc,
+                radius = Math.min(this.width,this.height)/2;
+
+            if(this.width != this.height)
+                ctx.setScale(this.width/radius, this.height/radius);
 
             ctx.lineWidth= this.lineWidth;
-
             ctx.globalCompositeOperation= this.compositeOp;
             if ( null!==this.fillStyle ) {
                 ctx.fillStyle= this.fillStyle;
                 ctx.beginPath();
-                ctx.arc( this.width/2, this.height/2, Math.min(this.width,this.height)/2, 0, 2*Math.PI, false );
+                ctx.arc( this.width/2, this.height/2, radius, 0, 2*Math.PI, false );
                 ctx.fill();
             }
 
             if ( null!==this.strokeStyle ) {
                 ctx.strokeStyle= this.strokeStyle;
                 ctx.beginPath();
-                ctx.arc( this.width/2, this.height/2, Math.min(this.width,this.height)/2, 0, 2*Math.PI, false );
+                ctx.arc( this.width/2, this.height/2, radius, 0, 2*Math.PI, false );
                 ctx.stroke();
             }
         },
