@@ -2925,24 +2925,37 @@
          */
         paintCircle : function(director,time) {
             var ctx= director.crc,
-                radius = Math.min(this.width,this.height)/2;
+                radius,
+                centerX, centerY;
 
-            if(this.width != this.height)
-                ctx.scale(this.width/radius, this.height/radius);
+            if( null==this.fillStyle && null==this.strokeStyle)
+                return;
+
+            centerX = this.width/2;
+            centerY = this.height/2;
+
+            ctx.beginPath();
+            if(this.width === this.height) {
+                ctx.arc( centerX, centerY, Math.min(this.width,this.height)/2, 0, 2*Math.PI, false );
+            } else {
+                ctx.moveTo(centerX, 0);
+                ctx.bezierCurveTo(  this.width, 0,
+                                    this.width, this.height,
+                                    centerX, this.height);
+                ctx.bezierCurveTo(  0, this.height,
+                                    0, 0,
+                                    centerX, 0);
+            }
 
             ctx.lineWidth= this.lineWidth;
             ctx.globalCompositeOperation= this.compositeOp;
             if ( null!==this.fillStyle ) {
                 ctx.fillStyle= this.fillStyle;
-                ctx.beginPath();
-                ctx.arc( this.width/2, this.height/2, radius, 0, 2*Math.PI, false );
                 ctx.fill();
             }
 
             if ( null!==this.strokeStyle ) {
                 ctx.strokeStyle= this.strokeStyle;
-                ctx.beginPath();
-                ctx.arc( this.width/2, this.height/2, radius, 0, 2*Math.PI, false );
                 ctx.stroke();
             }
         },
@@ -2957,6 +2970,9 @@
         paintRectangle : function(director,time) {
             var ctx= director.crc;
 
+            if( null==this.fillStyle && null==this.strokeStyle)
+                return;
+
             ctx.lineWidth= this.lineWidth;
 
             if ( this.lineCap ) {
@@ -2969,18 +2985,17 @@
                 ctx.miterLimit= this.miterLimit;
             }
 
+            ctx.beginPath();
+            ctx.rect(0,0,this.width,this.height);
+
             ctx.globalCompositeOperation= this.compositeOp;
             if ( null!==this.fillStyle ) {
                 ctx.fillStyle= this.fillStyle;
-                ctx.beginPath();
-                ctx.fillRect(0,0,this.width,this.height);
                 ctx.fill();
             }
 
             if ( null!==this.strokeStyle ) {
                 ctx.strokeStyle= this.strokeStyle;
-                ctx.beginPath();
-                ctx.strokeRect(0,0,this.width,this.height);
                 ctx.stroke();
             }
         }
