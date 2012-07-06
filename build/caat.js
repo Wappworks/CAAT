@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 118
+Version: 0.4 build: 120
 
 Created on:
 DATE: 2012-07-05
-TIME: 22:36:59
+TIME: 22:43:27
 */
 
 
@@ -8537,7 +8537,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 radius = Math.min(this.width,this.height)/2;
 
             if(this.width != this.height)
-                ctx.setScale(this.width/radius, this.height/radius);
+                ctx.scale(this.width/radius, this.height/radius);
 
             ctx.lineWidth= this.lineWidth;
             ctx.globalCompositeOperation= this.compositeOp;

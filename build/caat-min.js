@@ -22,11 +22,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 117
+Version: 0.4 build: 119
 
 Created on:
 DATE: 2012-07-05
-TIME: 22:36:53
+TIME: 22:43:21
 */
 
 
@@ -188,7 +188,7 @@ this.pathDuration/this.pathDuration).y*this.path.getLength(),e=new CAAT.Point(0,
 b,c){this.path=a;this.pathInterpolator=b||(new CAAT.Interpolator).createLinearInterpolator();this.pathDuration=c||1E4;this.mouseEnabled=!1;return this}};extend(CAAT.TextActor,CAAT.Actor,null)})();
 (function(){CAAT.ShapeActor=function(){CAAT.ShapeActor.superclass.constructor.call(this);this.compositeOp="source-over";this.setShape(this.SHAPE_CIRCLE);return this};CAAT.ShapeActor.prototype={shape:0,compositeOp:null,lineWidth:1,lineCap:null,lineJoin:null,miterLimit:null,SHAPE_CIRCLE:0,SHAPE_RECTANGLE:1,setLineWidth:function(a){this.lineWidth=a;return this},setLineCap:function(a){this.lineCap=a;return this},setLineJoin:function(a){this.lineJoin=a;return this},setMiterLimit:function(a){this.miterLimit=
 a;return this},getLineCap:function(){return this.lineCap},getLineJoin:function(){return this.lineJoin},getMiterLimit:function(){return this.miterLimit},getLineWidth:function(){return this.lineWidth},setShape:function(a){this.shape=a;this.paint=this.shape===this.SHAPE_CIRCLE?this.paintCircle:this.paintRectangle;return this},setCompositeOp:function(a){this.compositeOp=a;return this},paint:function(){},paintCircle:function(a){var a=a.crc,b=Math.min(this.width,this.height)/2;this.width!=this.height&&
-a.setScale(this.width/b,this.height/b);a.lineWidth=this.lineWidth;a.globalCompositeOperation=this.compositeOp;null!==this.fillStyle&&(a.fillStyle=this.fillStyle,a.beginPath(),a.arc(this.width/2,this.height/2,b,0,2*Math.PI,!1),a.fill());null!==this.strokeStyle&&(a.strokeStyle=this.strokeStyle,a.beginPath(),a.arc(this.width/2,this.height/2,b,0,2*Math.PI,!1),a.stroke())},paintRectangle:function(a){a=a.crc;a.lineWidth=this.lineWidth;this.lineCap&&(a.lineCap=this.lineCap);this.lineJoin&&(a.lineJoin=this.lineJoin);
+a.scale(this.width/b,this.height/b);a.lineWidth=this.lineWidth;a.globalCompositeOperation=this.compositeOp;null!==this.fillStyle&&(a.fillStyle=this.fillStyle,a.beginPath(),a.arc(this.width/2,this.height/2,b,0,2*Math.PI,!1),a.fill());null!==this.strokeStyle&&(a.strokeStyle=this.strokeStyle,a.beginPath(),a.arc(this.width/2,this.height/2,b,0,2*Math.PI,!1),a.stroke())},paintRectangle:function(a){a=a.crc;a.lineWidth=this.lineWidth;this.lineCap&&(a.lineCap=this.lineCap);this.lineJoin&&(a.lineJoin=this.lineJoin);
 this.miterLimit&&(a.miterLimit=this.miterLimit);a.globalCompositeOperation=this.compositeOp;null!==this.fillStyle&&(a.fillStyle=this.fillStyle,a.beginPath(),a.fillRect(0,0,this.width,this.height),a.fill());null!==this.strokeStyle&&(a.strokeStyle=this.strokeStyle,a.beginPath(),a.strokeRect(0,0,this.width,this.height),a.stroke())}};extend(CAAT.ShapeActor,CAAT.ActorContainer,null)})();
 (function(){CAAT.StarActor=function(){CAAT.StarActor.superclass.constructor.call(this);this.compositeOp="source-over";return this};CAAT.StarActor.prototype={nPeaks:0,maxRadius:0,minRadius:0,initialAngle:0,compositeOp:null,lineWidth:1,lineCap:null,lineJoin:null,miterLimit:null,setLineWidth:function(a){this.lineWidth=a;return this},setLineCap:function(a){this.lineCap=a;return this},setLineJoin:function(a){this.lineJoin=a;return this},setMiterLimit:function(a){this.miterLimit=a;return this},getLineCap:function(){return this.lineCap},
 getLineJoin:function(){return this.lineJoin},getMiterLimit:function(){return this.miterLimit},getLineWidth:function(){return this.lineWidth},setFilled:function(){return this},setOutlined:function(){return this},setCompositeOp:function(a){this.compositeOp=a;return this},setInitialAngle:function(a){this.initialAngle=a;return this},initialize:function(a,b,c){this.setSize(2*b,2*b);this.nPeaks=a;this.maxRadius=b;this.minRadius=c;return this},paint:function(a){var a=a.ctx,b=this.width/2,c=this.height/2,

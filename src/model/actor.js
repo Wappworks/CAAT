@@ -2928,7 +2928,7 @@
                 radius = Math.min(this.width,this.height)/2;
 
             if(this.width != this.height)
-                ctx.setScale(this.width/radius, this.height/radius);
+                ctx.scale(this.width/radius, this.height/radius);
 
             ctx.lineWidth= this.lineWidth;
             ctx.globalCompositeOperation= this.compositeOp;
