@@ -55,6 +55,7 @@
                 if (callback_loaded_one_image ) {
                     callback_loaded_one_image(0,[]);
                 }
+                return;
             }
 
             var me= this, i;
