@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 126
+Version: 0.4 build: 128
 
 Created on:
 DATE: 2012-07-09
-TIME: 12:47:53
+TIME: 13:50:04
 */
 
 
@@ -9485,6 +9485,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 ssin.easeRotationIn(time, alpha, anchorin, interpolatorIn);
             } else if (typein === CAAT.Scene.prototype.EASE_SCALE) {
                 ssin.easeScaleIn(0, time, alpha, anchorin, interpolatorIn);
+            } else if (typein === CAAT.Scene.prototype.EASE_STATIONARY) {
+                ssin.easeStationary( time, alpha, true );
             } else {
                 ssin.easeTranslationIn(time, alpha, anchorin, interpolatorIn);
             }
@@ -9493,6 +9495,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 sout.easeRotationOut(time, alpha, anchorout, interpolatorOut);
             } else if (typeout === CAAT.Scene.prototype.EASE_SCALE) {
                 sout.easeScaleOut(0, time, alpha, anchorout, interpolatorOut);
+            } else if (typeout === CAAT.Scene.prototype.EASE_STATIONARY) {
+                sout.easeStationary( time, alpha, false );
             } else {
                 sout.easeTranslationOut(time, alpha, anchorout, interpolatorOut);
             }

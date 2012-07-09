@@ -31,6 +31,7 @@
         EASE_ROTATION:					1,      // Constant values to identify the type of Scene transition
 		EASE_SCALE:						2,      // to perform on Scene switching by the Director.
 		EASE_TRANSLATE:					3,
+        EASE_STATIONARY:				4,
 
         timerList:                      null,   // collection of CAAT.TimerTask objects.
         timerSequence:                  0,      // incremental CAAT.TimerTask id.
@@ -254,6 +255,28 @@
 			this.emptyBehaviorList();
 			CAAT.Scene.superclass.addBehavior.call( this, this.easeContainerBehaviour );
 		},
+        /**
+         * This method will setup Scene behaviours to switch a Scene which stays stationary
+         *
+         * @param time integer indicating time in milliseconds for the Scene.
+         * @param alpha boolean indicating whether fading will be applied to the Scene.
+         * @param isIn boolean indicating whether the scene will be brought in.
+         */
+        easeStationary : function( time, alpha, isIn ) {
+
+            this.easeContainerBehaviour= new CAAT.ContainerBehavior();
+            this.easeIn= isIn;
+
+            if (alpha) {
+                this.createAlphaBehaviour(time,isIn);
+            }
+
+            this.easeContainerBehaviour.setFrameTime( this.time, time );
+            this.easeContainerBehaviour.addListener(this);
+
+            this.emptyBehaviorList();
+            CAAT.Scene.superclass.addBehavior.call( this, this.easeContainerBehaviour );
+        },
         /**
          * Called from CAAT.Director to bring in a Scene.
          * A helper method for easeScale.

@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 126
+Version: 0.4 build: 128
 
 Created on:
 DATE: 2012-07-09
-TIME: 12:47:51
+TIME: 13:50:01
 */
 
 
@@ -10555,6 +10555,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 ssin.easeRotationIn(time, alpha, anchorin, interpolatorIn);
             } else if (typein === CAAT.Scene.prototype.EASE_SCALE) {
                 ssin.easeScaleIn(0, time, alpha, anchorin, interpolatorIn);
+            } else if (typein === CAAT.Scene.prototype.EASE_STATIONARY) {
+                ssin.easeStationary( time, alpha, true );
             } else {
                 ssin.easeTranslationIn(time, alpha, anchorin, interpolatorIn);
             }
@@ -10563,6 +10565,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 sout.easeRotationOut(time, alpha, anchorout, interpolatorOut);
             } else if (typeout === CAAT.Scene.prototype.EASE_SCALE) {
                 sout.easeScaleOut(0, time, alpha, anchorout, interpolatorOut);
+            } else if (typeout === CAAT.Scene.prototype.EASE_STATIONARY) {
+                sout.easeStationary( time, alpha, false );
             } else {
                 sout.easeTranslationOut(time, alpha, anchorout, interpolatorOut);
             }
@@ -13815,6 +13819,7 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
         EASE_ROTATION:					1,      // Constant values to identify the type of Scene transition
 		EASE_SCALE:						2,      // to perform on Scene switching by the Director.
 		EASE_TRANSLATE:					3,
+        EASE_STATIONARY:				4,
 
         timerList:                      null,   // collection of CAAT.TimerTask objects.
         timerSequence:                  0,      // incremental CAAT.TimerTask id.
@@ -14038,6 +14043,28 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
 			this.emptyBehaviorList();
 			CAAT.Scene.superclass.addBehavior.call( this, this.easeContainerBehaviour );
 		},
+        /**
+         * This method will setup Scene behaviours to switch a Scene which stays stationary
+         *
+         * @param time integer indicating time in milliseconds for the Scene.
+         * @param alpha boolean indicating whether fading will be applied to the Scene.
+         * @param isIn boolean indicating whether the scene will be brought in.
+         */
+        easeStationary : function( time, alpha, isIn ) {
+
+            this.easeContainerBehaviour= new CAAT.ContainerBehavior();
+            this.easeIn= isIn;
+
+            if (alpha) {
+                this.createAlphaBehaviour(time,isIn);
+            }
+
+            this.easeContainerBehaviour.setFrameTime( this.time, time );
+            this.easeContainerBehaviour.addListener(this);
+
+            this.emptyBehaviorList();
+            CAAT.Scene.superclass.addBehavior.call( this, this.easeContainerBehaviour );
+        },
         /**
          * Called from CAAT.Director to bring in a Scene.
          * A helper method for easeScale.

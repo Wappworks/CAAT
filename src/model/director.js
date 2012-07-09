@@ -994,6 +994,8 @@
                 ssin.easeRotationIn(time, alpha, anchorin, interpolatorIn);
             } else if (typein === CAAT.Scene.prototype.EASE_SCALE) {
                 ssin.easeScaleIn(0, time, alpha, anchorin, interpolatorIn);
+            } else if (typein === CAAT.Scene.prototype.EASE_STATIONARY) {
+                ssin.easeStationary( time, alpha, true );
             } else {
                 ssin.easeTranslationIn(time, alpha, anchorin, interpolatorIn);
             }
@@ -1002,6 +1004,8 @@
                 sout.easeRotationOut(time, alpha, anchorout, interpolatorOut);
             } else if (typeout === CAAT.Scene.prototype.EASE_SCALE) {
                 sout.easeScaleOut(0, time, alpha, anchorout, interpolatorOut);
+            } else if (typeout === CAAT.Scene.prototype.EASE_STATIONARY) {
+                sout.easeStationary( time, alpha, false );
             } else {
                 sout.easeTranslationOut(time, alpha, anchorout, interpolatorOut);
             }
