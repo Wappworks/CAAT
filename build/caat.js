@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 124
+Version: 0.4 build: 126
 
 Created on:
-DATE: 2012-07-06
-TIME: 21:08:07
+DATE: 2012-07-09
+TIME: 12:47:51
 */
 
 
@@ -10517,8 +10517,12 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * the scenes.
          * @param interpolatorIn CAAT.Interpolator object to apply to entering scene.
          * @param interpolatorOut CAAT.Interpolator object to apply to exiting scene.
+         * @param [sceneInOnTop] The scene draw order. Defaults to true (the scene in is drawn on top) .
          */
-        easeInOut : function(inSceneIndex, typein, anchorin, outSceneIndex, typeout, anchorout, time, alpha, interpolatorIn, interpolatorOut) {
+        easeInOut : function(inSceneIndex, typein, anchorin, outSceneIndex, typeout, anchorout, time, alpha, interpolatorIn, interpolatorOut, sceneInOnTop) {
+
+            if( sceneInOnTop == null )
+                sceneInOnTop = true;
 
             if (inSceneIndex === this.getCurrentSceneIndex()) {
                 return;
@@ -10565,8 +10569,13 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
             this.childrenList = [];
 
-            this.addChild(sout);
-            this.addChild(ssin);
+            if( sceneInOnTop ) {
+                this.addChild(sout);
+                this.addChild(ssin);
+            } else {
+                this.addChild(ssin);
+                this.addChild(sout);
+            }
         },
         /**
          * This method will switch between two given Scene indexes (ie, take away scene number 2,
@@ -10639,7 +10648,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                     alpha,
 
                     interpolatorIn,
-                    interpolatorOut);
+                    interpolatorOut,
+                    true );
 
         },
         /**
@@ -10788,7 +10798,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
         easeEnd : function(scene, b_easeIn) {
             // scene is going out
             if (!b_easeIn) {
-
+                this.removeChild( scene );
                 scene.setExpired(true);
             } else {
                 this.currentScene = scene;
