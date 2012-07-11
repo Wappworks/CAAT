@@ -22,11 +22,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 127
+Version: 0.4 build: 129
 
 Created on:
-DATE: 2012-07-09
-TIME: 13:49:54
+DATE: 2012-07-10
+TIME: 19:33:37
 */
 
 
@@ -147,7 +147,7 @@ a;return this},fireEvent:function(a,c){for(var d=0;d<this.lifecycleListenerList.
 setAlpha:function(a){this.alpha=a;this.invalidate();return this},resetTransform:function(){this.rotationAngle=0;this.rotationY=this.rotationX=0.5;this.scaleY=this.scaleX=1;this.scaleTY=this.scaleTX=0.5;this.scaleAnchor=0;this.oldY=this.oldX=-1;this.dirty=!0;return this},setFrameTime:function(a,c){this.start_time=a;this.duration=c;this.expired=!1;this.dirty=!0;return this},paint:function(a,c){if(this.backgroundImage)this.backgroundImage.paint(a,c,0,0);else if(this.fillStyle){var d=a.crc;d.fillStyle=
 this.fillStyle;d.fillRect(0,0,this.width,this.height)}},setScale:function(a,c){this.scaleX=a;this.scaleY=c;this.dirty=!0;return this},getAnchorPercent:function(a){var c=[0.5,0.5,0.5,0,0.5,1,0,0.5,1,0.5,0,0,1,0,0,1,1,1];return{x:c[2*a],y:c[2*a+1]}},getAnchor:function(a){var c=0,d=0;switch(a){case this.ANCHOR_CENTER:d=c=0.5;break;case this.ANCHOR_TOP:c=0.5;d=0;break;case this.ANCHOR_BOTTOM:c=0.5;d=1;break;case this.ANCHOR_LEFT:c=0;d=0.5;break;case this.ANCHOR_RIGHT:c=1;d=0.5;break;case this.ANCHOR_TOP_RIGHT:c=
 1;d=0;break;case this.ANCHOR_BOTTOM_LEFT:c=0;d=1;break;case this.ANCHOR_BOTTOM_RIGHT:d=c=1;break;case this.ANCHOR_TOP_LEFT:d=c=0}return{x:c,y:d}},setGlobalAnchor:function(a,c){this.scaleTX=this.rotationX=this.tAnchorX=a;this.scaleTY=this.rotationY=this.tAnchorY=c;this.dirty=!0;return this},setScaleAnchor:function(a,c){this.scaleTX=a;this.scaleTY=c;this.dirty=!0;return this},setScaleAnchored:function(a,c,d,e){this.scaleTX=d;this.scaleTY=e;this.scaleX=a;this.scaleY=c;this.dirty=!0;return this},setRotationAnchor:function(a,
-c){this.rotationX=c;this.rotationY=a;this.dirty=!0;return this},setRotation:function(a){this.rotationAngle=a;this.dirty=!0;return this},setRotationAnchored:function(a,c,d){this.rotationAngle=a;this.rotationX=c;this.rotationY=d;this.dirty=!0;return this},setSize:function(a,c){this.width=a|0;this.height=c|0;this.dirty=!0;return this},setBounds:function(a,c,d,e){this.x=a;this.y=c;this.width=d;this.height=e;this.dirty=!0;return this},setLocation:function(a,c){this.x=a;this.y=c;this.oldX=a;this.oldY=c;
+c){this.rotationX=a;this.rotationY=c;this.dirty=!0;return this},setRotation:function(a){this.rotationAngle=a;this.dirty=!0;return this},setRotationAnchored:function(a,c,d){this.rotationAngle=a;this.rotationX=c;this.rotationY=d;this.dirty=!0;return this},setSize:function(a,c){this.width=a|0;this.height=c|0;this.dirty=!0;return this},setBounds:function(a,c,d,e){this.x=a;this.y=c;this.width=d;this.height=e;this.dirty=!0;return this},setLocation:function(a,c){this.x=a;this.y=c;this.oldX=a;this.oldY=c;
 this.dirty=!0;return this},setPosition:function(a,c){return this.setLocation(a,c)},setPositionAnchor:function(a,c){this.tAnchorX=a;this.tAnchorY=c;return this},setPositionAnchored:function(a,c,d,e){this.setLocation(a,c);this.tAnchorX=d;this.tAnchorY=e;return this},isInAnimationFrame:function(a){return this.expired?!1:this.duration===Number.MAX_VALUE?this.start_time<=a:a>=this.start_time+this.duration?(this.expired||this.setExpired(a),!1):this.start_time<=a&&a<this.start_time+this.duration},contains:function(a,
 c){return 0<=a&&0<=c&&a<this.width&&c<this.height},create:function(){return this},addBehavior:function(a){this.behaviorList.push(a);return this},removeBehaviour:function(a){for(var c=this.behaviorList,d=c.length-1;d;)if(c[d]===a){c.splice(d,1);break}return this},removeBehaviorById:function(a){for(var c=this.behaviorList,d=0;d<c.length;d++)c[d].id===a&&c.splice(d,1);return this},getBehavior:function(a){for(var c=this.behaviorList,d=0;d<c.length;d++){var e=c[d];if(e.id===a)return e}return null},setDiscardable:function(a){this.discardable=
 a;return this},destroy:function(a){this.parent&&this.parent.removeChild(this);this.fireEvent("destroyed",a)},modelToView:function(a){this.dirty&&this.setModelViewMatrix();var c=this.worldModelViewMatrix.matrix;if(a instanceof Array)for(var d=0;d<a.length;d++){var e=a[d],f=e.x,g=e.y;e.x=f*c[0]+g*c[1]+c[2];e.y=f*c[3]+g*c[4]+c[5]}else f=a.x,g=a.y,a.x=f*c[0]+g*c[1]+c[2],a.y=f*c[3]+g*c[4]+c[5];return a},modelToModel:function(a,c){this.dirty&&this.setModelViewMatrix();return c.viewToModel(this.modelToView(a))},

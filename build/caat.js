@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 128
+Version: 0.4 build: 130
 
 Created on:
-DATE: 2012-07-09
-TIME: 13:50:01
+DATE: 2012-07-10
+TIME: 19:33:47
 */
 
 
@@ -6292,8 +6292,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 		},
 
         setRotationAnchor : function( rax, ray ) {
-            this.rotationX= ray;
-   	        this.rotationY= rax;
+            this.rotationX= rax;
+   	        this.rotationY= ray;
             this.dirty= true;
             return this;
         },

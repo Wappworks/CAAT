@@ -683,8 +683,8 @@
 		},
 
         setRotationAnchor : function( rax, ray ) {
-            this.rotationX= ray;
-   	        this.rotationY= rax;
+            this.rotationX= rax;
+   	        this.rotationY= ray;
             this.dirty= true;
             return this;
         },
