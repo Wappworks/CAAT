@@ -150,7 +150,7 @@
          */
 		createAlphaBehaviour: function(time, isIn) {
 			var ab= new CAAT.AlphaBehavior();
-			ab.setFrameTime( 0, time );
+			ab.setDelayTime( 0, time );
 			ab.startAlpha= isIn ? 0 : 1;
 			ab.endAlpha= isIn ? 1 : 0;
 			this.easeContainerBehaviour.addBehavior(ab);
@@ -202,7 +202,7 @@
                 pb.setInterpolator( interpolator );
             }
 
-            pb.setFrameTime( 0, time );
+            pb.setDelayTime( 0, time );
 
             // BUGBUG anchors: 1..4
             if ( anchor<1 ) {
@@ -249,7 +249,7 @@
 
 			this.easeContainerBehaviour.addBehavior(pb);
 
-			this.easeContainerBehaviour.setFrameTime( this.time, time );
+			this.easeContainerBehaviour.setDelayTime( 0, time );
 			this.easeContainerBehaviour.addListener(this);
 
 			this.emptyBehaviorList();
@@ -271,7 +271,7 @@
                 this.createAlphaBehaviour(time,isIn);
             }
 
-            this.easeContainerBehaviour.setFrameTime( this.time, time );
+            this.easeContainerBehaviour.setDelayTime( 0, time );
             this.easeContainerBehaviour.addListener(this);
 
             this.emptyBehaviorList();
@@ -364,7 +364,7 @@
 
             var anchorPercent= this.getAnchorPercent(anchor);
 			var sb= new CAAT.ScaleBehavior().
-			        setFrameTime( starttime, time ).
+			        setDelayTime( starttime, time ).
                     setValues(x,x2,y,y2, anchorPercent.x, anchorPercent.y);
 
             if ( interpolator ) {
@@ -373,7 +373,7 @@
 
 			this.easeContainerBehaviour.addBehavior(sb);
 			
-			this.easeContainerBehaviour.setFrameTime( this.time, time );
+			this.easeContainerBehaviour.setDelayTime( 0, time );
 			this.easeContainerBehaviour.addListener(this);
 			
 			this.emptyBehaviorList();
@@ -457,14 +457,14 @@
 
             var anchorPercent= this.getAnchorPercent(anchor);
 			var rb= new CAAT.RotateBehavior().
-			        setFrameTime( 0, time ).
+			        setDelayTime( 0, time ).
                     setValues( start, end, anchorPercent.x, anchorPercent.y );
 
             if ( interpolator ) {
                 rb.setInterpolator(interpolator);
             }
 			this.easeContainerBehaviour.addBehavior(rb);
-			this.easeContainerBehaviour.setFrameTime( this.time, time );
+			this.easeContainerBehaviour.setDelayTime( this.time, time );
 			this.easeContainerBehaviour.addListener(this);
 			
 			this.emptyBehaviorList();
