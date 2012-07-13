@@ -1444,6 +1444,8 @@
             }
 
             this.needsRepaint= false;
+
+            CAAT.currentDirector= undefined;
         },
 
         /**

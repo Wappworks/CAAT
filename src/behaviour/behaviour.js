@@ -459,6 +459,11 @@
          */
 		apply : function(time, actor) {
 
+            if ( !this.solved ) {
+                this.behaviorStartTime+= time;
+                this.solved= true;
+            }
+
             time+= this.timeOffset*this.behaviorDuration;
             
 			if ( this.isBehaviorInTime(time,actor) )	{

@@ -1,10 +1,8 @@
 #
-# execute version procedure. 
 # version.nfo contains new version value.
 #
-./version.sh
 VERSION=`cat version.nfo`
-echo "New generated version: ${VERSION}"
+echo "Packed generated version: ${VERSION}"
 
 
 DST_FILE_NAME="${CAAT_DST}";

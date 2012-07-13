@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 136
+Version: 0.4 build: 137
 
 Created on:
 DATE: 2012-07-13
-TIME: 15:24:15
+TIME: 15:51:55
 */
 
 
@@ -417,9 +417,9 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                                     objectName: object.____name,
                                     method:     fnname,
                                     arguments:  args } );
-                            if ( typeof rr!=="undefined" ) {
-                                //retValue= rr;
-                            }
+//                            if ( typeof rr!=="undefined" ) {
+//                                retValue= rr;
+//                            }
                         }
                     } catch(e) {
                         // an exeception was thrown, call exception-method hook if
@@ -3875,6 +3875,11 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * @param actor a CAAT.Actor instance indicating the actor to apply the behaviors for.
          */
 		apply : function(time, actor) {
+
+            if ( !this.solved ) {
+                this.behaviorStartTime+= time;
+                this.solved= true;
+            }
 
             time+= this.timeOffset*this.behaviorDuration;
             
@@ -9935,6 +9940,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             }
 
             this.needsRepaint= false;
+
+            CAAT.currentDirector= undefined;
         },
 
         /**
@@ -11589,7 +11596,7 @@ CAAT.loop= function(fps) {
     }
 }
 
-CAAT.currentDirector;   // this variable always points to current director.
+CAAT.currentDirector = undefined;   // this variable always points to current director.
 CAAT.getCurrentScene= function() {
     return CAAT.currentDirector.getCurrentScene();
 }
