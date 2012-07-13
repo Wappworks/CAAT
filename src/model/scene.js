@@ -193,6 +193,8 @@
          * @param interpolator {CAAT.Interpolator} a CAAT.Interpolator to apply to the Scene transition.
          */
 		easeTranslation : function( time, alpha, anchor, isIn, interpolator ) {
+            if( this.easeContainerBehaviour )
+                this.easeContainerBehaviour.emptyListenerList();
 
             this.easeContainerBehaviour= new CAAT.ContainerBehavior();
             this.easeIn= isIn;
@@ -264,6 +266,9 @@
          */
         easeStationary : function( time, alpha, isIn ) {
 
+            if( this.easeContainerBehaviour )
+                this.easeContainerBehaviour.emptyListenerList();
+
             this.easeContainerBehaviour= new CAAT.ContainerBehavior();
             this.easeIn= isIn;
 
@@ -313,7 +318,10 @@
          * @param isIn boolean indicating whether the Scene is being brought in.
          */
 		easeScale : function(starttime,time,alpha,anchor,isIn,interpolator) {
-			this.easeContainerBehaviour= new CAAT.ContainerBehavior();
+            if( this.easeContainerBehaviour )
+                this.easeContainerBehaviour.emptyListenerList();
+
+            this.easeContainerBehaviour= new CAAT.ContainerBehavior();
 
 			var x=0;
 			var y=0;
@@ -419,7 +427,10 @@
          * @param isIn boolean indicating whehter the Scene is brought in.
          */
 		easeRotation : function(time,alpha,anchor,isIn,interpolator) {
-			this.easeContainerBehaviour= new CAAT.ContainerBehavior();
+            if( this.easeContainerBehaviour )
+                this.easeContainerBehaviour.emptyListenerList();
+
+            this.easeContainerBehaviour= new CAAT.ContainerBehavior();
 			
 			var start=0;
 			var end=0;

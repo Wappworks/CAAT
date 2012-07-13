@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 134
+Version: 0.4 build: 136
 
 Created on:
 DATE: 2012-07-13
-TIME: 14:50:42
+TIME: 15:24:12
 */
 
 
@@ -13981,6 +13981,8 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
          * @param interpolator {CAAT.Interpolator} a CAAT.Interpolator to apply to the Scene transition.
          */
 		easeTranslation : function( time, alpha, anchor, isIn, interpolator ) {
+            if( this.easeContainerBehaviour )
+                this.easeContainerBehaviour.emptyListenerList();
 
             this.easeContainerBehaviour= new CAAT.ContainerBehavior();
             this.easeIn= isIn;
@@ -14052,6 +14054,9 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
          */
         easeStationary : function( time, alpha, isIn ) {
 
+            if( this.easeContainerBehaviour )
+                this.easeContainerBehaviour.emptyListenerList();
+
             this.easeContainerBehaviour= new CAAT.ContainerBehavior();
             this.easeIn= isIn;
 
@@ -14101,7 +14106,10 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
          * @param isIn boolean indicating whether the Scene is being brought in.
          */
 		easeScale : function(starttime,time,alpha,anchor,isIn,interpolator) {
-			this.easeContainerBehaviour= new CAAT.ContainerBehavior();
+            if( this.easeContainerBehaviour )
+                this.easeContainerBehaviour.emptyListenerList();
+
+            this.easeContainerBehaviour= new CAAT.ContainerBehavior();
 
 			var x=0;
 			var y=0;
@@ -14207,7 +14215,10 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
          * @param isIn boolean indicating whehter the Scene is brought in.
          */
 		easeRotation : function(time,alpha,anchor,isIn,interpolator) {
-			this.easeContainerBehaviour= new CAAT.ContainerBehavior();
+            if( this.easeContainerBehaviour )
+                this.easeContainerBehaviour.emptyListenerList();
+
+            this.easeContainerBehaviour= new CAAT.ContainerBehavior();
 			
 			var start=0;
 			var end=0;
