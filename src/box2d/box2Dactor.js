@@ -30,7 +30,7 @@
             debugDraw.SetFlags(0x0001 | 0x0002);
 
         } else {
-            world.setDebugDraw( null );
+            world.SetDebugDraw( null );
         }
     }
 })();

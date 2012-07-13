@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 132
+Version: 0.4 build: 134
 
 Created on:
-DATE: 2012-07-11
-TIME: 20:56:09
+DATE: 2012-07-13
+TIME: 14:50:46
 */
 
 
@@ -61,7 +61,7 @@ TIME: 20:56:09
             debugDraw.SetFlags(0x0001 | 0x0002);
 
         } else {
-            world.setDebugDraw( null );
+            world.SetDebugDraw( null );
         }
     }
 })();
