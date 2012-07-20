@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 137
+Version: 0.4 build: 138
 
 Created on:
-DATE: 2012-07-13
-TIME: 15:51:53
+DATE: 2012-07-20
+TIME: 14:17:53
 */
 
 
@@ -9657,6 +9657,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
         ctx:                null,   // refactoring crc for a more convenient name
         time:               0,      // virtual actor time.
         timeline:           0,      // global director timeline.
+        timeDelta:          0,      // time delta since the last render
         imagesCache:        null,   // An array of JSON elements of the form { id:string, image:Image }
         audioManager:       null,
         clear:              true,   // clear background before drawing scenes ??
@@ -10144,7 +10145,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
             this.time += time;
 
-            this.animate(this,time);
+            this.animate(this,this.time);
 
             if ( CAAT.DEBUG ) {
                 this.resetStats();
@@ -10992,6 +10993,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             if ( delta > 500 ) {
                 delta= 500;
             }
+
+            this.timeDelta = delta;
 
             if ( this.onRenderStart ) {
                 this.onRenderStart(delta);
