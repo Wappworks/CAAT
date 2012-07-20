@@ -91,6 +91,7 @@
         ctx:                null,   // refactoring crc for a more convenient name
         time:               0,      // virtual actor time.
         timeline:           0,      // global director timeline.
+        timeDelta:          0,      // time delta since the last render
         imagesCache:        null,   // An array of JSON elements of the form { id:string, image:Image }
         audioManager:       null,
         clear:              true,   // clear background before drawing scenes ??
@@ -578,7 +579,7 @@
 
             this.time += time;
 
-            this.animate(this,time);
+            this.animate(this,this.time);
 
             if ( CAAT.DEBUG ) {
                 this.resetStats();
@@ -1426,6 +1427,8 @@
             if ( delta > 500 ) {
                 delta= 500;
             }
+
+            this.timeDelta = delta;
 
             if ( this.onRenderStart ) {
                 this.onRenderStart(delta);
