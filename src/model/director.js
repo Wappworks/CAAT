@@ -957,12 +957,9 @@
          * the scenes.
          * @param interpolatorIn CAAT.Interpolator object to apply to entering scene.
          * @param interpolatorOut CAAT.Interpolator object to apply to exiting scene.
-         * @param [sceneInOnTop] The scene draw order. Defaults to true (the scene in is drawn on top) .
+         * @param [sceneOutOnTop] The scene draw order. Defaults to true (the scene out is drawn on top) .
          */
-        easeInOut : function(inSceneIndex, typein, anchorin, outSceneIndex, typeout, anchorout, time, alpha, interpolatorIn, interpolatorOut, sceneInOnTop) {
-
-            if( sceneInOnTop == null )
-                sceneInOnTop = true;
+        easeInOut : function(inSceneIndex, typein, anchorin, outSceneIndex, typeout, anchorout, time, alpha, interpolatorIn, interpolatorOut, sceneOutOnTop ) {
 
             if (inSceneIndex === this.getCurrentSceneIndex()) {
                 return;
@@ -1013,12 +1010,12 @@
 
             this.childrenList = [];
 
-            if( sceneInOnTop ) {
-                this.addChild(sout);
+            if( sceneOutOnTop ) {
                 this.addChild(ssin);
+                this.addChild(sout);
             } else {
-                this.addChild(ssin);
                 this.addChild(sout);
+                this.addChild(ssin);
             }
         },
         /**

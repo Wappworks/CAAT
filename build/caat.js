@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 139
+Version: 0.4 build: 140
 
 Created on:
-DATE: 2012-07-26
-TIME: 21:07:28
+DATE: 2012-07-27
+TIME: 01:09:15
 */
 
 
@@ -10523,12 +10523,9 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * the scenes.
          * @param interpolatorIn CAAT.Interpolator object to apply to entering scene.
          * @param interpolatorOut CAAT.Interpolator object to apply to exiting scene.
-         * @param [sceneInOnTop] The scene draw order. Defaults to true (the scene in is drawn on top) .
+         * @param [sceneOutOnTop] The scene draw order. Defaults to true (the scene out is drawn on top) .
          */
-        easeInOut : function(inSceneIndex, typein, anchorin, outSceneIndex, typeout, anchorout, time, alpha, interpolatorIn, interpolatorOut, sceneInOnTop) {
-
-            if( sceneInOnTop == null )
-                sceneInOnTop = true;
+        easeInOut : function(inSceneIndex, typein, anchorin, outSceneIndex, typeout, anchorout, time, alpha, interpolatorIn, interpolatorOut, sceneOutOnTop ) {
 
             if (inSceneIndex === this.getCurrentSceneIndex()) {
                 return;
@@ -10579,12 +10576,12 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
             this.childrenList = [];
 
-            if( sceneInOnTop ) {
-                this.addChild(sout);
+            if( sceneOutOnTop ) {
                 this.addChild(ssin);
+                this.addChild(sout);
             } else {
-                this.addChild(ssin);
                 this.addChild(sout);
+                this.addChild(ssin);
             }
         },
         /**
