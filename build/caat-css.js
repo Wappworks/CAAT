@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 140
+Version: 0.4 build: 141
 
 Created on:
-DATE: 2012-07-27
-TIME: 01:09:18
+DATE: 2012-07-31
+TIME: 11:27:42
 */
 
 
@@ -1756,7 +1756,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * @return {boolean}
          */
 		contains : function(px,py) {
-			return px>=0 && px<this.width && py>=0 && py<this.height; 
+			return px>=this.x && px<this.x1 && py>=this.y && py<this.y1;
 		},
         /**
          * Return whether this rectangle is empty, that is, has zero dimension.
