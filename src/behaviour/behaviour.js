@@ -1144,9 +1144,9 @@
 	CAAT.PathBehavior.prototype= {
 		path:           null,   // the path to traverse
         autoRotate :    false,  // set whether the actor must be rotated tangentially to the path.
+        reverse:        false,  // set whether the path is traversed in reverse
         prevX:          -1,     // private, do not use.
         prevY:          -1,     // private, do not use.
-
         autoRotateOp:   CAAT.PathBehavior.autorotate.FREE,
 
         getPropertyName : function() {
@@ -1168,6 +1168,18 @@
             }
             return this;
         },
+
+        /**
+         * Sets the path traversal as reversed
+         * @param reverse {Boolean}
+         * @return this
+         */
+        setReversed: function( reversed ) {
+            this.reversed = reversed;
+
+            return this;
+        },
+
         /**
          * Set the behavior path.
          * The path can be any length, and will take behaviorDuration time to be traversed.
@@ -1248,6 +1260,9 @@
                     y: actor.y
                 };
             }
+
+            if( this.reversed )
+                time = 1 - time;
 
             var point= this.path.getPosition(time);
 

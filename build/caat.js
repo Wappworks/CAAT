@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 141
+Version: 0.4 build: 142
 
 Created on:
-DATE: 2012-07-31
-TIME: 11:27:40
+DATE: 2012-08-02
+TIME: 15:53:58
 */
 
 
@@ -4560,9 +4560,9 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 	CAAT.PathBehavior.prototype= {
 		path:           null,   // the path to traverse
         autoRotate :    false,  // set whether the actor must be rotated tangentially to the path.
+        reverse:        false,  // set whether the path is traversed in reverse
         prevX:          -1,     // private, do not use.
         prevY:          -1,     // private, do not use.
-
         autoRotateOp:   CAAT.PathBehavior.autorotate.FREE,
 
         getPropertyName : function() {
@@ -4584,6 +4584,18 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             }
             return this;
         },
+
+        /**
+         * Sets the path traversal as reversed
+         * @param reverse {Boolean}
+         * @return this
+         */
+        setReversed: function( reversed ) {
+            this.reversed = reversed;
+
+            return this;
+        },
+
         /**
          * Set the behavior path.
          * The path can be any length, and will take behaviorDuration time to be traversed.
@@ -4664,6 +4676,9 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                     y: actor.y
                 };
             }
+
+            if( this.reversed )
+                time = 1 - time;
 
             var point= this.path.getPosition(time);
 
