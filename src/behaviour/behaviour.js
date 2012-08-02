@@ -81,6 +81,7 @@
 		behaviorStartTime:	-1,             // scene time to start applying the behavior
 		behaviorDuration:	-1,             // behavior duration in ms.
 		cycleBehavior:		false,          // apply forever ?
+        reversed:           false,          // direction of behavior?
 
         status:             CAAT.Behavior.NOT_STARTED,
 
@@ -101,6 +102,12 @@
 
         setTimeOffset : function( offset ) {
             this.timeOffset= offset;
+            return this;
+        },
+
+        setReversed: function( reversed ) {
+            this.reversed = reversed;
+
             return this;
         },
 
@@ -334,6 +341,10 @@
 			if ( this.cycleBehavior )	{
 				time%=this.behaviorDuration;
 			}
+            if( this.reversed ) {
+                time = this.behaviorDuration - time;
+            }
+
 			return this.interpolator.getPosition(time/this.behaviorDuration).y;
 		},
         /**
@@ -347,7 +358,7 @@
 		setExpired : function(actor,time) {
             // set for final interpolator value.
             this.status= CAAT.Behavior.Status.EXPIRED;
-			this.setForTime(this.interpolator.getPosition(1).y,actor);
+			this.setForTime(this.interpolator.getPosition( this.reversed ? 0 : 1 ).y,actor);
 			this.fireBehaviorExpiredEvent(actor,time);
 		},
         /**
@@ -1144,7 +1155,6 @@
 	CAAT.PathBehavior.prototype= {
 		path:           null,   // the path to traverse
         autoRotate :    false,  // set whether the actor must be rotated tangentially to the path.
-        reverse:        false,  // set whether the path is traversed in reverse
         prevX:          -1,     // private, do not use.
         prevY:          -1,     // private, do not use.
         autoRotateOp:   CAAT.PathBehavior.autorotate.FREE,
@@ -1166,17 +1176,6 @@
             if (autorotateOp!==undefined) {
                 this.autoRotateOp= autorotateOp;
             }
-            return this;
-        },
-
-        /**
-         * Sets the path traversal as reversed
-         * @param reverse {Boolean}
-         * @return this
-         */
-        setReversed: function( reversed ) {
-            this.reversed = reversed;
-
             return this;
         },
 
@@ -1260,9 +1259,6 @@
                     y: actor.y
                 };
             }
-
-            if( this.reversed )
-                time = 1 - time;
 
             var point= this.path.getPosition(time);
 

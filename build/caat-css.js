@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 142
+Version: 0.4 build: 144
 
 Created on:
 DATE: 2012-08-02
-TIME: 15:54:00
+TIME: 16:16:47
 */
 
 
@@ -3498,6 +3498,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 		behaviorStartTime:	-1,             // scene time to start applying the behavior
 		behaviorDuration:	-1,             // behavior duration in ms.
 		cycleBehavior:		false,          // apply forever ?
+        reversed:           false,          // direction of behavior?
 
         status:             CAAT.Behavior.NOT_STARTED,
 
@@ -3518,6 +3519,12 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
         setTimeOffset : function( offset ) {
             this.timeOffset= offset;
+            return this;
+        },
+
+        setReversed: function( reversed ) {
+            this.reversed = reversed;
+
             return this;
         },
 
@@ -3751,6 +3758,10 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 			if ( this.cycleBehavior )	{
 				time%=this.behaviorDuration;
 			}
+            if( this.reversed ) {
+                time = this.behaviorDuration - time;
+            }
+
 			return this.interpolator.getPosition(time/this.behaviorDuration).y;
 		},
         /**
@@ -3764,7 +3775,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 		setExpired : function(actor,time) {
             // set for final interpolator value.
             this.status= CAAT.Behavior.Status.EXPIRED;
-			this.setForTime(this.interpolator.getPosition(1).y,actor);
+			this.setForTime(this.interpolator.getPosition( this.reversed ? 0 : 1 ).y,actor);
 			this.fireBehaviorExpiredEvent(actor,time);
 		},
         /**
@@ -4561,7 +4572,6 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 	CAAT.PathBehavior.prototype= {
 		path:           null,   // the path to traverse
         autoRotate :    false,  // set whether the actor must be rotated tangentially to the path.
-        reverse:        false,  // set whether the path is traversed in reverse
         prevX:          -1,     // private, do not use.
         prevY:          -1,     // private, do not use.
         autoRotateOp:   CAAT.PathBehavior.autorotate.FREE,
@@ -4583,17 +4593,6 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             if (autorotateOp!==undefined) {
                 this.autoRotateOp= autorotateOp;
             }
-            return this;
-        },
-
-        /**
-         * Sets the path traversal as reversed
-         * @param reverse {Boolean}
-         * @return this
-         */
-        setReversed: function( reversed ) {
-            this.reversed = reversed;
-
             return this;
         },
 
@@ -4677,9 +4676,6 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                     y: actor.y
                 };
             }
-
-            if( this.reversed )
-                time = 1 - time;
 
             var point= this.path.getPosition(time);
 
