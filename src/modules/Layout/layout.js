@@ -55,7 +55,7 @@
         var actor_area= width / what_to_layout_array.length;
 
         for( i=0, l=what_to_layout_array.length; i<l; i++ ) {
-            what_to_layout_array[i].setLocation(
+            what_to_layout_array[i].setPosition(
                 x + i * actor_area + (actor_area - what_to_layout_array[i].width) / 2,
                 y);
         }

@@ -361,7 +361,7 @@
          * @deprecated
          */
         centerOn : function( x,y ) {
-            this.setLocation( x-this.width/2, y-this.height/2 );
+            this.setPosition( x-this.width/2, y-this.height/2 );
             return this;
         },
         /**
@@ -762,6 +762,10 @@
          * @deprecated
          */
 	    setLocation : function( x, y ) {
+            return this.setPosition( x, y );
+	    },
+
+        setPosition : function( x,y ) {
             this.x= x;
             this.y= y;
             this.oldX= x;
@@ -770,10 +774,6 @@
             this.dirty= true;
 
             return this;
-	    },
-
-        setPosition : function( x,y ) {
-            return this.setLocation( x,y );
         },
 
         setPositionAnchor : function( pax, pay ) {
@@ -783,7 +783,7 @@
         },
 
         setPositionAnchored : function( x,y,pax,pay ) {
-            this.setLocation( x,y );
+            this.setPosition( x,y );
             this.tAnchorX=  pax;
             this.tAnchorY=  pay;
             return this;

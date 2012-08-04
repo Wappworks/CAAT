@@ -104,7 +104,7 @@
 
             CAAT.B2DBodyActor.superclass.destroy.call(this);
             if ( this.recycle ) {
-                this.setLocation(-Number.MAX_VALUE, -Number.MAX_VALUE);
+                this.setPosition(-Number.MAX_VALUE, -Number.MAX_VALUE);
                 this.setAwake(false);
             } else {
                 var body= this.worldBody;
@@ -122,7 +122,7 @@
             this.worldBody.SetSleepingAllowed(bool);
             return this;
         },
-        setLocation : function(x,y) {
+        setPosition : function(x,y) {
             this.worldBody.SetPosition(
                 new Box2D.Common.Math.b2Vec2(
                     (x+this.width/2)/CAAT.PMR,
@@ -293,8 +293,8 @@
             var poly= this.worldBodyFixture.GetShape();
             if ( poly ) {
                 var v= Box2D.Common.Math.b2Math.MulX(xf, poly.m_centroid);
-                //this.setLocation(
-                CAAT.Actor.prototype.setLocation.call( this,
+                //this.setPosition(
+                CAAT.Actor.prototype.setPosition.call( this,
                         v.x*CAAT.PMR - this.width/2,
                         v.y*CAAT.PMR - this.height/2 );
                 this.setRotation( b.GetAngle() );
@@ -472,8 +472,8 @@
 
             var b= this.worldBody;
             var xf= b.m_xf;
-            //this.setLocation(
-            CAAT.Actor.prototype.setLocation.call( this,
+            //this.setPosition(
+            CAAT.Actor.prototype.setPosition.call( this,
                     CAAT.PMR*xf.position.x - this.width/2,
                     CAAT.PMR*xf.position.y - this.height/2 );
             this.setRotation( b.GetAngle() );

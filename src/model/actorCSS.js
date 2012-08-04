@@ -437,7 +437,7 @@
          * @return this
          */
         centerOn : function( x,y ) {
-            this.setLocation( x-this.width/2, y-this.height/2 );
+            this.setPosition( x-this.width/2, y-this.height/2 );
             return this;
         },
         /**
@@ -882,7 +882,7 @@
 	        this.width= w;
 	        this.height= h;
 
-            this.setLocation(x,y);
+            this.setPosition(x,y);
             this.setSize(w,h);
 
             return this;
@@ -890,7 +890,17 @@
 
 
         setPosition : function( x,y ) {
-            return this.setLocation( x,y );
+            this.x= x;
+            this.y= y;
+
+            this.style3();
+            /*
+             this.style('left', x+'px');
+             this.style('top',  y+'px');
+             */
+            this.dirty= true;
+
+            return this;
         },
 
         setPositionAnchor : function( pax, pay ) {
@@ -902,7 +912,7 @@
         },
 
         setPositionAnchored : function( x,y,pax,pay ) {
-            this.setLocation( x,y );
+            this.setPosition( x,y );
             this.tAnchorX=  pax;
             this.tAnchorY=  pay;
             return this;
@@ -921,18 +931,7 @@
          * @return this
          */
 	    setLocation : function( x, y ) {
-
-            this.x= x;
-            this.y= y;
-
-            this.style3();
-/*
-            this.style('left', x+'px');
-            this.style('top',  y+'px');
-*/
-            this.dirty= true;
-
-            return this;
+            return this.setPosition( x, y );
 	    },
         /**
          * This method is called by the Director to know whether the actor is on Scene time.
@@ -1288,7 +1287,7 @@
                     var vy = mouseEvent.screenPoint.y - this.screeny;
                     this.setRotation(-Math.atan2(vx, vy) + this.ara);
                 } else {
-                    this.setLocation(
+                    this.setPosition(
                         this.x + mouseEvent.point.x - this.ax,
                         this.y + mouseEvent.point.y - this.ay );
                     this.ax = mouseEvent.point.x;

@@ -982,8 +982,8 @@
             ssin.resetTransform();
             sout.resetTransform();
 
-            ssin.setLocation(0, 0);
-            sout.setLocation(0, 0);
+            ssin.setPosition(0, 0);
+            sout.setPosition(0, 0);
 
             ssin.alpha = 1;
             sout.alpha = 1;
@@ -1126,7 +1126,7 @@
             this.addChild(sin);
 
             sin.resetTransform();
-            sin.setLocation(0, 0);
+            sin.setPosition(0, 0);
             sin.alpha = 1;
             sin.mouseEnabled = false;
             sin.setExpired(false);
@@ -1146,7 +1146,7 @@
             sin.setExpired(false);
             sin.mouseEnabled = true;
             sin.resetTransform();
-            sin.setLocation(0, 0);
+            sin.setPosition(0, 0);
             sin.alpha = 1;
 
             sin.activated();

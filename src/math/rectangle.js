@@ -40,7 +40,7 @@
          * @param x {number}
          * @param y {number}
          */
-        setLocation: function( x,y ) {
+        setPosition: function( x,y ) {
             this.x= x;
             this.y= y;
             this.x1= this.x+this.width;
@@ -60,7 +60,7 @@
             return this;
         },
         setBounds : function( x,y,w,h ) {
-            this.setLocation( x, y )
+            this.setPosition( x, y )
             this.setDimension( w, h );
             return this;
         },

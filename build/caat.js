@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 144
+Version: 0.4 build: 146
 
 Created on:
-DATE: 2012-08-02
-TIME: 16:16:44
+DATE: 2012-08-04
+TIME: 00:56:14
 */
 
 
@@ -1723,7 +1723,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * @param x {number}
          * @param y {number}
          */
-        setLocation: function( x,y ) {
+        setPosition: function( x,y ) {
             this.x= x;
             this.y= y;
             this.x1= this.x+this.width;
@@ -1743,7 +1743,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             return this;
         },
         setBounds : function( x,y,w,h ) {
-            this.setLocation( x, y )
+            this.setPosition( x, y )
             this.setDimension( w, h );
             return this;
         },
@@ -4689,7 +4689,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 var ay= point.y-this.prevY;
 
                 if ( ax===0 && ay===0 ) {
-                    actor.setLocation( point.x, point.y );
+                    actor.setPosition( point.x, point.y );
                     return { x: actor.x, y: actor.y };
                 }
 
@@ -4727,7 +4727,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             }
 
             if ( this.doValueApplication ) {
-                actor.setLocation( point.x, point.y );
+                actor.setPosition( point.x, point.y );
                 return { x: actor.x, y: actor.y };
             } else {
                 return {
@@ -5986,7 +5986,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * @deprecated
          */
         centerOn : function( x,y ) {
-            this.setLocation( x-this.width/2, y-this.height/2 );
+            this.setPosition( x-this.width/2, y-this.height/2 );
             return this;
         },
         /**
@@ -6387,6 +6387,10 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * @deprecated
          */
 	    setLocation : function( x, y ) {
+            return this.setPosition( x, y );
+	    },
+
+        setPosition : function( x,y ) {
             this.x= x;
             this.y= y;
             this.oldX= x;
@@ -6395,10 +6399,6 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             this.dirty= true;
 
             return this;
-	    },
-
-        setPosition : function( x,y ) {
-            return this.setLocation( x,y );
         },
 
         setPositionAnchor : function( pax, pay ) {
@@ -6408,7 +6408,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
         },
 
         setPositionAnchored : function( x,y,pax,pay ) {
-            this.setLocation( x,y );
+            this.setPosition( x,y );
             this.tAnchorX=  pax;
             this.tAnchorY=  pay;
             return this;
@@ -10559,8 +10559,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             ssin.resetTransform();
             sout.resetTransform();
 
-            ssin.setLocation(0, 0);
-            sout.setLocation(0, 0);
+            ssin.setPosition(0, 0);
+            sout.setPosition(0, 0);
 
             ssin.alpha = 1;
             sout.alpha = 1;
@@ -10703,7 +10703,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             this.addChild(sin);
 
             sin.resetTransform();
-            sin.setLocation(0, 0);
+            sin.setPosition(0, 0);
             sin.alpha = 1;
             sin.mouseEnabled = false;
             sin.setExpired(false);
@@ -10723,7 +10723,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             sin.setExpired(false);
             sin.mouseEnabled = true;
             sin.resetTransform();
-            sin.setLocation(0, 0);
+            sin.setPosition(0, 0);
             sin.alpha = 1;
 
             sin.activated();
@@ -15313,7 +15313,7 @@ CAAT.modules.CircleManager = CAAT.modules.CircleManager || {};/**
         var actor_area= width / what_to_layout_array.length;
 
         for( i=0, l=what_to_layout_array.length; i<l; i++ ) {
-            what_to_layout_array[i].setLocation(
+            what_to_layout_array[i].setPosition(
                 x + i * actor_area + (actor_area - what_to_layout_array[i].width) / 2,
                 y);
         }
@@ -17177,7 +17177,7 @@ CAAT.modules.CircleManager = CAAT.modules.CircleManager || {};/**
 
             this.width= this.bbox.width;
             this.height= this.bbox.height;
-            this.setLocation( this.bbox.x, this.bbox.y );
+            this.setPosition( this.bbox.x, this.bbox.y );
             this.bbox.x= 0;
             this.bbox.y= 0;
             this.bbox.x1= this.width;
@@ -17528,9 +17528,7 @@ CAAT.modules.CircleManager = CAAT.modules.CircleManager || {};/**
         },
 
         setLocation : function( x, y ) {
-            this.tb_x= x;
-            this.tb_y= y;
-            return this;
+            return this.setPosition( x, y );
         },
 
         flatten : function( npatches, closed ) {

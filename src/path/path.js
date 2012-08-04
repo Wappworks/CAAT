@@ -1483,7 +1483,7 @@
 
             this.width= this.bbox.width;
             this.height= this.bbox.height;
-            this.setLocation( this.bbox.x, this.bbox.y );
+            this.setPosition( this.bbox.x, this.bbox.y );
             this.bbox.x= 0;
             this.bbox.y= 0;
             this.bbox.x1= this.width;
@@ -1834,9 +1834,7 @@
         },
 
         setLocation : function( x, y ) {
-            this.tb_x= x;
-            this.tb_y= y;
-            return this;
+            return this.setPosition( x, y );
         },
 
         flatten : function( npatches, closed ) {

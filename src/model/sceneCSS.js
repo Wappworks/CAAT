@@ -250,7 +250,7 @@
 			this.easeContainerBehaviour.addListener(this);
 
             var start= pb.path.startCurvePosition();
-            this.setLocation(start.x, start.y);
+            this.setPosition(start.x, start.y);
 
 			this.emptyBehaviorList();
 			CAAT.Scene.superclass.addBehavior.call( this, this.easeContainerBehaviour );

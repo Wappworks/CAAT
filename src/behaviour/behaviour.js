@@ -1273,7 +1273,7 @@
                 var ay= point.y-this.prevY;
 
                 if ( ax===0 && ay===0 ) {
-                    actor.setLocation( point.x, point.y );
+                    actor.setPosition( point.x, point.y );
                     return { x: actor.x, y: actor.y };
                 }
 
@@ -1311,7 +1311,7 @@
             }
 
             if ( this.doValueApplication ) {
-                actor.setLocation( point.x, point.y );
+                actor.setPosition( point.x, point.y );
                 return { x: actor.x, y: actor.y };
             } else {
                 return {
