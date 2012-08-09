@@ -22,11 +22,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 232
+Version: 0.4 build: 233
 
 Created on:
 DATE: 2012-08-08
-TIME: 22:58:16
+TIME: 23:07:02
 */
 
 
@@ -106,7 +106,7 @@ a;this.behaviorDuration=b;this.setStatus(CAAT.Behavior.Status.NOT_STARTED);retur
 a,this.solved=!0);var e=a+=this.timeOffset*this.behaviorDuration;this.isBehaviorInTime(a,b)&&(a=this.normalizeTime(a),this.fireBehaviorAppliedEvent(b,e,a,this.setForTime(a,b)))},setCycle:function(a){this.cycleBehavior=a;return this},addListener:function(a){this.lifecycleListenerList.push(a);return this},emptyListenerList:function(){this.lifecycleListenerList=[];return this},getStartTime:function(){return this.behaviorStartTime},getDuration:function(){return this.behaviorDuration},isBehaviorInTime:function(a,
 b){var e=CAAT.Behavior.Status;if(this.status===e.EXPIRED||0>this.behaviorStartTime)return!1;this.cycleBehavior&&a>=this.behaviorStartTime&&(a=(a-this.behaviorStartTime)%this.behaviorDuration+this.behaviorStartTime);if(a>this.behaviorStartTime+this.behaviorDuration)return this.status!==e.EXPIRED&&this.setExpired(b,a),!1;this.status===e.NOT_STARTED&&(this.status=e.STARTED,this.fireBehaviorStartedEvent(b,a));return this.behaviorStartTime<=a},fireBehaviorStartedEvent:function(a,b){for(var e=0,f=this.lifecycleListenerList.length;e<
 f;e++){var g=this.lifecycleListenerList[e];g.behaviorStarted&&g.behaviorStarted(this,b,a)}},fireBehaviorExpiredEvent:function(a,b){for(var e=0,f=this.lifecycleListenerList.length;e<f;e++){var g=this.lifecycleListenerList[e];g.behaviorExpired&&g.behaviorExpired(this,b,a)}},fireBehaviorAppliedEvent:function(a,b,e,f){for(var g=0,h=this.lifecycleListenerList.length;g<h;g++){var i=this.lifecycleListenerList[g];i.behaviorApplied&&i.behaviorApplied(this,b,e,a,f)}},normalizeTime:function(a){a-=this.behaviorStartTime;
-this.cycleBehavior&&(a%=this.behaviorDuration);this.reversed&&(a=this.behaviorDuration-a);return this.interpolator.getPosition(a/this.behaviorDuration).y},setExpired:function(a,b){this.status=CAAT.Behavior.Status.EXPIRED;this.setForTime(this.interpolator.getPosition(this.reversed?0:1).y,a);this.fireBehaviorExpiredEvent(a,b);this.discardable&&a.removeBehavior(this)},setForTime:function(){},initialize:function(a){if(a)for(var b in a)this[b]=a[b];return this},getPropertyName:function(){return""}}})();
+this.cycleBehavior&&(a%=this.behaviorDuration);this.reversed&&(a=this.behaviorDuration-a);return this.interpolator.getPosition(a/this.behaviorDuration).y},setExpired:function(a,b){this.status=CAAT.Behavior.Status.EXPIRED;this.setForTime(this.interpolator.getPosition(this.reversed?0:1).y,a);this.fireBehaviorExpiredEvent(a,b);this.discardable&&a.removeBehaviour(this)},setForTime:function(){},initialize:function(a){if(a)for(var b in a)this[b]=a[b];return this},getPropertyName:function(){return""}}})();
 (function(){CAAT.ContainerBehavior=function(){CAAT.ContainerBehavior.superclass.constructor.call(this);this.behaviors=[];return this};CAAT.ContainerBehavior.prototype={behaviors:null,conformToDuration:function(a){this.duration=a;for(var a=a/this.duration,b,c=0;c<this.behavior.length;c++)b=this.behavior[c],b.setFrameTime(b.getStartTime()*a,b.getDuration()*a);return this},addBehavior:function(a){this.behaviors.push(a);a.addListener(this);return this},apply:function(a,b){this.solved||(this.behaviorStartTime+=
 a,this.solved=!0);a+=this.timeOffset*this.behaviorDuration;if(this.isBehaviorInTime(a,b)){a-=this.getStartTime();this.cycleBehavior&&(a%=this.getDuration());for(var c=this.behaviors,d=0;d<c.length;d++)c[d].apply(a,b)}},behaviorExpired:function(a){this.cycleBehavior&&a.setStatus(CAAT.Behavior.Status.STARTED)},setForTime:function(a,b){for(var c=this.behaviors,d=0;d<c.length;d++)c[d].setForTime(a,b);return null},setExpired:function(a,b){CAAT.ContainerBehavior.superclass.setExpired.call(this,a,b);for(var c=
 this.behaviors,d=0;d<c.length;d++){var e=c[d];e.status!==CAAT.Behavior.Status.EXPIRED&&e.setExpired(a,b-this.behaviorStartTime)}return this},setFrameTime:function(a,b){CAAT.ContainerBehavior.superclass.setFrameTime.call(this,a,b);for(var c=this.behaviors,d=0;d<c.length;d++)c[d].setStatus(CAAT.Behavior.Status.NOT_STARTED);return this},calculateKeyFrameData:function(a,b,c){function d(a){if(g[a])i+=g[a];else if(c&&(j=c[a]))i+=j,g[a]=j}var e,f,g={},h;for(e=0;e<this.behaviors.length;e++)f=this.behaviors[e],
