@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 231
+Version: 0.4 build: 232
 
 Created on:
 DATE: 2012-08-08
-TIME: 21:43:40
+TIME: 22:58:25
 */
 
 
@@ -3540,6 +3540,12 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             return this;
         },
 
+        setDiscardable: function( discardable ) {
+            this.discardable = discardable;
+
+            return this;
+        },
+
         setReversed: function( reversed ) {
             this.reversed = reversed;
 
@@ -3797,7 +3803,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 			this.fireBehaviorExpiredEvent(actor,time);
 
             if ( this.discardable ) {
-                this.actor.removeBehavior( this );
+                actor.removeBehavior( this );
             }
 		},
         /**

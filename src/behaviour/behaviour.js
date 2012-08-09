@@ -107,6 +107,12 @@
             return this;
         },
 
+        setDiscardable: function( discardable ) {
+            this.discardable = discardable;
+
+            return this;
+        },
+
         setReversed: function( reversed ) {
             this.reversed = reversed;
 
@@ -364,7 +370,7 @@
 			this.fireBehaviorExpiredEvent(actor,time);
 
             if ( this.discardable ) {
-                this.actor.removeBehavior( this );
+                actor.removeBehavior( this );
             }
 		},
         /**
