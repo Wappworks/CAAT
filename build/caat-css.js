@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 233
+Version: 0.4 build: 234
 
 Created on:
-DATE: 2012-08-08
-TIME: 23:07:11
+DATE: 2012-08-09
+TIME: 11:12:38
 */
 
 
@@ -10130,11 +10130,11 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          */
         renderFrame : function() {
 
-            CAAT.currentDirector= this;
-
             if (this.stopped) {
                 return;
             }
+
+            CAAT.currentDirector= this;
 
             var t = new Date().getTime(),
                     delta = t - this.timeline;
@@ -10168,7 +10168,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
             this.needsRepaint= false;
 
-            CAAT.currentDirector= undefined;
+            CAAT.currentDirector= null;
         },
 
         /**
@@ -10630,7 +10630,9 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
                 this.touching= true;
 
+                CAAT.currentDirector = this;
                 this.__mouseDownHandler(e);
+                CAAT.currentDirector = null;
             }
         },
 
@@ -10644,7 +10646,9 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
                 this.touching= false;
 
+                CAAT.currentDirector = this;
                 this.__mouseUpHandler(e);
+                CAAT.currentDirector = null;
             }
         },
 
@@ -10661,7 +10665,10 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                     var ee= e.targetTouches[i];
                     var mp= this.mousePoint;
                     this.getCanvasCoord(mp, ee);
+
+                    CAAT.currentDirector = this;
                     this.__mouseMoveHandler(ee);
+                    CAAT.currentDirector = null;
                 }
             }
         },
@@ -10695,6 +10702,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
         },
 
         __touchEndHandlerMT : function(e) {
+            CAAT.currentDirector = this;
 
             e.preventDefault();
 
@@ -10761,9 +10769,12 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
                 actor.touchEnd( touch );
             }
+
+            CAAT.currentDirector = null;
         },
 
         __touchMoveHandlerMT : function(e) {
+            CAAT.currentDirector = this;
 
             e.preventDefault();
 
@@ -10833,6 +10844,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
                 actor.touchMove( touch );
             }
+
+            CAAT.currentDirector = null;
         },
 
         __touchCancelHandleMT : function(e) {
@@ -10840,6 +10853,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
         },
 
         __touchStartHandlerMT : function(e) {
+            CAAT.currentDirector = this;
+
             e.preventDefault();
 
 
@@ -10918,6 +10933,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 actor.touchStart( touch );
             }
 
+            CAAT.currentDirector = null;
         },
 
         __findTouchFirstActor : function() {
@@ -10938,6 +10954,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
         __gesturedActor : null,
         __touchGestureStartHandleMT : function( e ) {
+            CAAT.currentDirector = this;
+
             var actor= this.__findTouchFirstActor();
 
             if ( actor!==null && actor.isGestureEnabled() ) {
@@ -10952,9 +10970,11 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                     e.scale + this.__gestureSX,
                     e.scale + this.__gestureSY );
             }
+            CAAT.currentDirector = null;
         },
 
         __touchGestureEndHandleMT : function( e ) {
+            CAAT.currentDirector = this;
 
             if ( null!==this.__gesturedActor && this.__gesturedActor.isGestureEnabled()) {
                 this.__gesturedActor.gestureEnd(
@@ -10966,10 +10986,11 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             this.__gestureRotation= 0;
             this.__gestureScale= 0;
 
-
+            CAAT.currentDirector = null;
         },
 
         __touchGestureChangeHandleMT : function( e ) {
+            CAAT.currentDirector = this;
 
             if (this.__gesturedActor!== null && this.__gesturedActor.isGestureEnabled()) {
                 this.__gesturedActor.gestureChange(
@@ -10977,6 +10998,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                     this.__gestureSX + e.scale,
                     this.__gestureSY + e.scale);
             }
+
+            CAAT.currentDirector = null;
         },
 
 
@@ -10993,7 +11016,10 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
                     var mp= me.mousePoint;
                     me.getCanvasCoord(mp, e);
+
+                    CAAT.currentDirector = me;
                     me.__mouseUpHandler(e);
+                    CAAT.currentDirector = null;
 
                     me.touching= false;
                 }
@@ -11012,7 +11038,9 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                     }
                     me.touching= true;
 
+                    CAAT.currentDirector = me;
                     me.__mouseDownHandler(e);
+                    CAAT.currentDirector = null;
                 }
             }, false );
 
@@ -11028,7 +11056,9 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                         return;
                     }
 
+                    CAAT.currentDirector = me;
                     me.__mouseOverHandler(e);
+                    CAAT.currentDirector = null;
                 }
             }, false);
 
@@ -11040,7 +11070,10 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
                     var mp= me.mousePoint;
                     me.getCanvasCoord(mp, e);
+
+                    CAAT.currentDirector = me;
                     me.__mouseOutHandler(e);
+                    CAAT.currentDirector = null;
                 }
             }, false);
 
@@ -11054,8 +11087,10 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                     if ( !me.dragging && ( mp.x<0 || mp.y<0 || mp.x>=me.width || mp.y>=me.height ) ) {
                         return;
                     }
+                    CAAT.currentDirector = me;
                     me.__mouseMoveHandler(e);
-                }, false);
+                    CAAT.currentDirector = null;
+            }, false);
 
             window.addEventListener("dblclick", function(e) {
                 if ( e.target===canvas ) {
@@ -11068,7 +11103,9 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                         return;
                     }
 
+                    CAAT.currentDirector = me;
                     me.__mouseDBLClickHandler(e);
+                    CAAT.currentDirector = null;
                 }
             }, false);
 
