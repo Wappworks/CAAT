@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 146
+Version: 0.4 build: 147
 
 Created on:
-DATE: 2012-08-04
-TIME: 00:56:14
+DATE: 2012-08-08
+TIME: 21:01:32
 */
 
 
@@ -7575,6 +7575,18 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
         boundingBox         :   null,
         runion              :   new CAAT.Rectangle(),   // Watch out. one for every container.
 
+        localMouseEnabled   : true,                     // Container accepts events locally?
+
+        /**
+         * Enable or disable local mouse handling for this actor
+         * @param enable {boolean} a boolean indicating whether the event is handled
+         * @return this
+         */
+        enableLocalEvents : function( enable ) {
+            this.localMouseEnabled= enable;
+            return this;
+        },
+
         /**
          * Draws this ActorContainer and all of its children screen bounding box.
          *
@@ -7954,7 +7966,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 }
 			}
 
-			return this;
+			return this.localMouseEnabled ? this : null;
 		},
         /**
          * Destroys this ActorContainer.

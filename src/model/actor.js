@@ -1950,6 +1950,18 @@
         boundingBox         :   null,
         runion              :   new CAAT.Rectangle(),   // Watch out. one for every container.
 
+        localMouseEnabled   : true,                     // Container accepts events locally?
+
+        /**
+         * Enable or disable local mouse handling for this actor
+         * @param enable {boolean} a boolean indicating whether the event is handled
+         * @return this
+         */
+        enableLocalEvents : function( enable ) {
+            this.localMouseEnabled= enable;
+            return this;
+        },
+
         /**
          * Draws this ActorContainer and all of its children screen bounding box.
          *
@@ -2329,7 +2341,7 @@
                 }
 			}
 
-			return this;
+			return this.localMouseEnabled ? this : null;
 		},
         /**
          * Destroys this ActorContainer.
