@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - CAAT.PathBehavior</title>
+		<title>JsDoc Reference - CAAT.ArcPath</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -306,26 +306,24 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Class CAAT.PathBehavior
+				Class CAAT.ArcPath
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
 			<p class="description">
 				
-				<br />Extends
-					<a href="../symbols/CAAT.Behavior.html">CAAT.Behavior</a>.<br />
 				
 			
 				
 				
 				
-					<br /><i>Defined in: </i> <a href="../symbols/src/src_behaviour_behaviour.js.html">behaviour.js</a>.
+					<br /><i>Defined in: </i> <a href="../symbols/src/src_path_path.js.html">path.js</a>.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class CAAT.PathBehavior.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class CAAT.ArcPath.">
 				<caption>Class Summary</caption>
 				<thead>
 					<tr>
@@ -338,9 +336,9 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/CAAT.PathBehavior.html#constructor">CAAT.PathBehavior</a></b>()
+								<b><a href="../symbols/CAAT.ArcPath.html#constructor">CAAT.ArcPath</a></b>()
 							</div>
-							<div class="description">CAAT.PathBehavior modifies the position of a CAAT.Actor along the path represented by aninstance of <code>CAAT.Path</code>.</div>
+							<div class="description">Circular path.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -349,44 +347,12 @@ ul.inheritsList
 
 <!-- ============================== properties summary ===================== -->
 			
-				
-				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class CAAT.PathBehavior.">
-					<caption>Field Summary</caption>
-					<thead>
-						<tr>
-							<th scope="col">Field Attributes</th>
-							<th scope="col">Field Name and Description</th>
-						</tr>
-					</thead>
-					<tbody>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								CAAT.PathBehavior.<b><a href="../symbols/CAAT.PathBehavior.html#.autorotate">autorotate</a></b>
-								</div>
-								<div class="description"></div>
-							</td>
-						</tr>
-					
-					</tbody>
-				</table>
-				
-				
-				
-				<dl class="inheritsList">
-				
-				</dl>
-				
-			
 
 <!-- ============================== methods summary ======================== -->
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class CAAT.PathBehavior.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class CAAT.ArcPath.">
 					<caption>Method Summary</caption>
 					<thead>
 						<tr>
@@ -399,7 +365,7 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/CAAT.PathBehavior.html#calculateKeyFrameData">calculateKeyFrameData</a></b>(time)
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#applyAsPath">applyAsPath</a></b>(director)
 								</div>
 								<div class="description"></div>
 							</td>
@@ -408,7 +374,25 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/CAAT.PathBehavior.html#calculateKeyFramesData">calculateKeyFramesData</a></b>(prefix, name, keyframessize)
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#endCurvePosition">endCurvePosition</a></b>()
+								</div>
+								<div class="description">An arc starts and ends in the same point.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#finalPositionX">finalPositionX</a></b>()
+								</div>
+								<div class="description">Returns final path segment point's x coordinate.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#getContour">getContour</a></b>(iSize)
 								</div>
 								<div class="description"></div>
 							</td>
@@ -417,7 +401,7 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/CAAT.PathBehavior.html#getPropertyName">getPropertyName</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#getControlPoint">getControlPoint</a></b>(index)
 								</div>
 								<div class="description"></div>
 							</td>
@@ -426,43 +410,7 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/CAAT.PathBehavior.html#positionOnTime">positionOnTime</a></b>(time)
-								</div>
-								<div class="description">Get a point on the path.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/CAAT.PathBehavior.html#setAutoRotate">setAutoRotate</a></b>(autorotate, autorotateOp)
-								</div>
-								<div class="description">Sets an actor rotation to be heading from past to current path's point.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/CAAT.PathBehavior.html#setForTime">setForTime</a></b>(time, actor)
-								</div>
-								<div class="description">Translates the Actor to the corresponding time path position.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/CAAT.PathBehavior.html#setPath">setPath</a></b>()
-								</div>
-								<div class="description">Set the behavior path.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/CAAT.PathBehavior.html#setTranslation">setTranslation</a></b>(tx, ty)
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#getPosition">getPosition</a></b>(time)
 								</div>
 								<div class="description"></div>
 							</td>
@@ -471,9 +419,144 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/CAAT.PathBehavior.html#setValues">setValues</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#getPositionFromLength">getPositionFromLength</a></b>(iLength)
 								</div>
-								<div class="description">Set the behavior path.</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#initialize">initialize</a></b>(x, y, r, angle)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#initialPositionX">initialPositionX</a></b>()
+								</div>
+								<div class="description">Returns initial path segment point's x coordinate.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#isArcTo">isArcTo</a></b>()
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#isClockWise">isClockWise</a></b>()
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#numControlPoints">numControlPoints</a></b>()
+								</div>
+								<div class="description">Get the number of control points.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#paint">paint</a></b>(director, bDrawHandles)
+								</div>
+								<div class="description">Draws this path segment on screen.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#setArcTo">setArcTo</a></b>(b)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#setClockWise">setClockWise</a></b>(cw)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#setFinalPosition">setFinalPosition</a></b>(finalX, finalY)
+								</div>
+								<div class="description">Set a rectangle from points[0] to (finalX, finalY)</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#setInitialPosition">setInitialPosition</a></b>(x, y)
+								</div>
+								<div class="description">Set this path segment's starting position.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#setPoint">setPoint</a></b>(point, index)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#setPoints">setPoints</a></b>(points)
+								</div>
+								<div class="description">An array of {CAAT.Point} composed of two points.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#setRadius">setRadius</a></b>(r)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#startCurvePosition">startCurvePosition</a></b>()
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/CAAT.ArcPath.html#updatePath">updatePath</a></b>(point)
+								</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -481,10 +564,6 @@ ul.inheritsList
 				</table>
 				
 				
-				
-				<dl class="inheritsList">
-				<dt>Methods borrowed from class <a href="../symbols/CAAT.Behavior.html">CAAT.Behavior</a>: </dt><dd><a href="../symbols/CAAT.Behavior.html#addListener">addListener</a>, <a href="../symbols/CAAT.Behavior.html#apply">apply</a>, <a href="../symbols/CAAT.Behavior.html#emptyListenerList">emptyListenerList</a>, <a href="../symbols/CAAT.Behavior.html#fireBehaviorAppliedEvent">fireBehaviorAppliedEvent</a>, <a href="../symbols/CAAT.Behavior.html#fireBehaviorExpiredEvent">fireBehaviorExpiredEvent</a>, <a href="../symbols/CAAT.Behavior.html#fireBehaviorStartedEvent">fireBehaviorStartedEvent</a>, <a href="../symbols/CAAT.Behavior.html#getDuration">getDuration</a>, <a href="../symbols/CAAT.Behavior.html#getStartTime">getStartTime</a>, <a href="../symbols/CAAT.Behavior.html#initialize">initialize</a>, <a href="../symbols/CAAT.Behavior.html#isBehaviorInTime">isBehaviorInTime</a>, <a href="../symbols/CAAT.Behavior.html#normalizeTime">normalizeTime</a>, <a href="../symbols/CAAT.Behavior.html#setCycle">setCycle</a>, <a href="../symbols/CAAT.Behavior.html#setDefaultInterpolator">setDefaultInterpolator</a>, <a href="../symbols/CAAT.Behavior.html#setDelayTime">setDelayTime</a>, <a href="../symbols/CAAT.Behavior.html#setExpired">setExpired</a>, <a href="../symbols/CAAT.Behavior.html#setFrameTime">setFrameTime</a>, <a href="../symbols/CAAT.Behavior.html#setId">setId</a>, <a href="../symbols/CAAT.Behavior.html#setInterpolator">setInterpolator</a>, <a href="../symbols/CAAT.Behavior.html#setOutOfFrameTime">setOutOfFrameTime</a>, <a href="../symbols/CAAT.Behavior.html#setPingPong">setPingPong</a>, <a href="../symbols/CAAT.Behavior.html#setReversed">setReversed</a>, <a href="../symbols/CAAT.Behavior.html#setStatus">setStatus</a>, <a href="../symbols/CAAT.Behavior.html#setTimeOffset">setTimeOffset</a>, <a href="../symbols/CAAT.Behavior.html#setValueApplication">setValueApplication</a></dd>
-				</dl>
 				
 			
 <!-- ============================== events summary ======================== -->
@@ -498,11 +577,11 @@ ul.inheritsList
 				</div>
 				
 				<div class="fixedFont">
-						<b>CAAT.PathBehavior</b>()
+						<b>CAAT.ArcPath</b>()
 				</div>
 				
 				<div class="description">
-					CAAT.PathBehavior modifies the position of a CAAT.Actor along the path represented by aninstance of <code>CAAT.Path</code>.
+					Circular path. Complete 360 degrees.
 					
 				</div>
 				
@@ -522,33 +601,6 @@ ul.inheritsList
 
 <!-- ============================== field details ========================== -->		
 			
-				<div class="sectionTitle">
-					Field Detail
-				</div>
-				
-					<a name=".autorotate"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">CAAT.PathBehavior.</span><b>autorotate</b>
-					
-					</div>
-					<div class="description">
-						
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					
-				
-			
 
 <!-- ============================== method details ========================= -->		
 			
@@ -556,11 +608,11 @@ ul.inheritsList
 					Method Detail
 				</div>
 				
-					<a name="calculateKeyFrameData"> </a>
+					<a name="applyAsPath"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>calculateKeyFrameData</b>(time)
+					<b>applyAsPath</b>(director)
 					
 					</div>
 					<div class="description">
@@ -576,7 +628,7 @@ ul.inheritsList
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>time</b>
+									<b>director</b>
 									
 								</dt>
 								<dd></dd>
@@ -592,63 +644,15 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name="calculateKeyFramesData"> </a>
+					<a name="endCurvePosition"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>calculateKeyFramesData</b>(prefix, name, keyframessize)
+					<b>endCurvePosition</b>()
 					
 					</div>
 					<div class="description">
-						
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>prefix</b>
-									
-								</dt>
-								<dd></dd>
-							
-								<dt>
-									<b>name</b>
-									
-								</dt>
-								<dd></dd>
-							
-								<dt>
-									<b>keyframessize</b>
-									
-								</dt>
-								<dd></dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="getPropertyName"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>getPropertyName</b>()
-					
-					</div>
-					<div class="description">
-						
+						An arc starts and ends in the same point.
 						
 						
 					</div>
@@ -665,32 +669,21 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name="positionOnTime"> </a>
+					<a name="finalPositionX"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{object}</span>
-					<b>positionOnTime</b>(time)
+					<span class="light">{number}</span>
+					<b>finalPositionX</b>()
 					
 					</div>
 					<div class="description">
-						Get a point on the path.If the time to get the point at is in behaviors frame time, a point on the path will be returned, otherwisea default {x:-1, y:-1} point will be returned.
+						Returns final path segment point's x coordinate.
 						
 						
 					</div>
 					
 					
 					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>time</b>
-									
-								</dt>
-								<dd>{number} the time at which the point will be taken from the path.</dd>
-							
-							</dl>
 						
 						
 						
@@ -699,7 +692,7 @@ ul.inheritsList
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{object}</span> an object of the form {x:float y:float}</dd>
+								<dd><span class="light fixedFont">{number}</span> </dd>
 							
 							</dl>
 						
@@ -708,15 +701,15 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name="setAutoRotate"> </a>
+					<a name="getContour"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>setAutoRotate</b>(autorotate, autorotateOp)
+					<b>getContour</b>(iSize)
 					
 					</div>
 					<div class="description">
-						Sets an actor rotation to be heading from past to current path's point.Take into account that this will be incompatible with rotation Behaviorssince they will set their own rotation configuration.
+						
 						
 						
 					</div>
@@ -728,44 +721,349 @@ ul.inheritsList
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>autorotate</b>
+									<b>iSize</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="getControlPoint"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>getControlPoint</b>(index)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>index</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="getPosition"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>getPosition</b>(time)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>time</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="getPositionFromLength"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>getPositionFromLength</b>(iLength)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>iLength</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="initialize"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>initialize</b>(x, y, r, angle)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>x</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>y</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>r</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>angle</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="initialPositionX"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{number}</span>
+					<b>initialPositionX</b>()
+					
+					</div>
+					<div class="description">
+						Returns initial path segment point's x coordinate.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{number}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="isArcTo"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>isArcTo</b>()
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="isClockWise"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>isClockWise</b>()
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="numControlPoints"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{number}</span>
+					<b>numControlPoints</b>()
+					
+					</div>
+					<div class="description">
+						Get the number of control points. For this type of path segment, start andending path segment points. Defaults to 2.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{number}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="paint"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>paint</b>(director, bDrawHandles)
+					
+					</div>
+					<div class="description">
+						Draws this path segment on screen. Optionally it can draw handles for every control point, inthis case, start and ending path segment points.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>director</b>
+									
+								</dt>
+								<dd>{CAAT.Director}</dd>
+							
+								<dt>
+									<b>bDrawHandles</b>
 									
 								</dt>
 								<dd>{boolean}</dd>
 							
-								<dt>
-									<b>autorotateOp</b>
-									
-								</dt>
-								<dd>{CAAT.PathBehavior.autorotate} whether the sprite is drawn heading to the right.</dd>
-							
 							</dl>
 						
 						
 						
 						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd>this.</dd>
-							
-							</dl>
 						
 						
 						
 
 					<hr />
 				
-					<a name="setForTime"> </a>
+					<a name="setArcTo"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{object}</span>
-					<b>setForTime</b>(time, actor)
+					
+					<b>setArcTo</b>(b)
 					
 					</div>
 					<div class="description">
-						Translates the Actor to the corresponding time path position.If autoRotate=true, the actor is rotated as well. The rotation anchor will (if set) always be ANCHOR_CENTER.
+						
 						
 						
 					</div>
@@ -777,56 +1075,7 @@ ul.inheritsList
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>time</b>
-									
-								</dt>
-								<dd>an integer indicating the time the behavior is being applied at.</dd>
-							
-								<dt>
-									<b>actor</b>
-									
-								</dt>
-								<dd>a CAAT.Actor instance to be translated.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{object}</span> an object of the form <code>{ x: {float}, y: {float}�}</code>.</dd>
-							
-							</dl>
-						
-						
-						
-
-					<hr />
-				
-					<a name="setPath"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>setPath</b>()
-					
-					</div>
-					<div class="description">
-						Set the behavior path.The path can be any length, and will take behaviorDuration time to be traversed.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/CAAT.Path.html">CAAT.Path</a>}</span> <b></b>
+									<b>b</b>
 									
 								</dt>
 								<dd></dd>
@@ -842,11 +1091,11 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name="setTranslation"> </a>
+					<a name="setClockWise"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>setTranslation</b>(tx, ty)
+					<b>setClockWise</b>(cw)
 					
 					</div>
 					<div class="description">
@@ -862,56 +1111,7 @@ ul.inheritsList
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>tx</b>
-									
-								</dt>
-								<dd>a float with xoffset.</dd>
-							
-								<dt>
-									<b>ty</b>
-									
-								</dt>
-								<dd>a float with yoffset.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">See:</dt>
-							
-								<dd>Acotr.setPositionAcchor</dd>
-							
-							</dl>
-						
-
-					<hr />
-				
-					<a name="setValues"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>setValues</b>()
-					
-					</div>
-					<div class="description">
-						Set the behavior path.The path can be any length, and will take behaviorDuration time to be traversed.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/CAAT.Path.html">CAAT.Path</a>}</span> <b></b>
+									<b>cw</b>
 									
 								</dt>
 								<dd></dd>
@@ -922,12 +1122,264 @@ ul.inheritsList
 						
 						
 						
+						
+						
+
+					<hr />
+				
+					<a name="setFinalPosition"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setFinalPosition</b>(finalX, finalY)
+					
+					</div>
+					<div class="description">
+						Set a rectangle from points[0] to (finalX, finalY)
+						
+						
+					</div>
+					
+					
+					
+						
 							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
+							<dt class="heading">Parameters:</dt>
 							
-								<dd>this</dd>
+								<dt>
+									<b>finalX</b>
+									
+								</dt>
+								<dd>{number}</dd>
+							
+								<dt>
+									<b>finalY</b>
+									
+								</dt>
+								<dd>{number}</dd>
 							
 							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="setInitialPosition"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setInitialPosition</b>(x, y)
+					
+					</div>
+					<div class="description">
+						Set this path segment's starting position.This method should not be called again after setFinalPosition has been called.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>x</b>
+									
+								</dt>
+								<dd>{number}</dd>
+							
+								<dt>
+									<b>y</b>
+									
+								</dt>
+								<dd>{number}</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="setPoint"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setPoint</b>(point, index)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>point</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>index</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="setPoints"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setPoints</b>(points)
+					
+					</div>
+					<div class="description">
+						An array of {CAAT.Point} composed of two points.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>points</b>
+									
+								</dt>
+								<dd>{Array<CAAT.Point>}</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="setRadius"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setRadius</b>(r)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>r</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="startCurvePosition"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>startCurvePosition</b>()
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="updatePath"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>updatePath</b>(point)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>point</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
 						
 						
 						
@@ -946,7 +1398,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Wed Aug 08 2012 21:44:16 GMT-0700 (PDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Wed Aug 08 2012 21:44:15 GMT-0700 (PDT)
 		</div>
 	</body>
 </html>

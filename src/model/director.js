@@ -148,7 +148,7 @@
 
         needsRepaint        : false,    // for rendering mode = dirty, this flags means, paint another frame
 
-        touches             : null,
+        touches             : null,     // Touches information. Associate touch.id with an actor and original touch info.
 
         requestRepaint : function() {
             this.needsRepaint= true;
@@ -292,7 +292,6 @@
             }
 
             this.setBounds(0, 0, width, height);
-            this.create();
             this.enableEvents(proxy);
 
             this.timeline = new Date().getTime();
@@ -355,7 +354,6 @@
 
             if (this.gl) {
                 this.canvas = canvas;
-                this.create();
                 this.setBounds(0, 0, width, height);
 
                 this.crc = this.ctx;
@@ -400,7 +398,7 @@
          * @return {CAAT.Scene}
          */
         createScene : function() {
-            var scene = new CAAT.Scene().create();
+            var scene = new CAAT.Scene();
             this.addScene(scene);
             return scene;
         },
@@ -576,6 +574,10 @@
          * Director.
          */
         render : function(time) {
+
+            if ( this.currentScene && this.currentScene.isPaused() ) {
+                return;
+            }
 
             this.time += time;
 
@@ -1971,12 +1973,6 @@
             this.__gestureScale= 0;
         },
 
-        /**
-         * Touches information.
-         * associate touch.id with an actor and original touch info.
-         */
-        touches : null,
-
         __touchEndHandlerMT : function(e) {
 
             e.preventDefault();
@@ -2536,10 +2532,10 @@
             this.eventHandler.style.width=      ''+this.width+'px';
             this.eventHandler.style.height=     ''+this.height+'px';
 
-            var canvas= this.eventHandler;
+            this.canvas= this.eventHandler;
             this.in_ = false;
 
-            this.addHandlers(canvas);
+            this.addHandlers(this.canvas);
         };
     }
 
