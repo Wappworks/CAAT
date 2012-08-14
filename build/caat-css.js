@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 234
+Version: 0.4 build: 235
 
 Created on:
-DATE: 2012-08-09
-TIME: 11:12:38
+DATE: 2012-08-14
+TIME: 15:38:17
 */
 
 
@@ -3803,7 +3803,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 			this.fireBehaviorExpiredEvent(actor,time);
 
             if ( this.discardable ) {
-                actor.removeBehaviour( this );
+                actor.removeBehavior( this );
             }
 		},
         /**
@@ -6894,7 +6894,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          *
          * @param behavior {CAAT.Behavior} a CAAT.Behavior instance.
          */
-        removeBehaviour : function( behavior ) {
+        removeBehavior : function( behavior ) {
             var c=this.behaviorList
             var n= c.length-1;
             while(n) {
@@ -6902,6 +6902,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                     c.splice(n,1);
                     return this;
                 }
+                n--;
             }
             return this;
         },
@@ -16693,13 +16694,14 @@ CAAT.modules.CircleManager = CAAT.modules.CircleManager || {};/**
          *
          * @param behavior {CAAT.Behavior} a CAAT.Behavior instance.
          */
-        removeBehaviour : function( behavior ) {
+        removeBehavior : function( behavior ) {
             var n= this.behaviorList.length-1;
             while(n) {
                 if ( this.behaviorList[n]===behavior ) {
                     this.behaviorList.splice(n,1);
                     return this;
                 }
+                n--;
             }
 
             return this;

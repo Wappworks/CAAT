@@ -370,7 +370,7 @@
 			this.fireBehaviorExpiredEvent(actor,time);
 
             if ( this.discardable ) {
-                actor.removeBehaviour( this );
+                actor.removeBehavior( this );
             }
 		},
         /**

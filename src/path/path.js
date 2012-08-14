@@ -1947,13 +1947,14 @@
          *
          * @param behavior {CAAT.Behavior} a CAAT.Behavior instance.
          */
-        removeBehaviour : function( behavior ) {
+        removeBehavior : function( behavior ) {
             var n= this.behaviorList.length-1;
             while(n) {
                 if ( this.behaviorList[n]===behavior ) {
                     this.behaviorList.splice(n,1);
                     return this;
                 }
+                n--;
             }
 
             return this;
