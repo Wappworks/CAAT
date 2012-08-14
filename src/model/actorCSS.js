@@ -1229,7 +1229,7 @@
         removeBehavior : function( behavior ) {
             var c=this.behaviorList
             var n= c.length-1;
-            while(n) {
+            while(n >= 0) {
                 if ( c[n]===behavior ) {
                     c.splice(n,1);
                     return this;
@@ -1562,8 +1562,9 @@
                 this.style( 'display', this.visible ? 'block' : 'none');
             }
 
-			for( var i=0; i<this.behaviorList.length; i++ )	{
-				this.behaviorList[i].apply(time,this);
+            // Have to apply in reverse order because discardable behaviors will alter the list state..
+            for( var i=this.behaviorList.length - 1; i >= 0; i-- )	{
+                this.behaviorList[i].apply(time,this);
 			}
 
             this.frameAlpha= this.parent ? this.parent.frameAlpha*this.alpha : 1;

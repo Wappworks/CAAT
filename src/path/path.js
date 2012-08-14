@@ -1949,7 +1949,7 @@
          */
         removeBehavior : function( behavior ) {
             var n= this.behaviorList.length-1;
-            while(n) {
+            while(n >= 0) {
                 if ( this.behaviorList[n]===behavior ) {
                     this.behaviorList.splice(n,1);
                     return this;
@@ -1979,7 +1979,8 @@
 
         applyBehaviors : function(time) {
 //            if (this.behaviorList.length) {
-                for( var i=0; i<this.behaviorList.length; i++ )	{
+                // Have to apply in reverse order because discardable behaviors will alter the list state..
+                for( var i=this.behaviorList.length - 1; i >= 0; i-- )	{
                     this.behaviorList[i].apply(time,this);
                 }
 

@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 235
+Version: 0.4 build: 236
 
 Created on:
 DATE: 2012-08-14
-TIME: 15:38:17
+TIME: 16:01:50
 */
 
 
@@ -3929,7 +3929,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 				}
 
                 var bh= this.behaviors;
-				for( var i=0; i<bh.length; i++ )	{
+				for( var i=bh.length - 1; i >= 0; i-- )	{
 					bh[i].apply(time, actor);
 				}
 			}
@@ -6897,7 +6897,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
         removeBehavior : function( behavior ) {
             var c=this.behaviorList
             var n= c.length-1;
-            while(n) {
+            while(n >= 0) {
                 if ( c[n]===behavior ) {
                     c.splice(n,1);
                     return this;
@@ -7230,8 +7230,9 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 this.style( 'display', this.visible ? 'block' : 'none');
             }
 
-			for( var i=0; i<this.behaviorList.length; i++ )	{
-				this.behaviorList[i].apply(time,this);
+            // Have to apply in reverse order because discardable behaviors will alter the list state..
+            for( var i=this.behaviorList.length - 1; i >= 0; i-- )	{
+                this.behaviorList[i].apply(time,this);
 			}
 
             this.frameAlpha= this.parent ? this.parent.frameAlpha*this.alpha : 1;
@@ -16696,7 +16697,7 @@ CAAT.modules.CircleManager = CAAT.modules.CircleManager || {};/**
          */
         removeBehavior : function( behavior ) {
             var n= this.behaviorList.length-1;
-            while(n) {
+            while(n >= 0) {
                 if ( this.behaviorList[n]===behavior ) {
                     this.behaviorList.splice(n,1);
                     return this;
@@ -16726,7 +16727,8 @@ CAAT.modules.CircleManager = CAAT.modules.CircleManager || {};/**
 
         applyBehaviors : function(time) {
 //            if (this.behaviorList.length) {
-                for( var i=0; i<this.behaviorList.length; i++ )	{
+                // Have to apply in reverse order because discardable behaviors will alter the list state..
+                for( var i=this.behaviorList.length - 1; i >= 0; i-- )	{
                     this.behaviorList[i].apply(time,this);
                 }
 

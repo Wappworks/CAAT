@@ -496,7 +496,7 @@
 				}
 
                 var bh= this.behaviors;
-				for( var i=0; i<bh.length; i++ )	{
+				for( var i=bh.length - 1; i >= 0; i-- )	{
 					bh[i].apply(time, actor);
 				}
 			}

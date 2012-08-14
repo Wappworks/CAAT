@@ -1024,7 +1024,7 @@
         removeBehavior : function( behavior ) {
             var c= this.behaviorList;
             var n= c.length-1;
-            while(n) {
+            while(n >= 0 ) {
                 if ( c[n]===behavior ) {
                     c.splice(n,1);
                     return this;
@@ -1412,7 +1412,8 @@
                 this.oldY= this.y;
             }
 
-			for( i=0; i<this.behaviorList.length; i++ )	{
+            // Have to apply in reverse order because discardable behaviors will alter the list state..
+			for( i=this.behaviorList.length - 1; i >= 0; i-- )	{
 				this.behaviorList[i].apply(time,this);
 			}
 
