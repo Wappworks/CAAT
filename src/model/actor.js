@@ -2908,7 +2908,7 @@
          */
 		drawSpriteText: function(director, time) {
 			if (null===this.path) {
-				this.font.drawString( director.ctx, this.text, 0, 0);
+				this.font.drawString( director.ctx, this.text, 0, 0, this.textAlign );
 			} else {
 				this.drawSpriteTextOnPath(director, time);
 			}

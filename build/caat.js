@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 236
+Version: 0.4 build: 237
 
 Created on:
-DATE: 2012-08-14
-TIME: 16:01:48
+DATE: 2012-08-15
+TIME: 22:34:25
 */
 
 
@@ -8575,7 +8575,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          */
 		drawSpriteText: function(director, time) {
 			if (null===this.path) {
-				this.font.drawString( director.ctx, this.text, 0, 0);
+				this.font.drawString( director.ctx, this.text, 0, 0, this.textAlign );
 			} else {
 				this.drawSpriteTextOnPath(director, time);
 			}
@@ -13855,10 +13855,18 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
             return this.fontHeight;
         },
 
-        drawString : function( ctx, str, x, y ) {
+        drawString : function( ctx, str, x, y, textAlign ) {
             var i, l, charInfo, w;
             var charArr = str.split("");
-            
+
+            // Handle text align (if applicable)...
+            if( textAlign != null ) {
+                if( textAlign === "center" )
+                    x -= (this.stringWidth(str) * 0.5) >> 0;
+                else if( textAlign === "right" )
+                    x -= this.stringWidth(str);
+            }
+
             for( i=0; i<charArr.length; i++ ) {
                 charInfo= this.mapInfo[ charArr[i] ];
                   if ( charInfo ) {
