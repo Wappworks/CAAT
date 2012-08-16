@@ -823,17 +823,9 @@
             return this.fontHeight;
         },
 
-        drawString : function( ctx, str, x, y, textAlign ) {
+        drawString : function( ctx, str, x, y ) {
             var i, l, charInfo, w;
             var charArr = str.split("");
-
-            // Handle text align (if applicable)...
-            if( textAlign != null ) {
-                if( textAlign === "center" )
-                    x -= (this.stringWidth(str) * 0.5) >> 0;
-                else if( textAlign === "right" )
-                    x -= this.stringWidth(str);
-            }
 
             for( i=0; i<charArr.length; i++ ) {
                 charInfo= this.mapInfo[ charArr[i] ];

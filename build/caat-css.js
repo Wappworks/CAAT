@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 237
+Version: 0.4 build: 238
 
 Created on:
-DATE: 2012-08-15
-TIME: 22:34:28
+DATE: 2012-08-16
+TIME: 01:58:18
 */
 
 
@@ -12786,17 +12786,9 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
             return this.fontHeight;
         },
 
-        drawString : function( ctx, str, x, y, textAlign ) {
+        drawString : function( ctx, str, x, y ) {
             var i, l, charInfo, w;
             var charArr = str.split("");
-
-            // Handle text align (if applicable)...
-            if( textAlign != null ) {
-                if( textAlign === "center" )
-                    x -= (this.stringWidth(str) * 0.5) >> 0;
-                else if( textAlign === "right" )
-                    x -= this.stringWidth(str);
-            }
 
             for( i=0; i<charArr.length; i++ ) {
                 charInfo= this.mapInfo[ charArr[i] ];

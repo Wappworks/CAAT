@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 237
+Version: 0.4 build: 238
 
 Created on:
-DATE: 2012-08-15
-TIME: 22:34:25
+DATE: 2012-08-16
+TIME: 01:58:15
 */
 
 
@@ -8293,6 +8293,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
         pathDuration:       10000,  // an integer indicating the time to be taken to traverse the path. ms.
 		sign:			    1,      // traverse the path forward or backwards.
 
+        spriteTextAlignOffset: null,    // an integer indicating the text alignment position offset when drawing sprite text
+
         /**
          * Set the text to be filled. The default Filling style will be set by calling setFillStyle method.
          * Default value is true.
@@ -8346,6 +8348,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
         },
         setTextAlign : function( align ) {
             this.textAlign= align;
+            this.spriteTextAlignOffset = null;
             return this;
         },
         /**
@@ -8407,8 +8410,10 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             if ( this.font instanceof CAAT.SpriteImage ) {
                 this.textWidth= this.font.stringWidth( this.text );
                 this.textHeight=this.font.stringHeight();
-                this.width= this.textWidth;
-                this.height= this.textHeight;
+                this.spriteTextAlignOffset = null;
+                if (this.width===0) {
+                    this.width= this.textWidth;
+                }
                 return this;
             }
 
@@ -8575,7 +8580,22 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          */
 		drawSpriteText: function(director, time) {
 			if (null===this.path) {
-				this.font.drawString( director.ctx, this.text, 0, 0, this.textAlign );
+                if( this.spriteTextAlignOffset == null ) {
+                    switch( this.textAlign ) {
+                        case "right":
+                            this.spriteTextAlignOffset = this.width - this.textWidth;
+                            break;
+
+                        case "center":
+                            this.spriteTextAlignOffset = ( (this.width - this.textWidth) * 0.5 ) >> 0;
+                            break;
+
+                        default:    // Left aligned
+                            this.spriteTextAlignOffset = 0;
+                            break;
+                    }
+                }
+				this.font.drawString( director.ctx, this.text, this.spriteTextAlignOffset, 0 );
 			} else {
 				this.drawSpriteTextOnPath(director, time);
 			}
@@ -13855,17 +13875,9 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
             return this.fontHeight;
         },
 
-        drawString : function( ctx, str, x, y, textAlign ) {
+        drawString : function( ctx, str, x, y ) {
             var i, l, charInfo, w;
             var charArr = str.split("");
-
-            // Handle text align (if applicable)...
-            if( textAlign != null ) {
-                if( textAlign === "center" )
-                    x -= (this.stringWidth(str) * 0.5) >> 0;
-                else if( textAlign === "right" )
-                    x -= this.stringWidth(str);
-            }
 
             for( i=0; i<charArr.length; i++ ) {
                 charInfo= this.mapInfo[ charArr[i] ];

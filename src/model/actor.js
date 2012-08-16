@@ -2626,6 +2626,8 @@
         pathDuration:       10000,  // an integer indicating the time to be taken to traverse the path. ms.
 		sign:			    1,      // traverse the path forward or backwards.
 
+        spriteTextAlignOffset: null,    // an integer indicating the text alignment position offset when drawing sprite text
+
         /**
          * Set the text to be filled. The default Filling style will be set by calling setFillStyle method.
          * Default value is true.
@@ -2679,6 +2681,7 @@
         },
         setTextAlign : function( align ) {
             this.textAlign= align;
+            this.spriteTextAlignOffset = null;
             return this;
         },
         /**
@@ -2740,8 +2743,10 @@
             if ( this.font instanceof CAAT.SpriteImage ) {
                 this.textWidth= this.font.stringWidth( this.text );
                 this.textHeight=this.font.stringHeight();
-                this.width= this.textWidth;
-                this.height= this.textHeight;
+                this.spriteTextAlignOffset = null;
+                if (this.width===0) {
+                    this.width= this.textWidth;
+                }
                 return this;
             }
 
@@ -2908,7 +2913,22 @@
          */
 		drawSpriteText: function(director, time) {
 			if (null===this.path) {
-				this.font.drawString( director.ctx, this.text, 0, 0, this.textAlign );
+                if( this.spriteTextAlignOffset == null ) {
+                    switch( this.textAlign ) {
+                        case "right":
+                            this.spriteTextAlignOffset = this.width - this.textWidth;
+                            break;
+
+                        case "center":
+                            this.spriteTextAlignOffset = ( (this.width - this.textWidth) * 0.5 ) >> 0;
+                            break;
+
+                        default:    // Left aligned
+                            this.spriteTextAlignOffset = 0;
+                            break;
+                    }
+                }
+				this.font.drawString( director.ctx, this.text, this.spriteTextAlignOffset, 0 );
 			} else {
 				this.drawSpriteTextOnPath(director, time);
 			}
