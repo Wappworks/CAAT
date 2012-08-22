@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 238
+Version: 0.4 build: 239
 
 Created on:
-DATE: 2012-08-16
-TIME: 01:58:18
+DATE: 2012-08-22
+TIME: 14:59:59
 */
 
 
@@ -12058,6 +12058,7 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
         TR_FLIP_ALL:			3,
         TR_FIXED_TO_SIZE:       4,
         TR_TILE:                5,
+        TR_TILE_VERTICAL:       6,
 
         image:                  null,
         rows:                   1,
@@ -12264,6 +12265,41 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
         },
 
         /**
+         * Must be used to draw actor background and the actor should have setClip(true) so that the image tiles
+         * properly.
+         * @param director
+         * @param time
+         * @param x
+         * @param y
+         */
+        paintTiledVerticalStretchedHorizontal : function( director, time, x, y ) {
+            this.setSpriteIndexAtTime(time);
+            var el= this.mapInfo[this.spriteIndex];
+
+            var w= Math.max( 0, this.getWidth() - this.offsetX );
+            var h= this.getHeight();
+            var xpos = this.offsetX + x;
+            var yoff= (this.offsetY + y) % h;
+            if ( yoff> 0 ) {
+                yoff= yoff-h;
+            }
+            var ypos = yoff + y;
+
+            var nh= (((this.ownerActor.height-yoff)/h)>>0)+1;
+            var i;
+            var ctx= director.ctx;
+
+            for( i=0; i<nh; i++ ) {
+                ctx.drawImage(
+                    this.image,
+                    el.x, el.y,
+                    el.width, el.height,
+                    xpos, ypos + (i*el.height)>>0,
+                    w, el.height);
+            }
+        },
+
+        /**
          * Draws the subimage pointed by imageIndex horizontally inverted.
          * @param canvas a canvas context.
          * @param imageIndex {number} a subimage index.
@@ -12426,9 +12462,16 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
             var x= -(el.x-this.offsetX);
             var y= -(el.y-this.offsetY);
 
+            var transformation = this.ownerActor.transformation;
+            var cssRepeat = "no repeat";
+            if( transformation===this.TR_TILE )
+                cssRepeat = "repeat";
+            else if( transformation===this.TR_TILE_VERTICAL )
+                cssRepeat = "repeat-y";
+
             return ''+x+'px '+
-                   y+'px '+
-                    (this.ownerActor.transformation===this.TR_TILE ? 'repeat' : 'no-repeat');
+                y+'px '+
+                cssRepeat;
         },
         /**
          * Get the number of subimages in this compoundImage
@@ -12539,7 +12582,10 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
                 case this.TR_TILE:
                     this.paint= this.paintTiled;
                     break;
-				default:
+                case this.TR_TILE_VERTICAL:
+                    this.paint= this.paintTiledVerticalStretchedHorizontal;
+                    break;
+                default:
 					this.paint= this.paintN;
 			}
             return this;
