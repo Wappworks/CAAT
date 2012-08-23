@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 239
+Version: 0.4 build: 240
 
 Created on:
 DATE: 2012-08-22
-TIME: 14:59:59
+TIME: 18:06:14
 */
 
 
@@ -1432,14 +1432,11 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 (function () {
 
     /**
-     * Class with color utilities.
+     * Color utilities.
      *
      * @constructor
      */
-	CAAT.Color = function () {
-		return this;
-	};
-	CAAT.Color.prototype = {
+	CAAT.Color = {
 		/**
 		 * HSV to RGB color conversion
 		 * <p>
@@ -1541,24 +1538,22 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * @param r1 {number} final color red component.
          * @param g1 {number} final color green component.
          * @param b1 {number} final color blue component.
-         * @param nsteps {number} number of colors to calculate including the two given colors. If 16 is passed as value,
-         * 14 colors plus the two initial ones will be calculated.
-         * @param step {number} return this color index of all the calculated colors.
+         * @param pct {number} the current interpolation percentage (0 - 1)
          *
          * @return { r{number}, g{number}, b{number} } return an object with the new calculated color components.
          * @static
          */
-        interpolate : function (r0, g0, b0, r1, g1, b1, nsteps, step) {
+        interpolate : function (r0, g0, b0, r1, g1, b1, pct ) {
 
             var r, g, b;
 
-            if (step <= 0) {
+            if (pct <= 0) {
                 return {
                     r: r0,
                     g: g0,
                     b: b0
                 };
-            } else if (step >= nsteps) {
+            } else if (pct >= 1) {
                 return {
                     r: r1,
                     g: g1,
@@ -1566,9 +1561,9 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 };
             }
 
-            r = (r0 + (r1 - r0) / nsteps * step) >> 0;
-            g = (g0 + (g1 - g0) / nsteps * step) >> 0;
-            b = (b0 + (b1 - b0) / nsteps * step) >> 0;
+            r = (r0 + (r1 - r0) * pct) >> 0;
+            g = (g0 + (g1 - g0) * pct) >> 0;
+            b = (b0 + (b1 - b0) * pct) >> 0;
 
             if (r > 255) {
                 r = 255;
@@ -1676,11 +1671,26 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
      * @constructor
      */
 	CAAT.Color.RGB = function(r, g, b) {
-		this.r = r || 255;
-		this.g = g || 255;
-		this.b = b || 255;
+		this.r = r;
+		this.g = g;
+		this.b = b;
 		return this;
 	};
+
+    CAAT.Color.RGB.fromHex = function( hexColor ) {
+        var startIndex = 0,
+            r, g, b;
+
+        if( hexColor.charAt(0) === "#" )
+            startIndex = 1;
+
+        r = parseInt( hexColor.substring( startIndex, startIndex + 2 ), 16 );
+        g = parseInt( hexColor.substring( startIndex + 2, startIndex + 4 ), 16 );
+        b = parseInt( hexColor.substring( startIndex + 4, startIndex + 6 ), 16 );
+
+        return new CAAT.Color.RGB(r, g, b);
+    };
+
 	CAAT.Color.RGB.prototype= {
 		r: 255,
 		g: 255,
@@ -4796,11 +4806,52 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
      * @constructor
      */
     CAAT.ColorBehavior= function() {
+        CAAT.ColorBehavior.superclass.constructor.call(this);
         return this;
     };
 
     CAAT.ColorBehavior.prototype= {
+        colorStart: null,
+        colorEnd: null,
 
+        /**
+         * Sets the values
+         *
+         * @param {CAAT.Color.RGB|String}   colorStart
+         * @param {CAAT.Color.RGB|String}   colorEnd
+         *
+         * @returns this
+         */
+        setValues: function ( colorStart, colorEnd) {
+            if( typeof colorStart === "string" )
+                colorStart = CAAT.Color.RGB.fromHex( colorStart );
+            if( typeof colorEnd === "string" )
+                colorEnd = CAAT.Color.RGB.fromHex( colorEnd );
+
+            this.colorStart = colorStart;
+            this.colorEnd = colorEnd;
+
+            return this;
+        },
+
+        /**
+         * This method must be overriden for every Behavior breed.
+         * Must not be called directly.
+         * @param actor {CAAT.Actor} a CAAT.Actor instance.
+         * @param time {number} an integer with the scene time.
+         *
+         * @private
+         */
+        setForTime : function( time, actor ) {
+            var colorStart = this.colorStart,
+                colorEnd = this.colorEnd,
+                colorCurr, fillStyle;
+
+            colorCurr = CAAT.Color.interpolate( colorStart.r, colorStart.g, colorStart.b, colorEnd.r, colorEnd.g, colorEnd.b, time );
+            fillStyle = "#" + CAAT.Color.RGB.prototype.toHex.apply( colorCurr );
+
+            actor.setFillStyle( fillStyle );
+        }
     };
 
     extend( CAAT.ColorBehavior, CAAT.Behavior );

@@ -338,7 +338,7 @@ ul.inheritsList
 							<div class="fixedFont">
 								<b><a href="../symbols/CAAT.Color.html#constructor">CAAT.Color</a></b>()
 							</div>
-							<div class="description">Class with color utilities.</div>
+							<div class="description">Color utilities.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -360,10 +360,10 @@ ul.inheritsList
 					<tbody>
 					
 						<tr>
-							<td class="attributes">&nbsp;</td>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/CAAT.Color.html#RampEnumeration">RampEnumeration</a></b>
+								CAAT.Color.<b><a href="../symbols/CAAT.Color.html#.RampEnumeration">RampEnumeration</a></b>
 								</div>
 								<div class="description">Enumeration to define types of color ramps.</div>
 							</td>
@@ -391,27 +391,27 @@ ul.inheritsList
 					<tbody>
 					
 						<tr>
-							<td class="attributes">&nbsp;</td>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/CAAT.Color.html#hsvToRgb">hsvToRgb</a></b>(h, s, v)
+								<div class="fixedFont">CAAT.Color.<b><a href="../symbols/CAAT.Color.html#.hsvToRgb">hsvToRgb</a></b>(h, s, v)
 								</div>
 								<div class="description">HSV to RGB color conversion<p>H runs from 0 to 360 degrees<br>S and V run from 0 to 100<p>Ported from the excellent java algorithm by Eugene Vishnevsky at:http://www.cs.rit.edu/~ncs/color/t_convert.html</div>
 							</td>
 						</tr>
 					
 						<tr>
-							<td class="attributes">&nbsp;</td>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/CAAT.Color.html#interpolate">interpolate</a></b>(r0, g0, b0, r1, g1, b1, nsteps, step)
+								<div class="fixedFont">CAAT.Color.<b><a href="../symbols/CAAT.Color.html#.interpolate">interpolate</a></b>(r0, g0, b0, r1, g1, b1, pct)
 								</div>
 								<div class="description">Interpolate the color between two given colors.</div>
 							</td>
 						</tr>
 					
 						<tr>
-							<td class="attributes">&nbsp;</td>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/CAAT.Color.html#makeRGBColorRamp">makeRGBColorRamp</a></b>(fromColorsArray, rampSize, returnType)
+								<div class="fixedFont">CAAT.Color.<b><a href="../symbols/CAAT.Color.html#.makeRGBColorRamp">makeRGBColorRamp</a></b>(fromColorsArray, rampSize, returnType)
 								</div>
 								<div class="description">Generate a ramp of colors from an array of given colors.</div>
 							</td>
@@ -438,7 +438,7 @@ ul.inheritsList
 				</div>
 				
 				<div class="description">
-					Class with color utilities.
+					Color utilities.
 					
 				</div>
 				
@@ -462,11 +462,11 @@ ul.inheritsList
 					Field Detail
 				</div>
 				
-					<a name="RampEnumeration"> </a>
-					<div class="fixedFont">
+					<a name=".RampEnumeration"> </a>
+					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<b>RampEnumeration</b>
+					<span class="light">CAAT.Color.</span><b>RampEnumeration</b>
 					
 					</div>
 					<div class="description">
@@ -492,11 +492,11 @@ ul.inheritsList
 					Method Detail
 				</div>
 				
-					<a name="hsvToRgb"> </a>
-					<div class="fixedFont">
+					<a name=".hsvToRgb"> </a>
+					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<b>hsvToRgb</b>(h, s, v)
+					<span class="light">CAAT.Color.</span><b>hsvToRgb</b>(h, s, v)
 					
 					</div>
 					<div class="description">
@@ -540,11 +540,11 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name="interpolate"> </a>
-					<div class="fixedFont">
+					<a name=".interpolate"> </a>
+					<div class="fixedFont">&lt;static&gt; 
 					
 					<span class="light">{r{number}|g{number}|b{number}}</span>
-					<b>interpolate</b>(r0, g0, b0, r1, g1, b1, nsteps, step)
+					<span class="light">CAAT.Color.</span><b>interpolate</b>(r0, g0, b0, r1, g1, b1, pct)
 					
 					</div>
 					<div class="description">
@@ -596,16 +596,10 @@ ul.inheritsList
 								<dd>{number} final color blue component.</dd>
 							
 								<dt>
-									<b>nsteps</b>
+									<b>pct</b>
 									
 								</dt>
-								<dd>{number} number of colors to calculate including the two given colors. If 16 is passed as value,14 colors plus the two initial ones will be calculated.</dd>
-							
-								<dt>
-									<b>step</b>
-									
-								</dt>
-								<dd>{number} return this color index of all the calculated colors.</dd>
+								<dd>{number} the current interpolation percentage (0 - 1)</dd>
 							
 							</dl>
 						
@@ -625,11 +619,11 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name="makeRGBColorRamp"> </a>
-					<div class="fixedFont">
+					<a name=".makeRGBColorRamp"> </a>
+					<div class="fixedFont">&lt;static&gt; 
 					
 					<span class="light">{[{number}|{number}|{number}|{number}]}</span>
-					<b>makeRGBColorRamp</b>(fromColorsArray, rampSize, returnType)
+					<span class="light">CAAT.Color.</span><b>makeRGBColorRamp</b>(fromColorsArray, rampSize, returnType)
 					
 					</div>
 					<div class="description">
@@ -692,7 +686,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Wed Aug 22 2012 15:00:38 GMT-0700 (PDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Wed Aug 22 2012 18:06:53 GMT-0700 (PDT)
 		</div>
 	</body>
 </html>

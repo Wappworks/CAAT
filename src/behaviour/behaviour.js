@@ -1363,11 +1363,52 @@
      * @constructor
      */
     CAAT.ColorBehavior= function() {
+        CAAT.ColorBehavior.superclass.constructor.call(this);
         return this;
     };
 
     CAAT.ColorBehavior.prototype= {
+        colorStart: null,
+        colorEnd: null,
 
+        /**
+         * Sets the values
+         *
+         * @param {CAAT.Color.RGB|String}   colorStart
+         * @param {CAAT.Color.RGB|String}   colorEnd
+         *
+         * @returns this
+         */
+        setValues: function ( colorStart, colorEnd) {
+            if( typeof colorStart === "string" )
+                colorStart = CAAT.Color.RGB.fromHex( colorStart );
+            if( typeof colorEnd === "string" )
+                colorEnd = CAAT.Color.RGB.fromHex( colorEnd );
+
+            this.colorStart = colorStart;
+            this.colorEnd = colorEnd;
+
+            return this;
+        },
+
+        /**
+         * This method must be overriden for every Behavior breed.
+         * Must not be called directly.
+         * @param actor {CAAT.Actor} a CAAT.Actor instance.
+         * @param time {number} an integer with the scene time.
+         *
+         * @private
+         */
+        setForTime : function( time, actor ) {
+            var colorStart = this.colorStart,
+                colorEnd = this.colorEnd,
+                colorCurr, fillStyle;
+
+            colorCurr = CAAT.Color.interpolate( colorStart.r, colorStart.g, colorStart.b, colorEnd.r, colorEnd.g, colorEnd.b, time );
+            fillStyle = "#" + CAAT.Color.RGB.prototype.toHex.apply( colorCurr );
+
+            actor.setFillStyle( fillStyle );
+        }
     };
 
     extend( CAAT.ColorBehavior, CAAT.Behavior );
