@@ -96,6 +96,7 @@
         TR_FIXED_TO_SIZE:       4,
         TR_TILE:                5,
         TR_TILE_VERTICAL:       6,
+        TR_TILE_HORIZONTAL:     7,
 
         image:                  null,
         rows:                   1,
@@ -313,7 +314,7 @@
             this.setSpriteIndexAtTime(time);
             var el= this.mapInfo[this.spriteIndex];
 
-            var w= Math.max( 0, this.getWidth() - this.offsetX );
+            var w= this.ownerActor.width;
             var h= this.getHeight();
             var xpos = this.offsetX + x;
             var yoff= (this.offsetY + y) % h;
@@ -333,6 +334,41 @@
                     el.width, el.height,
                     xpos, ypos + (i*el.height)>>0,
                     w, el.height);
+            }
+        },
+
+        /**
+         * Must be used to draw actor background and the actor should have setClip(true) so that the image tiles
+         * properly.
+         * @param director
+         * @param time
+         * @param x
+         * @param y
+         */
+        paintStretchedVerticalTiledHorizontal : function( director, time, x, y ) {
+            this.setSpriteIndexAtTime(time);
+            var el= this.mapInfo[this.spriteIndex];
+
+            var w= this.getWidth();
+            var h= this.ownerActor.height;
+            var xoff = (this.offsetX + x) % w;
+            var ypos= this.offsetY + y;
+            if ( xoff> 0 ) {
+                xoff = xoff - w;
+            }
+            var xpos = xoff + x;
+
+            var nw= (((this.ownerActor.width-xoff)/w)>>0)+1;
+            var i;
+            var ctx= director.ctx;
+
+            for( i=0; i<nw; i++ ) {
+                ctx.drawImage(
+                    this.image,
+                    el.x, el.y,
+                    el.width, el.height,
+                    xpos + (i*el.width)>>0, ypos,
+                    el.width, h);
             }
         },
 
@@ -621,6 +657,9 @@
                     break;
                 case this.TR_TILE_VERTICAL:
                     this.paint= this.paintTiledVerticalStretchedHorizontal;
+                    break;
+                case this.TR_TILE_HORIZONTAL:
+                    this.paint= this.paintStretchedVerticalTiledHorizontal;
                     break;
                 default:
 					this.paint= this.paintN;
