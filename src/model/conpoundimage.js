@@ -706,7 +706,7 @@
             if ( this.animationImageIndex.length>1 ) {
                 if ( this.prevAnimationTime===-1 )	{
                     this.prevAnimationTime= time;
-                    this.spriteIndex=0;
+                    this.spriteIndex=this.animationImageIndex[0];
                 }
                 else	{
                     var ttime= time;
