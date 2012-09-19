@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 242
+Version: 0.4 build: 243
 
 Created on:
-DATE: 2012-09-13
-TIME: 14:58:28
+DATE: 2012-09-19
+TIME: 11:43:25
 */
 
 
@@ -8464,6 +8464,9 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 this.spriteTextAlignOffset = null;
                 if (this.width===0) {
                     this.width= this.textWidth;
+                }
+                if ( this.height===0 ) {
+                    this.height= this.textHeight;
                 }
                 return this;
             }

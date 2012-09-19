@@ -2747,6 +2747,9 @@
                 if (this.width===0) {
                     this.width= this.textWidth;
                 }
+                if ( this.height===0 ) {
+                    this.height= this.textHeight;
+                }
                 return this;
             }
 
