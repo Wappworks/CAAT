@@ -175,6 +175,12 @@
             return this.glEnabled ? 'WEBGL' : 'CANVAS';
         },
         windowResized : function(w, h) {
+            var canvasParent = this.canvas.parentNode;
+            if( canvasParent != window.document ) {
+                w = canvasParent.clientWidth;
+                h = canvasParent.clientHeight;
+            }
+
             switch (this.resize) {
                 case this.RESIZE_WIDTH:
                     this.setBounds(0, 0, w, this.height);

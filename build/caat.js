@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 243
+Version: 0.4 build: 244
 
 Created on:
-DATE: 2012-09-19
-TIME: 11:43:25
+DATE: 2012-10-04
+TIME: 17:06:43
 */
 
 
@@ -10041,6 +10041,12 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             return this.glEnabled ? 'WEBGL' : 'CANVAS';
         },
         windowResized : function(w, h) {
+            var canvasParent = this.canvas.parentNode;
+            if( canvasParent != window.document ) {
+                w = canvasParent.clientWidth;
+                h = canvasParent.clientHeight;
+            }
+
             switch (this.resize) {
                 case this.RESIZE_WIDTH:
                     this.setBounds(0, 0, w, this.height);
@@ -12680,6 +12686,7 @@ CAAT.FPS=           60;
  * On resize event listener
  */
 CAAT.windowResizeListeners= [];
+CAAT.windowResizeTimer = null;
 
 /**
  * Register an object as resize callback.
@@ -12942,11 +12949,17 @@ CAAT.GlobalEnableEvents= function __GlobalEnableEvents() {
 
     window.addEventListener('resize',
         function(evt) {
-            for( var i=0; i<CAAT.windowResizeListeners.length; i++ ) {
-                CAAT.windowResizeListeners[i].windowResized(
+            if( CAAT.windowResizeTimer != null )
+                clearTimeout( CAAT.windowResizeTimer );
+
+            CAAT.windowResizeTimer = setTimeout(function(){
+                CAAT.windowResizeTimer = null;
+                for( var i=0; i<CAAT.windowResizeListeners.length; i++ ) {
+                    CAAT.windowResizeListeners[i].windowResized(
                         window.innerWidth,
                         window.innerHeight);
-            }
+                }
+            }, 500 );
         },
         false);
 };

@@ -234,6 +234,7 @@ CAAT.FPS=           60;
  * On resize event listener
  */
 CAAT.windowResizeListeners= [];
+CAAT.windowResizeTimer = null;
 
 /**
  * Register an object as resize callback.
@@ -496,11 +497,17 @@ CAAT.GlobalEnableEvents= function __GlobalEnableEvents() {
 
     window.addEventListener('resize',
         function(evt) {
-            for( var i=0; i<CAAT.windowResizeListeners.length; i++ ) {
-                CAAT.windowResizeListeners[i].windowResized(
+            if( CAAT.windowResizeTimer != null )
+                clearTimeout( CAAT.windowResizeTimer );
+
+            CAAT.windowResizeTimer = setTimeout(function(){
+                CAAT.windowResizeTimer = null;
+                for( var i=0; i<CAAT.windowResizeListeners.length; i++ ) {
+                    CAAT.windowResizeListeners[i].windowResized(
                         window.innerWidth,
                         window.innerHeight);
-            }
+                }
+            }, 500 );
         },
         false);
 };
