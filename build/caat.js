@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 245
+Version: 0.4 build: 246
 
 Created on:
 DATE: 2012-11-30
-TIME: 12:48:42
+TIME: 14:57:21
 */
 
 
@@ -12485,6 +12485,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 CAAT.TouchInfo= function( id, point, screenPoint, target ) {
 
     this.identifier= id;
+    this.startPoint= new CAAT.Point().set( point.x, point.y );
     this.point= new CAAT.Point().set( point.x, point.y );
     this.screenPoint= new CAAT.Point().set( screenPoint.x, screenPoint.y );
     this.target= target;

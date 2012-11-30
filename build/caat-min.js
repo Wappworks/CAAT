@@ -22,11 +22,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 245
+Version: 0.4 build: 246
 
 Created on:
 DATE: 2012-11-30
-TIME: 12:48:36
+TIME: 14:57:13
 */
 
 
@@ -274,7 +274,7 @@ a.rotation))},!1),c.addEventListener("gestureend",function(a){a.target===c&&(a.p
 0,d,e);this.eventHandler.style.width=d+"px";this.eventHandler.style.height=e+"px";return this},CAAT.Director.prototype.initialize=function(a,b,d){this.timeline=(new Date).getTime();this.domElement=d;this.style("position","absolute");this.style("width",""+a+"px");this.style("height",""+b+"px");this.style("overflow","hidden");this.enableEvents(d);this.setBounds(0,0,a,b);this.checkDebug();return this},CAAT.Director.prototype.render=function(a){this.time+=a;this.animate(this,a);var b,d,e;CAAT.DEBUG&&
 this.resetStats();b=0;for(d=this.childrenList.length;b<d;b++){var f=this.childrenList[b];if(f.isInAnimationFrame(this.time)){e=f.time-f.start_time;if(f.onRenderStart)f.onRenderStart(e);f.paintActor(this,e);if(f.onRenderEnd)f.onRenderEnd(e);f.isPaused()||(f.time+=a);CAAT.DEBUG&&(this.statistics.size_total+=f.size_total,this.statistics.size_active+=f.size_active,this.statistics.size_dirtyRects=this.nDirtyRects)}}this.frameCounter++},CAAT.Director.prototype.addScene=function(a){a.setVisible(!0);a.setBounds(0,
 0,this.width,this.height);this.scenes.push(a);a.setEaseListener(this);null===this.currentScene&&this.setScene(0);this.domElement.appendChild(a.domElement)},CAAT.Director.prototype.emptyScenes=function(){this.scenes=[];this.domElement.innerHTML="";this.createEventHandler()},CAAT.Director.prototype.setClear=function(){return this},CAAT.Director.prototype.createEventHandler=function(){this.eventHandler=document.createElement("div");this.domElement.appendChild(this.eventHandler);this.eventHandler.style.position=
-"absolute";this.eventHandler.style.left="0";this.eventHandler.style.top="0";this.eventHandler.style.zIndex=999999;this.eventHandler.style.width=""+this.width+"px";this.eventHandler.style.height=""+this.height+"px";this.canvas=this.eventHandler;this.in_=!1;this.addHandlers(this.canvas)});extend(CAAT.Director,CAAT.ActorContainer,null)})();CAAT.TouchInfo=function(a,c,b,d){this.identifier=a;this.point=(new CAAT.Point).set(c.x,c.y);this.screenPoint=(new CAAT.Point).set(b.x,b.y);this.target=d;this.time=(new Date).getTime();this.dragging=!1;return this};
+"absolute";this.eventHandler.style.left="0";this.eventHandler.style.top="0";this.eventHandler.style.zIndex=999999;this.eventHandler.style.width=""+this.width+"px";this.eventHandler.style.height=""+this.height+"px";this.canvas=this.eventHandler;this.in_=!1;this.addHandlers(this.canvas)});extend(CAAT.Director,CAAT.ActorContainer,null)})();CAAT.TouchInfo=function(a,c,b,d){this.identifier=a;this.startPoint=(new CAAT.Point).set(c.x,c.y);this.point=(new CAAT.Point).set(c.x,c.y);this.screenPoint=(new CAAT.Point).set(b.x,b.y);this.target=d;this.time=(new Date).getTime();this.dragging=!1;return this};
 (function(){CAAT.TouchEvent=function(){this.touches=[];this.changedTouches=[];return this};CAAT.TouchEvent.prototype={time:0,source:null,sourceEvent:null,shift:!1,control:!1,alt:!1,meta:!1,touches:null,changedTouches:null,init:function(a,c,b){this.source=c;this.alt=a.altKey;this.control=a.ctrlKey;this.shift=a.shiftKey;this.meta=a.metaKey;this.sourceEvent=a;this.time=b;return this},addTouch:function(a){-1===this.touches.indexOf(a)&&this.touches.push(a);return this},addChangedTouch:function(a){-1===
 this.changedTouches.indexOf(a)&&this.changedTouches.push(a);return this},isAltDown:function(){return this.alt},isControlDown:function(){return this.control},isShiftDown:function(){return this.shift},isMetaDown:function(){return this.meta},getSourceEvent:function(){return this.sourceEvent}}})();
 (function(){CAAT.MouseEvent=function(){this.point=new CAAT.Point(0,0,0);this.screenPoint=new CAAT.Point(0,0,0);this.touches=[];return this};CAAT.MouseEvent.prototype={screenPoint:null,point:null,time:0,source:null,shift:!1,control:!1,alt:!1,meta:!1,sourceEvent:null,touches:null,init:function(a,c,b,d,e,f){this.point.set(a,c);this.source=d;this.screenPoint=e;this.alt=b.altKey;this.control=b.ctrlKey;this.shift=b.shiftKey;this.meta=b.metaKey;this.sourceEvent=b;this.x=a;this.y=c;this.time=f;return this},
