@@ -12,16 +12,15 @@
  *
  **/
 
-CAAT.TouchInfo= function( id, x, y, target ) {
+CAAT.TouchInfo= function( id, point, screenPoint, target ) {
 
     this.identifier= id;
-    this.clientX= x;
-    this.pageX= x;
-    this.clientY= y;
-    this.pageY= y;
+    this.point= new CAAT.Point().set( point.x, point.y );
+    this.screenPoint= new CAAT.Point().set( screenPoint.x, screenPoint.y );
     this.target= target;
     this.time= new Date().getTime();
 
+    this.dragging= false;
     return this;
 };
 
