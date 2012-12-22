@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 244
+Version: 0.4 build: 247
 
 Created on:
-DATE: 2012-10-04
-TIME: 17:06:49
+DATE: 2012-12-21
+TIME: 15:48:30
 */
 
 
@@ -8779,6 +8779,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
 
 (function() {
+    var mouseTouchId = {};
+
     /**
      * Director is the animator scene graph manager.
      * <p>
@@ -8923,6 +8925,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
         needsRepaint        : false,    // for rendering mode = dirty, this flags means, paint another frame
 
         touches             : null,     // Touches information. Associate touch.id with an actor and original touch info.
+        touching            : null,
 
         requestRepaint : function() {
             this.needsRepaint= true;
@@ -8949,8 +8952,11 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             return this.glEnabled ? 'WEBGL' : 'CANVAS';
         },
         windowResized : function(w, h) {
-            var canvasParent = this.canvas.parentNode;
-            if( canvasParent != window.document ) {
+            var canvasParent = this.canvas.parentNode,
+                body = document.getElementsByTagName( "body")[0];
+
+            // If it's not the body, we'll have to sample the parent client width and height instead...
+            if( canvasParent != body ) {
                 w = canvasParent.clientWidth;
                 h = canvasParent.clientHeight;
             }
@@ -10365,10 +10371,15 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
              */
             if ( this.dragging && this.lastSelectedActor ) {
                 this.__mouseUpHandler(e);
-                return;
+                return false;
             }
 
-            this.getCanvasCoord(this.mousePoint, e);
+            var mp= this.mousePoint;
+            this.getCanvasCoord(mp, e);
+            if ( mp.x<0 || mp.y<0 || mp.x>=this.width || mp.y>=this.height ) {
+                return false;
+            }
+
             this.isMouseDown = true;
             var lactor = this.findActorAtPosition(this.mousePoint);
 
@@ -10389,34 +10400,36 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             }
 
             this.lastSelectedActor= lactor;
+            return true;
         },
 
         __mouseUpHandler : function(e) {
 
-            this.isMouseDown = false;
-            this.getCanvasCoord(this.mousePoint, e);
-
             var pos= null;
             var lactor= this.lastSelectedActor;
 
-            if (null !== lactor) {
-                pos = lactor.viewToModel(
-                    new CAAT.Point(this.screenMousePoint.x, this.screenMousePoint.y, 0));
-                if ( lactor.actionPerformed && lactor.contains(pos.x, pos.y) ) {
-                    lactor.actionPerformed(e)
-                }
+            if (null === lactor )
+                return false;
 
-                lactor.mouseUp(
-                    new CAAT.MouseEvent().init(
-                        pos.x,
-                        pos.y,
-                        e,
-                        lactor,
-                        this.screenMousePoint,
-                        this.currentScene.time));
+            this.isMouseDown = false;
+            this.getCanvasCoord(this.mousePoint, e);
+
+            pos = lactor.viewToModel(
+                new CAAT.Point(this.screenMousePoint.x, this.screenMousePoint.y, 0));
+            if ( lactor.actionPerformed && lactor.contains(pos.x, pos.y) ) {
+                lactor.actionPerformed(e)
             }
 
-            if (!this.dragging && null !== lactor) {
+            lactor.mouseUp(
+                new CAAT.MouseEvent().init(
+                    pos.x,
+                    pos.y,
+                    e,
+                    lactor,
+                    this.screenMousePoint,
+                    this.currentScene.time));
+
+            if (!this.dragging) {
                 if (lactor.contains(pos.x, pos.y)) {
                     lactor.mouseClick(
                         new CAAT.MouseEvent().init(
@@ -10431,11 +10444,16 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
             this.dragging = false;
             this.in_=       false;
-//            CAAT.setCursor('default');
+
+            return true;
         },
 
         __mouseMoveHandler : function(e) {
-            //this.getCanvasCoord(this.mousePoint, e);
+            var mp= this.mousePoint;
+            this.getCanvasCoord(mp, e);
+            if ( !this.dragging && ( mp.x<0 || mp.y<0 || mp.x>=this.width || mp.y>=this.height ) ) {
+                return false;
+            }
 
             var lactor;
             var pos;
@@ -10508,7 +10526,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                     }
                 }
 
-                return;
+                return true;
             }
 
             // mouse move.
@@ -10567,12 +10585,13 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             this.prevMousePoint.y= pos.y;
 
             this.lastSelectedActor = lactor;
+            return true;
         },
 
         __mouseOutHandler : function(e) {
 
             if ( this.dragging ) {
-                return;
+                return false;
             }
 
             if (null !== this.lastSelectedActor ) {
@@ -10600,19 +10619,26 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
             }
 
+            return true;
         },
 
         __mouseOverHandler : function(e) {
 
             if (this.dragging ) {
-                return;
+                return false;
+            }
+
+            var mp= this.mousePoint;
+            this.getCanvasCoord(mp, e);
+            if ( mp.x<0 || mp.y<0 || mp.x>=this.width || mp.y>=this.height ) {
+                return false;
             }
 
             var lactor;
             var pos, ev;
 
             if ( null==this.lastSelectedActor ) {
-                lactor= this.findActorAtPosition( this.mousePoint );
+                lactor= this.findActorAtPosition( mp );
 
                 if (null !== lactor) {
 
@@ -10649,11 +10675,17 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 lactor.mouseEnter(ev);
                 
             }
+
+            return true
         },
 
         __mouseDBLClickHandler : function(e) {
+            var mp = this.mousePoint;
+            this.getCanvasCoord(mp, e);
+            if ( mp.x<0 || mp.y<0 || mp.x>=this.width || mp.y>=this.height ) {
+                return false;
+            }
 
-            this.getCanvasCoord(this.mousePoint, e);
             if (null !== this.lastSelectedActor) {
 /*
                 var pos = this.lastSelectedActor.viewToModel(
@@ -10661,13 +10693,15 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 */
                 this.lastSelectedActor.mouseDblClick(
                     new CAAT.MouseEvent().init(
-                            this.mousePoint.x,
-                            this.mousePoint.y,
+                            mp.x,
+                            mp.y,
                             e,
                             this.lastSelectedActor,
                             this.screenMousePoint,
                             this.currentScene.time));
             }
+
+            return true;
         },
 
         /**
@@ -10677,43 +10711,43 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          */
         __touchStartHandler : function(e) {
 
-            if ( e.target===this.canvas ) {
+            if ( e.target===this.canvas && this.touching === null ) {
                 e.preventDefault();
-                e= e.targetTouches[0];
-
-                var mp= this.mousePoint;
-                this.getCanvasCoord(mp, e);
-                if ( mp.x<0 || mp.y<0 || mp.x>=this.width || mp.y>=this.height ) {
-                    return;
-                }
-
-                this.touching= true;
+                var ee= e.changedTouches[0];
 
                 CAAT.currentDirector = this;
-                this.__mouseDownHandler(e);
+                if( this.__mouseDownHandler(ee) )
+                    this.touching = ee.identifier;
                 CAAT.currentDirector = null;
             }
         },
 
         __touchEndHandler : function(e) {
 
-            if ( this.touching ) {
+            if ( this.touching !== null ) {
                 e.preventDefault();
-                e= e.changedTouches[0];
-                var mp= this.mousePoint;
-                this.getCanvasCoord(mp, e);
 
-                this.touching= false;
+                for( var i=0; i<e.targetTouches.length; i++ ) {
+                    var ee= e.changedTouches[i];
 
-                CAAT.currentDirector = this;
-                this.__mouseUpHandler(e);
-                CAAT.currentDirector = null;
+                    if( ee.identifier === this.touching ) {
+                        var mp= this.mousePoint;
+                        this.getCanvasCoord(mp, ee);
+
+                        CAAT.currentDirector = this;
+                        this.__mouseUpHandler(ee);
+                        CAAT.currentDirector = null;
+
+                        this.touching= null;
+                        break;
+                    }
+                }
             }
         },
 
         __touchMoveHandler : function(e) {
 
-            if ( this.touching ) {
+            if ( this.touching !== null ) {
                 e.preventDefault();
 
                 if ( this.gesturing ) {
@@ -10721,13 +10755,14 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 }
 
                 for( var i=0; i<e.targetTouches.length; i++ ) {
-                    var ee= e.targetTouches[i];
-                    var mp= this.mousePoint;
-                    this.getCanvasCoord(mp, ee);
+                    var ee= e.changedTouches[i];
 
-                    CAAT.currentDirector = this;
-                    this.__mouseMoveHandler(ee);
-                    CAAT.currentDirector = null;
+                    if( ee.identifier === this.touching ) {
+                        CAAT.currentDirector = this;
+                        this.__mouseMoveHandler(ee);
+                        CAAT.currentDirector = null;
+                        break;
+                    }
                 }
             }
         },
@@ -10847,61 +10882,73 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             for( i=0; i< e.changedTouches.length; i++ ) {
                 var touch= e.changedTouches[i];
                 var id= touch.identifier;
+                var touchRec= this.touches[ id ];
 
-                if ( this.touches[ id ] ) {
+                if ( touchRec ) {
                     var mp= this.mousePoint;
                     this.getCanvasCoord(mp, touch);
 
-                    var actor= this.touches[ id ].actor;
+                    var ti= touchRec.touch;
+                    if( !ti.dragging ) {
+                        if (Math.abs(ti.screenPoint.x - mp.x) < CAAT.DRAG_THRESHOLD_X &&
+                            Math.abs(ti.screenPoint.y - mp.y) < CAAT.DRAG_THRESHOLD_Y) {
+                            continue;
+                        }
+                    }
+
+
+                    var actor= touchRec.actor;
                     mp= actor.viewToModel(mp);
 
-                    this.touches[ id ]= {
-                        actor: actor,
-                        touch: new CAAT.TouchInfo( id, mp.x, mp.y, actor )
-                    };
+                    ti.point.set( mp.x, mp.y );
+                    ti.screenPoint.set( this.screenMousePoint.x, this.screenMousePoint.y );
+                    ti.draggig = true;
 
                     recent.push( id );
                 }
             }
 
-            /**
-             * para los touch identificados, extraer que actores se han afectado.
-             * crear eventos con la info de touch para cada uno.
-             */
+            if( recent.length > 0 ) {
 
-            var actors= {};
-            for( i=0; i<recent.length; i++ ) {
-                var touchId= recent[ i ];
-                var actor= this.touches[ touchId ].actor;
+                /**
+                 * para los touch identificados, extraer que actores se han afectado.
+                 * crear eventos con la info de touch para cada uno.
+                 */
 
-                if ( !actors[actor.id] ) {
-                    actors[actor.id]= {
-                        actor: actor,
-                        touch: new CAAT.TouchEvent().init( e, actor, this.currentScene.time )
-                    };
-                }
+                var actors= {};
+                for( i=0; i<recent.length; i++ ) {
+                    var touchId= recent[ i ];
+                    var actor= this.touches[ touchId ].actor;
 
-                var ev= actors[ actor.id ].touch;
-                ev.addTouch( this.touches[ touchId ].touch );
-                ev.addChangedTouch( this.touches[ touchId ].touch );
-            }
-
-            /**
-             * notificar a todos los actores.
-             */
-            for( var pr in actors ) {
-                var data= actors[pr];
-                var actor= data.actor;
-                var touch= data.touch;
-
-                for( var actorId in this.touches ) {
-                    var tt= this.touches[actorId]
-                    if ( tt.actor.id===actor.id ) {
-                        touch.addTouch( tt.touch );
+                    if ( !actors[actor.id] ) {
+                        actors[actor.id]= {
+                            actor: actor,
+                            touch: new CAAT.TouchEvent().init( e, actor, this.currentScene.time )
+                        };
                     }
+
+                    var ev= actors[ actor.id ].touch;
+                    ev.addTouch( this.touches[ touchId ].touch );
+                    ev.addChangedTouch( this.touches[ touchId ].touch );
                 }
 
-                actor.touchMove( touch );
+                /**
+                 * notificar a todos los actores.
+                 */
+                for( var pr in actors ) {
+                    var data= actors[pr];
+                    var actor= data.actor;
+                    var touch= data.touch;
+
+                    for( var actorId in this.touches ) {
+                        var tt= this.touches[actorId]
+                        if ( tt.actor.id===actor.id ) {
+                            touch.addTouch( tt.touch );
+                        }
+                    }
+
+                    actor.touchMove( touch );
+                }
             }
 
             CAAT.currentDirector = null;
@@ -10943,7 +10990,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
                         this.touches[ id ]= {
                             actor: actor,
-                            touch: new CAAT.TouchInfo( id, mp.x, mp.y, actor )
+                            touch: new CAAT.TouchInfo( id, mp, this.screenMousePoint, actor )
                         };
 
                         recent.push( id );
@@ -11068,52 +11115,39 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             var me= this;
 
             window.addEventListener('mouseup', function(e) {
-                if ( me.touching ) {
+                if( me.touching === mouseTouchId ) {
                     e.preventDefault();
                     e.cancelBubble = true;
                     if (e.stopPropagation) e.stopPropagation();
-
-                    var mp= me.mousePoint;
-                    me.getCanvasCoord(mp, e);
 
                     CAAT.currentDirector = me;
                     me.__mouseUpHandler(e);
                     CAAT.currentDirector = null;
 
-                    me.touching= false;
+                    me.touching = null;
                 }
             }, false );
 
             window.addEventListener('mousedown', function(e) {
-                if ( e.target===canvas ) {
+                if ( e.target===canvas && me.touching === null || me.touching === mouseTouchId ) {
                     e.preventDefault();
                     e.cancelBubble = true;
                     if (e.stopPropagation) e.stopPropagation();
 
-                    var mp= me.mousePoint;
-                    me.getCanvasCoord(mp, e);
-                    if ( mp.x<0 || mp.y<0 || mp.x>=me.width || mp.y>=me.height ) {
-                        return;
-                    }
-                    me.touching= true;
-
                     CAAT.currentDirector = me;
-                    me.__mouseDownHandler(e);
+                    if( me.__mouseDownHandler(e) )
+                        me.touching = mouseTouchId;
+                    else
+                        me.touching = null;
                     CAAT.currentDirector = null;
                 }
             }, false );
 
             window.addEventListener('mouseover',function(e) {
-                if ( e.target===canvas && !me.dragging ) {
+                if ( e.target===canvas ) {
                     e.preventDefault();
                     e.cancelBubble = true;
                     if (e.stopPropagation) e.stopPropagation();
-
-                    var mp= me.mousePoint;
-                    me.getCanvasCoord(mp, e);
-                    if ( mp.x<0 || mp.y<0 || mp.x>=me.width || mp.y>=me.height ) {
-                        return;
-                    }
 
                     CAAT.currentDirector = me;
                     me.__mouseOverHandler(e);
@@ -11122,13 +11156,10 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             }, false);
 
             window.addEventListener('mouseout',function(e) {
-                if ( e.target===canvas && !me.dragging ) {
+                if ( e.target===canvas ) {
                     e.preventDefault();
                     e.cancelBubble = true;
                     if (e.stopPropagation) e.stopPropagation();
-
-                    var mp= me.mousePoint;
-                    me.getCanvasCoord(mp, e);
 
                     CAAT.currentDirector = me;
                     me.__mouseOutHandler(e);
@@ -11141,11 +11172,6 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                     e.cancelBubble = true;
                     if (e.stopPropagation) e.stopPropagation();
 
-                    var mp= me.mousePoint;
-                    me.getCanvasCoord(mp, e);
-                    if ( !me.dragging && ( mp.x<0 || mp.y<0 || mp.x>=me.width || mp.y>=me.height ) ) {
-                        return;
-                    }
                     CAAT.currentDirector = me;
                     me.__mouseMoveHandler(e);
                     CAAT.currentDirector = null;
@@ -11156,11 +11182,6 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                     e.preventDefault();
                     e.cancelBubble = true;
                     if (e.stopPropagation) e.stopPropagation();
-                    var mp= me.mousePoint;
-                    me.getCanvasCoord(mp, e);
-                    if ( mp.x<0 || mp.y<0 || mp.x>=me.width || mp.y>=me.height ) {
-                        return;
-                    }
 
                     CAAT.currentDirector = me;
                     me.__mouseDBLClickHandler(e);
@@ -11372,16 +11393,16 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
  *
  **/
 
-CAAT.TouchInfo= function( id, x, y, target ) {
+CAAT.TouchInfo= function( id, point, screenPoint, target ) {
 
     this.identifier= id;
-    this.clientX= x;
-    this.pageX= x;
-    this.clientY= y;
-    this.pageY= y;
+    this.startPoint= new CAAT.Point().set( point.x, point.y );
+    this.point= new CAAT.Point().set( point.x, point.y );
+    this.screenPoint= new CAAT.Point().set( screenPoint.x, screenPoint.y );
     this.target= target;
     this.time= new Date().getTime();
 
+    this.dragging= false;
     return this;
 };
 
