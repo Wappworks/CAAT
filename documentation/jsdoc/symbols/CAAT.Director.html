@@ -684,7 +684,8 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.Director.html#easeIn">easeIn</a></b>(inSceneIndex, type, time, alpha, anchor, interpolator)
 								</div>
-								<div class="description">This method changes Director's current Scene to the scene index indicated byinSceneIndex parameter.</div>
+								<div class="description">This method changes Director's current Scene to the scene index indicated by
+inSceneIndex parameter.</div>
 							</td>
 						</tr>
 					
@@ -702,7 +703,8 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.Director.html#easeInOutRandom">easeInOutRandom</a></b>(inIndex, outIndex, time, alpha)
 								</div>
-								<div class="description">This method will switch between two given Scene indexes (ie, take away scene number 2,and bring in scene number 5).</div>
+								<div class="description">This method will switch between two given Scene indexes (ie, take away scene number 2,
+and bring in scene number 5).</div>
 							</td>
 						</tr>
 					
@@ -1017,7 +1019,8 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.Director.html#renderFrame">renderFrame</a></b>()
 								</div>
-								<div class="description">Starts the director animation.If no scene is explicitly selected, the current Scene willbe the first scene added to the Director.</div>
+								<div class="description">Starts the director animation.If no scene is explicitly selected, the current Scene will
+be the first scene added to the Director.</div>
 							</td>
 						</tr>
 					
@@ -1071,7 +1074,8 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.Director.html#setClear">setClear</a></b>(clear)
 								</div>
-								<div class="description">This method states whether the director must clear background before renderingeach frame.</div>
+								<div class="description">This method states whether the director must clear background before rendering
+each frame.</div>
 							</td>
 						</tr>
 					
@@ -1134,7 +1138,8 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.Director.html#setScene">setScene</a></b>(sceneIndex)
 								</div>
-								<div class="description">Changes (or sets) the current Director scene to the indexparameter.</div>
+								<div class="description">Changes (or sets) the current Director scene to the index
+parameter.</div>
 							</td>
 						</tr>
 					
@@ -1226,7 +1231,24 @@ ul.inheritsList
 				</div>
 				
 				<div class="description">
-					Director is the animator scene graph manager.<p>The director elements is an ActorContainer itself with the main responsibility of managingdifferent Scenes.<p>It is responsible for:<ul><li>scene changes.<li>route input to the appropriate scene graph actor.<li>be the central point for resource caching.<li>manage the timeline.<li>manage frame rate.<li>etc.</ul><p>One document can contain different CAAT.Director instances which will be kept together in CAATfunction.
+					Director is the animator scene graph manager.
+<p>
+The director elements is an ActorContainer itself with the main responsibility of managing
+different Scenes.
+<p>
+It is responsible for:
+<ul>
+<li>scene changes.
+<li>route input to the appropriate scene graph actor.
+<li>be the central point for resource caching.
+<li>manage the timeline.
+<li>manage frame rate.
+<li>etc.
+</ul>
+
+<p>
+One document can contain different CAAT.Director instances which will be kept together in CAAT
+function.
 					
 				</div>
 				
@@ -1916,7 +1938,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Same as mouseDown but not preventing event.Will only take care of first touch.
+						Same as mouseDown but not preventing event.
+Will only take care of first touch.
 						
 						
 					</div>
@@ -2080,7 +2103,17 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Add a rectangle to the list of dirty screen areas which should be redrawn.This is the opposite method to clear the whole screen and repaint everything again.Despite i'm not very fond of dirty rectangles because it needs some extra calculations, thisprocedure has shown to be speeding things up under certain situations. Nevertheless it doesn't oreven lowers performance under others, so it is a developer choice to activate them via a call tosetClear( CAAT.Director.CLEAR_DIRTY_RECTS ).This function, not only tracks a list of dirty rectangles, but tries to optimize the list. Overlappingrectangles will be removed and intersecting ones will be unioned.Before calling this method, check if this.dirtyRectsEnabled is true.
+						Add a rectangle to the list of dirty screen areas which should be redrawn.
+This is the opposite method to clear the whole screen and repaint everything again.
+Despite i'm not very fond of dirty rectangles because it needs some extra calculations, this
+procedure has shown to be speeding things up under certain situations. Nevertheless it doesn't or
+even lowers performance under others, so it is a developer choice to activate them via a call to
+setClear( CAAT.Director.CLEAR_DIRTY_RECTS ).
+
+This function, not only tracks a list of dirty rectangles, but tries to optimize the list. Overlapping
+rectangles will be removed and intersecting ones will be unioned.
+
+Before calling this method, check if this.dirtyRectsEnabled is true.
 						
 						
 					</div>
@@ -2152,7 +2185,11 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Add a new image to director's image cache. If gl is enabled and the 'noUpdateGL' is not set to true thisfunction will try to recreate the whole GL texture pages.If many handcrafted images are to be added to the director, some performance can be achieved by calling<code>director.addImage(id,image,false)</code> many times and a final call with<code>director.addImage(id,image,true)</code> to finally command the director to create texture pages.
+						Add a new image to director's image cache. If gl is enabled and the 'noUpdateGL' is not set to true this
+function will try to recreate the whole GL texture pages.
+If many handcrafted images are to be added to the director, some performance can be achieved by calling
+<code>director.addImage(id,image,false)</code> many times and a final call with
+<code>director.addImage(id,image,true)</code> to finally command the director to create texture pages.
 						
 						
 					</div>
@@ -2179,7 +2216,8 @@ ul.inheritsList
 									<b>noUpdateGL</b>
 									
 								</dt>
-								<dd>{!boolean} unless otherwise stated, the director will try to recreate the texture pages.</dd>
+								<dd>{!boolean} unless otherwise stated, the director will
+ try to recreate the texture pages.</dd>
 							
 							</dl>
 						
@@ -2200,7 +2238,15 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Add a new Scene to Director's Scene list. By adding a Scene to the Directordoes not mean it will be immediately visible, you should explicitly call either<ul> <li>easeIn <li>easeInOut <li>easeInOutRandom <li>setScene <li>or any of the scene switching methods</ul>
+						Add a new Scene to Director's Scene list. By adding a Scene to the Director
+does not mean it will be immediately visible, you should explicitly call either
+<ul>
+ <li>easeIn
+ <li>easeInOut
+ <li>easeInOutRandom
+ <li>setScene
+ <li>or any of the scene switching methods
+</ul>
 						
 						
 					</div>
@@ -2236,7 +2282,10 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						A director is a very special kind of actor.Its animation routine simple sets its modelViewMatrix in case some transformation's beenapplied.No behaviors are allowed for Director instances.
+						A director is a very special kind of actor.
+Its animation routine simple sets its modelViewMatrix in case some transformation's been
+applied.
+No behaviors are allowed for Director instances.
 						
 						
 					</div>
@@ -2529,7 +2578,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Scene easing listener. Notifies scenes when they're about to be activated (set as currentdirector's scene).
+						Scene easing listener. Notifies scenes when they're about to be activated (set as current
+director's scene).
 						
 						
 					</div>
@@ -2571,7 +2621,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						This method changes Director's current Scene to the scene index indicated byinSceneIndex parameter. The Scene running in the director won't be eased out.
+						This method changes Director's current Scene to the scene index indicated by
+inSceneIndex parameter. The Scene running in the director won't be eased out.
 						
 						
 					</div>
@@ -2592,7 +2643,9 @@ ul.inheritsList
 									<b>type</b>
 									
 								</dt>
-								<dd>integer indicating the type of transition to apply to bring the new currentScene to the Director. The values will be one of: CAAT.Scene.prototype.EASE_ROTATION,CAAT.Scene.prototype.EASE_SCALE, CAAT.Scene.prototype.EASE_TRANSLATION.</dd>
+								<dd>integer indicating the type of transition to apply to bring the new current
+Scene to the Director. The values will be one of: CAAT.Scene.prototype.EASE_ROTATION,
+CAAT.Scene.prototype.EASE_SCALE, CAAT.Scene.prototype.EASE_TRANSLATION.</dd>
 							
 								<dt>
 									<b>time</b>
@@ -2604,19 +2657,22 @@ ul.inheritsList
 									<b>alpha</b>
 									
 								</dt>
-								<dd>boolean indicating whether alpha transparency fading will be applied to theentereing Scene.</dd>
+								<dd>boolean indicating whether alpha transparency fading will be applied to the
+entereing Scene.</dd>
 							
 								<dt>
 									<b>anchor</b>
 									
 								</dt>
-								<dd>integer indicating the anchor to fix for Scene transition. It will be any ofCAAT.Actor.prototype.ANCHOR_* values.</dd>
+								<dd>integer indicating the anchor to fix for Scene transition. It will be any of
+CAAT.Actor.prototype.ANCHOR_* values.</dd>
 							
 								<dt>
 									<b>interpolator</b>
 									
 								</dt>
-								<dd>an CAAT.Interpolator object indicating the interpolation function toapply.</dd>
+								<dd>an CAAT.Interpolator object indicating the interpolation function to
+apply.</dd>
 							
 							</dl>
 						
@@ -2648,7 +2704,34 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						This method offers full control over the process of switching between any given two Scenes.To apply this method, you must specify the type of transition to apply for each Scene andthe anchor to keep the Scene pinned at.<p>The type of transition will be one of the following values defined in CAAT.Scene.prototype:<ul> <li>EASE_ROTATION <li>EASE_SCALE <li>EASE_TRANSLATION</ul><p>The anchor will be any of these values defined in CAAT.Actor.prototype:<ul> <li>ANCHOR_CENTER <li>ANCHOR_TOP <li>ANCHOR_BOTTOM <li>ANCHOR_LEFT <li>ANCHOR_RIGHT <li>ANCHOR_TOP_LEFT <li>ANCHOR_TOP_RIGHT <li>ANCHOR_BOTTOM_LEFT <li>ANCHOR_BOTTOM_RIGHT</ul><p>In example, for an entering scene performing a EASE_SCALE transition, the anchor is thepoint by which the scene will scaled.
+						This method offers full control over the process of switching between any given two Scenes.
+To apply this method, you must specify the type of transition to apply for each Scene and
+the anchor to keep the Scene pinned at.
+<p>
+The type of transition will be one of the following values defined in CAAT.Scene.prototype:
+<ul>
+ <li>EASE_ROTATION
+ <li>EASE_SCALE
+ <li>EASE_TRANSLATION
+</ul>
+
+<p>
+The anchor will be any of these values defined in CAAT.Actor.prototype:
+<ul>
+ <li>ANCHOR_CENTER
+ <li>ANCHOR_TOP
+ <li>ANCHOR_BOTTOM
+ <li>ANCHOR_LEFT
+ <li>ANCHOR_RIGHT
+ <li>ANCHOR_TOP_LEFT
+ <li>ANCHOR_TOP_RIGHT
+ <li>ANCHOR_BOTTOM_LEFT
+ <li>ANCHOR_BOTTOM_RIGHT
+</ul>
+
+<p>
+In example, for an entering scene performing a EASE_SCALE transition, the anchor is the
+point by which the scene will scaled.
 						
 						
 					</div>
@@ -2699,13 +2782,15 @@ ul.inheritsList
 									<b>time</b>
 									
 								</dt>
-								<dd>inteter indicating the time to perform the process of switchihg between Scene objectin milliseconds.</dd>
+								<dd>inteter indicating the time to perform the process of switchihg between Scene object
+in milliseconds.</dd>
 							
 								<dt>
 									<b>alpha</b>
 									
 								</dt>
-								<dd>boolean boolean indicating whether alpha transparency fading will be applied tothe scenes.</dd>
+								<dd>boolean boolean indicating whether alpha transparency fading will be applied to
+the scenes.</dd>
 							
 								<dt>
 									<b>interpolatorIn</b>
@@ -2744,7 +2829,22 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						This method will switch between two given Scene indexes (ie, take away scene number 2,and bring in scene number 5).<p>It will randomly choose for each Scene the type of transition to apply and the anchorpoint of each transition type.<p>It will also set for different kind of transitions the following interpolators:<ul><li>EASE_ROTATION    -> ExponentialInOutInterpolator, exponent 4.<li>EASE_SCALE       -> ElasticOutInterpolator, 1.1 and .4<li>EASE_TRANSLATION -> BounceOutInterpolator</ul><p>These are the default values, and could not be changed by now.This method in final instance delegates the process to easeInOutMethod.
+						This method will switch between two given Scene indexes (ie, take away scene number 2,
+and bring in scene number 5).
+<p>
+It will randomly choose for each Scene the type of transition to apply and the anchor
+point of each transition type.
+<p>
+It will also set for different kind of transitions the following interpolators:
+<ul>
+<li>EASE_ROTATION    -> ExponentialInOutInterpolator, exponent 4.
+<li>EASE_SCALE       -> ElasticOutInterpolator, 1.1 and .4
+<li>EASE_TRANSLATION -> BounceOutInterpolator
+</ul>
+
+<p>
+These are the default values, and could not be changed by now.
+This method in final instance delegates the process to easeInOutMethod.
 						
 						
 					</div>
@@ -2866,7 +2966,11 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Enable window resize events and set redimension policy. A callback functio could be suppliedto be notified on a Director redimension event. This is necessary in the case you set a redimpolicy not equal to RESIZE_PROPORTIONAL. In those redimension modes, director's area and theirchildren scenes are resized to fit the new area. But scenes content is not resized, and haveno option of knowing so uless an onResizeCallback function is supplied.
+						Enable window resize events and set redimension policy. A callback functio could be supplied
+to be notified on a Director redimension event. This is necessary in the case you set a redim
+policy not equal to RESIZE_PROPORTIONAL. In those redimension modes, director's area and their
+children scenes are resized to fit the new area. But scenes content is not resized, and have
+no option of knowing so uless an onResizeCallback function is supplied.
 						
 						
 					</div>
@@ -2887,7 +2991,8 @@ ul.inheritsList
 									<b>onResizeCallback</b>
 									
 								</dt>
-								<dd>{function(director{CAAT.Director}, width{integer}, height{integer})} a callbackto notify on canvas resize.</dd>
+								<dd>{function(director{CAAT.Director}, width{integer}, height{integer})} a callback
+to notify on canvas resize.</dd>
 							
 							</dl>
 						
@@ -3189,7 +3294,13 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Gets the resource with the specified resource name.The Director holds a collection called <code>imagesCache</code>where you can store a JSON of the form <code>[ { id: imageId, image: imageObject } ]</code>.This structure will be used as a resources cache.There's a CAAT.ImagePreloader class to preload resources andgenerate this structure on loading finalization.
+						Gets the resource with the specified resource name.
+The Director holds a collection called <code>imagesCache</code>
+where you can store a JSON of the form
+ <code>[ { id: imageId, image: imageObject } ]</code>.
+This structure will be used as a resources cache.
+There's a CAAT.ImagePreloader class to preload resources and
+generate this structure on loading finalization.
 						
 						
 					</div>
@@ -3527,7 +3638,11 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						This method performs Director initialization. Must be called once.If the canvas parameter is not set, it will create a Canvas itself,and the developer must explicitly add the canvas to the desired DOM position.This method will also set the Canvas dimension to the specified valuesby width and height parameters.
+						This method performs Director initialization. Must be called once.
+If the canvas parameter is not set, it will create a Canvas itself,
+and the developer must explicitly add the canvas to the desired DOM position.
+This method will also set the Canvas dimension to the specified values
+by width and height parameters.
 						
 						
 					</div>
@@ -3560,7 +3675,8 @@ ul.inheritsList
 									<b>proxy</b>
 									
 								</dt>
-								<dd>{HTMLElement} this object can be an event proxy in case you'd like to layer different elements             and want events delivered to the correct element.</dd>
+								<dd>{HTMLElement} this object can be an event proxy in case you'd like to layer different elements
+             and want events delivered to the correct element.</dd>
 							
 							</dl>
 						
@@ -3588,7 +3704,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Experimental.Initialize a gl enabled director.
+						Experimental.
+Initialize a gl enabled director.
 						
 						
 					</div>
@@ -3956,7 +4073,13 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						This is the entry point for the animation system of the Director.The director is fed with the elapsed time value to maintain a virtual timeline.This virtual timeline will provide each Scene with its own virtual timeline, and will onlyfeed time when the Scene is the current Scene, or is being switched.If dirty rectangles are enabled and canvas is used for rendering, the dirty rectangles will beset up as a single clip area.
+						This is the entry point for the animation system of the Director.
+The director is fed with the elapsed time value to maintain a virtual timeline.
+This virtual timeline will provide each Scene with its own virtual timeline, and will only
+feed time when the Scene is the current Scene, or is being switched.
+
+If dirty rectangles are enabled and canvas is used for rendering, the dirty rectangles will be
+set up as a single clip area.
 						
 						
 					</div>
@@ -3971,7 +4094,8 @@ ul.inheritsList
 									<b>time</b>
 									
 								</dt>
-								<dd>{number} integer indicating the elapsed time between two consecutive frames of theDirector.</dd>
+								<dd>{number} integer indicating the elapsed time between two consecutive frames of the
+Director.</dd>
 							
 							</dl>
 						
@@ -3992,7 +4116,13 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Starts the director animation.If no scene is explicitly selected, the current Scene willbe the first scene added to the Director.<p>The fps parameter will set the animation quality. Higher values,means CAAT will try to render more frames in the same second (at theexpense of cpu power at least until hardware accelerated canvas renderingcontext are available). A value of 60 is a high frame rate and should not be exceeded.
+						Starts the director animation.If no scene is explicitly selected, the current Scene will
+be the first scene added to the Director.
+<p>
+The fps parameter will set the animation quality. Higher values,
+means CAAT will try to render more frames in the same second (at the
+expense of cpu power at least until hardware accelerated canvas rendering
+context are available). A value of 60 is a high frame rate and should not be exceeded.
 						
 						
 					</div>
@@ -4017,7 +4147,15 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						This method draws an Scene to an offscreen canvas. This offscreen canvas is also a child ofanother Scene (transitionScene). So instead of drawing two scenes while transitioning fromone to another, first of all an scene is drawn to offscreen, and that image is translated.<p>Until the creation of this method, both scenes where drawn while transitioning withits performance penalty since drawing two scenes could be twice as expensive than drawingonly one.<p>Though a high performance increase, we should keep an eye on memory consumption.
+						This method draws an Scene to an offscreen canvas. This offscreen canvas is also a child of
+another Scene (transitionScene). So instead of drawing two scenes while transitioning from
+one to another, first of all an scene is drawn to offscreen, and that image is translated.
+<p>
+Until the creation of this method, both scenes where drawn while transitioning with
+its performance penalty since drawing two scenes could be twice as expensive than drawing
+only one.
+<p>
+Though a high performance increase, we should keep an eye on memory consumption.
 						
 						
 					</div>
@@ -4195,7 +4333,14 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						This method states whether the director must clear background before renderingeach frame.The clearing method could be: + CAAT.Director.CLEAR_ALL. previous to draw anything on screen the canvas will have clearRect called on it. + CAAT.Director.CLEAR_DIRTY_RECTS. Actors marked as invalid, or which have been moved, rotated or scaled   will have their areas redrawn. + CAAT.Director.CLEAR_NONE. clears nothing.
+						This method states whether the director must clear background before rendering
+each frame.
+
+The clearing method could be:
+ + CAAT.Director.CLEAR_ALL. previous to draw anything on screen the canvas will have clearRect called on it.
+ + CAAT.Director.CLEAR_DIRTY_RECTS. Actors marked as invalid, or which have been moved, rotated or scaled
+   will have their areas redrawn.
+ + CAAT.Director.CLEAR_NONE. clears nothing.
 						
 						
 					</div>
@@ -4472,7 +4617,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Changes (or sets) the current Director scene to the indexparameter. There will be no transition on scene change.
+						Changes (or sets) the current Director scene to the index
+parameter. There will be no transition on scene change.
 						
 						
 					</div>
@@ -4487,7 +4633,8 @@ ul.inheritsList
 									<b>sceneIndex</b>
 									
 								</dt>
-								<dd>{number} an integer indicating the index of the target Sceneto be shown.</dd>
+								<dd>{number} an integer indicating the index of the target Scene
+to be shown.</dd>
 							
 							</dl>
 						
@@ -4696,7 +4843,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						This method will change the current Scene by the Scene indicated as parameter.It will apply random values for anchor and transition type.
+						This method will change the current Scene by the Scene indicated as parameter.
+It will apply random values for anchor and transition type.
 						
 						
 					</div>

@@ -452,7 +452,15 @@ ul.inheritsList
 				</div>
 				
 				<div class="description">
-					This class applies a rotation to a CAAt.Actor instance.StartAngle, EndAngle must be supplied. Angles are in radians.The RotationAnchor, if not supplied, will be ANCHOR_CENTER.An example os use will bevar rb= new CAAT.RotateBehavior().     setValues(0,2*Math.PI).     setFrameTime(0,2500);
+					This class applies a rotation to a CAAt.Actor instance.
+StartAngle, EndAngle must be supplied. Angles are in radians.
+The RotationAnchor, if not supplied, will be ANCHOR_CENTER.
+
+An example os use will be
+
+var rb= new CAAT.RotateBehavior().
+     setValues(0,2*Math.PI).
+     setFrameTime(0,2500);
 					
 				</div>
 				
@@ -603,7 +611,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Set the behavior rotation anchor. Use this method when setting an exact percentby calling setValues is complicated.
+						Set the behavior rotation anchor. Use this method when setting an exact percent
+by calling setValues is complicated.
 						
 						
 					</div>
@@ -618,7 +627,10 @@ ul.inheritsList
 									<b>anchor</b>
 									
 								</dt>
-								<dd>any of CAAT.Actor.prototype.ANCHOR_* constants.These parameters are to set a custom rotation anchor point. if <code>anchor==CAAT.Actor.prototype.ANCHOR_CUSTOM</code> the custom rotation point is set.</dd>
+								<dd>any of CAAT.Actor.prototype.ANCHOR_* constants.
+
+These parameters are to set a custom rotation anchor point. if <code>anchor==CAAT.Actor.prototype.ANCHOR_CUSTOM
+</code> the custom rotation point is set.</dd>
 							
 								<dt>
 									<b>rx</b>
@@ -707,7 +719,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Behavior application function.Do not call directly.
+						Behavior application function.
+Do not call directly.
 						
 						
 					</div>
@@ -756,7 +769,12 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Set behavior bound values.if no anchorx,anchory values are supplied, the behavior will assume50% for both values, that is, the actor's center.Be aware the anchor values are supplied in <b>RELATIVE PERCENT</b> toactor's size.
+						Set behavior bound values.
+if no anchorx,anchory values are supplied, the behavior will assume
+50% for both values, that is, the actor's center.
+
+Be aware the anchor values are supplied in <b>RELATIVE PERCENT</b> to
+actor's size.
 						
 						
 					</div>

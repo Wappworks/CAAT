@@ -338,7 +338,10 @@ ul.inheritsList
 							<div class="fixedFont">
 								<b><a href="../symbols/CAAT.Interpolator.html#constructor">CAAT.Interpolator</a></b>()
 							</div>
-							<div class="description">a CAAT.Interpolator is a function which transforms a value into another but with some constraints:<ul><li>The input values must be between 0 and 1.</div>
+							<div class="description">a CAAT.Interpolator is a function which transforms a value into another but with some constraints:
+
+<ul>
+<li>The input values must be between 0 and 1.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -545,7 +548,33 @@ ul.inheritsList
 				</div>
 				
 				<div class="description">
-					a CAAT.Interpolator is a function which transforms a value into another but with some constraints:<ul><li>The input values must be between 0 and 1.<li>Output values will be between 0 and 1.<li>Every Interpolator has at least an entering boolean parameter called pingpong. if set to true, the Interpolatorwill set values from 0..1 and back from 1..0. So half the time for each range.</ul><p>CAAt.Interpolator is defined by a createXXXX method which sets up an internal getPosition(time)function. You could set as an Interpolator up any object which exposes a method getPosition(time)and returns a CAAT.Point or an object of the form {x:{number}, y:{number}}.<p>In the return value, the x attribute's value will be the same value as that of the time parameter,and y attribute will hold a value between 0 and 1 with the resulting value of applying theinterpolation function for the time parameter.<p>For am exponential interpolation, the getPosition function would look like this:<code>function getPosition(time) { return { x:time, y: Math.pow(time,2) }}</code>.meaning that for time=0.5, a value of 0,5*0,5 should use instead.<p>For a visual understanding of interpolators see tutorial 4 interpolators, or play with technicaldemo 1 where a SpriteActor moves along a path and the way it does can be modified by everyout-of-the-box interpolator.
+					a CAAT.Interpolator is a function which transforms a value into another but with some constraints:
+
+<ul>
+<li>The input values must be between 0 and 1.
+<li>Output values will be between 0 and 1.
+<li>Every Interpolator has at least an entering boolean parameter called pingpong. if set to true, the Interpolator
+will set values from 0..1 and back from 1..0. So half the time for each range.
+</ul>
+
+<p>
+CAAt.Interpolator is defined by a createXXXX method which sets up an internal getPosition(time)
+function. You could set as an Interpolator up any object which exposes a method getPosition(time)
+and returns a CAAT.Point or an object of the form {x:{number}, y:{number}}.
+<p>
+In the return value, the x attribute's value will be the same value as that of the time parameter,
+and y attribute will hold a value between 0 and 1 with the resulting value of applying the
+interpolation function for the time parameter.
+
+<p>
+For am exponential interpolation, the getPosition function would look like this:
+<code>function getPosition(time) { return { x:time, y: Math.pow(time,2) }}</code>.
+meaning that for time=0.5, a value of 0,5*0,5 should use instead.
+
+<p>
+For a visual understanding of interpolators see tutorial 4 interpolators, or play with technical
+demo 1 where a SpriteActor moves along a path and the way it does can be modified by every
+out-of-the-box interpolator.
 					
 				</div>
 				
@@ -964,7 +993,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Set an exponential interpolator function. The function to apply will be Math.pow(time,exponent).This function starts with 0 and ends in values of 1.
+						Set an exponential interpolator function. The function to apply will be Math.pow(time,exponent).
+This function starts with 0 and ends in values of 1.
 						
 						
 					</div>
@@ -1006,7 +1036,10 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Set an exponential interpolator function. Two functions will apply:Math.pow(time*2,exponent)/2 for the first half of the function (t<0.5) and1-Math.abs(Math.pow(time*2-2,exponent))/2 for the second half (t>=.5)This function starts with 0 and goes to values of 1 and ends with values of 0.
+						Set an exponential interpolator function. Two functions will apply:
+Math.pow(time*2,exponent)/2 for the first half of the function (t<0.5) and
+1-Math.abs(Math.pow(time*2-2,exponent))/2 for the second half (t>=.5)
+This function starts with 0 and goes to values of 1 and ends with values of 0.
 						
 						
 					</div>
@@ -1048,7 +1081,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Set an exponential interpolator function. The function to apply will be 1-Math.pow(time,exponent).This function starts with 1 and ends in values of 0.
+						Set an exponential interpolator function. The function to apply will be 1-Math.pow(time,exponent).
+This function starts with 1 and ends in values of 0.
 						
 						
 					</div>
@@ -1211,7 +1245,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Gets an array of coordinates which define the polyline of the intepolator's curve contour.Values for both coordinates range from 0 to 1.
+						Gets an array of coordinates which define the polyline of the intepolator's curve contour.
+Values for both coordinates range from 0 to 1.
 						
 						
 					</div>
