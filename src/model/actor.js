@@ -121,7 +121,7 @@
 		rotationY:				.50,      // transformation. rotation center y
         rotationX:				.50,      // transformation. rotation center x
         alpha:					1,      // alpha transparency value
-        isGlobalAlpha:          false,  // is this a global alpha
+        isLocalAlpha:          false,  // is this a global alpha
         frameAlpha:             1,      // hierarchically calculated alpha for this Actor.
 		expired:				false,  // set when the actor has been expired
 		discardable:			false,  // set when you want this actor to be removed if expired
@@ -606,8 +606,8 @@
          * If set to false, only this actor will have this alpha value.
          * @param global {boolean} whether the alpha value should be propagated to children.
          */
-        setGlobalAlpha : function( global ) {
-            this.isGlobalAlpha= global;
+        setLocalAlpha : function( global ) {
+            this.isLocalAlpha= global;
             return this;
         },
         /**
@@ -1715,7 +1715,7 @@
 
             var ctx= director.ctx;
 
-            this.frameAlpha= this.parent ? this.parent.frameAlpha*this.alpha : 1;
+            this.frameAlpha= this.parent ? this.parent.frameAlpha*this.alpha : this.alpha;
             ctx.globalAlpha= this.frameAlpha;
 
             director.modelViewMatrix.transformRenderingContextSet( ctx );
@@ -2174,7 +2174,7 @@
                 return;
             }
 
-            if ( !this.isGlobalAlpha ) {
+            if ( this.isLocalAlpha ) {
                 this.frameAlpha= this.parent ? this.parent.frameAlpha : 1;
             }
 
@@ -2202,7 +2202,7 @@
             ctx.setTransform( m[0], m[3], m[1], m[4], m[2], m[5], this.frameAlpha );
             this.paint(director, time);
 
-            if ( !this.isGlobalAlpha ) {
+            if ( this.isLocalAlpha ) {
                 this.frameAlpha= this.parent ? this.parent.frameAlpha : 1;
             }
 
@@ -2220,8 +2220,8 @@
 
             CAAT.ActorContainer.superclass.paintActorGL.call(this,director,time);
 
-            if ( !this.isGlobalAlpha ) {
-                this.frameAlpha= this.parent.frameAlpha;
+            if ( this.isLocalAlpha ) {
+                this.frameAlpha= this.parent ? this.parent.frameAlpha : 1;
             }
 
             for( c= this.activeChildren; c; c=c.__next ) {

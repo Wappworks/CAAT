@@ -550,8 +550,7 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.Path.html#closePath">closePath</a></b>()
 								</div>
-								<div class="description"><del>Close the path by adding a line path segment from the current last path
-coordinate to startCurvePosition coordinate</del>.</div>
+								<div class="description"><del>Close the path by adding a line path segment from the current last pathcoordinate to startCurvePosition coordinate</del>.</div>
 							</td>
 						</tr>
 					
@@ -677,8 +676,7 @@ coordinate to startCurvePosition coordinate</del>.</div>
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.Path.html#getPositionFromLength">getPositionFromLength</a></b>(iLength)
 								</div>
-								<div class="description">Analogously to the method getPosition, this method returns a CAAT.Point instance with
-the coordinate on the path that corresponds to the given length.</div>
+								<div class="description">Analogously to the method getPosition, this method returns a CAAT.Point instance withthe coordinate on the path that corresponds to the given length.</div>
 							</td>
 						</tr>
 					
@@ -930,8 +928,7 @@ the coordinate on the path that corresponds to the given length.</div>
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.Path.html#updatePath">updatePath</a></b>(point, callback)
 								</div>
-								<div class="description">Indicates that some path control point has changed, and that the path must recalculate
-its internal data, ie: length and bbox.</div>
+								<div class="description">Indicates that some path control point has changed, and that the path must recalculateits internal data, ie: length and bbox.</div>
 							</td>
 						</tr>
 					
@@ -960,28 +957,7 @@ its internal data, ie: length and bbox.</div>
 				</div>
 				
 				<div class="description">
-					This class the top most abstraction of path related classes in CAAT. It defines a path composes un
-an unlimited number of path segments including CAAT.Path instances.
-<p>
-Every operation of the CAAT.PathSegment interface is performed for every path segment. In example,
-the method <code>getLength</code> will contain the sum of every path segment's length.
-<p>
-An example of CAAT.Path will be as follows:
-<code>
-path.beginPath(x,y).<br>
-&nbsp;&nbsp;addLineTo(x1,y1).<br>
-&nbsp;&nbsp;addLineTo(x2,y2).<br>
-&nbsp;&nbsp;addQuadricTo(...).<br>
-&nbsp;&nbsp;addCubicTo(...).<br>
-&nbsp;&nbsp;endPath();<br>
-</code>
-<p>
-This code creates a path composed of four chained segments, starting at (x,y) and having each
-segment starting where the previous one ended.
-<p>
-This class is intended to wrap the other kind of path segment classes when just a one segmented
-path is to be defined. The methods <code>setLinear, setCubic and setQuadrid</code> will make
-a CAAT.Path instance to be defined by just one segment.
+					This class the top most abstraction of path related classes in CAAT. It defines a path composes unan unlimited number of path segments including CAAT.Path instances.<p>Every operation of the CAAT.PathSegment interface is performed for every path segment. In example,the method <code>getLength</code> will contain the sum of every path segment's length.<p>An example of CAAT.Path will be as follows:<code>path.beginPath(x,y).<br>&nbsp;&nbsp;addLineTo(x1,y1).<br>&nbsp;&nbsp;addLineTo(x2,y2).<br>&nbsp;&nbsp;addQuadricTo(...).<br>&nbsp;&nbsp;addCubicTo(...).<br>&nbsp;&nbsp;endPath();<br></code><p>This code creates a path composed of four chained segments, starting at (x,y) and having eachsegment starting where the previous one ended.<p>This class is intended to wrap the other kind of path segment classes when just a one segmentedpath is to be defined. The methods <code>setLinear, setCubic and setQuadrid</code> will makea CAAT.Path instance to be defined by just one segment.
 					
 				</div>
 				
@@ -1225,8 +1201,7 @@ a CAAT.Path instance to be defined by just one segment.
 					
 					</div>
 					<div class="description">
-						Add a Behavior to the Actor.
-An Actor accepts an undefined number of Behaviors.
+						Add a Behavior to the Actor.An Actor accepts an undefined number of Behaviors.
 						
 						
 					</div>
@@ -1269,8 +1244,7 @@ An Actor accepts an undefined number of Behaviors.
 					
 					</div>
 					<div class="description">
-						Add a Catmull-Rom segment to this path.
-The segment starts in the current last path coordinate.
+						Add a Catmull-Rom segment to this path.The segment starts in the current last path coordinate.
 						
 						
 					</div>
@@ -1321,8 +1295,7 @@ The segment starts in the current last path coordinate.
 									<b>color</b>
 									
 								</dt>
-								<dd>{color=}. optional parameter. determines the color to draw the segment with (if
-        being drawn by a CAAT.PathActor).</dd>
+								<dd>{color=}. optional parameter. determines the color to draw the segment with (if        being drawn by a CAAT.PathActor).</dd>
 							
 							</dl>
 						
@@ -1350,8 +1323,7 @@ The segment starts in the current last path coordinate.
 					
 					</div>
 					<div class="description">
-						Add a Cubic Bezier segment to this path.
-The segment starts in the current last path coordinate.
+						Add a Cubic Bezier segment to this path.The segment starts in the current last path coordinate.
 						
 						
 					</div>
@@ -1402,8 +1374,7 @@ The segment starts in the current last path coordinate.
 									<b>color</b>
 									
 								</dt>
-								<dd>{color=}. optional parameter. determines the color to draw the segment with (if
-        being drawn by a CAAT.PathActor).</dd>
+								<dd>{color=}. optional parameter. determines the color to draw the segment with (if        being drawn by a CAAT.PathActor).</dd>
 							
 							</dl>
 						
@@ -1431,8 +1402,7 @@ The segment starts in the current last path coordinate.
 					
 					</div>
 					<div class="description">
-						Adds a line segment to this path.
-The segment starts in the current last path coordinate.
+						Adds a line segment to this path.The segment starts in the current last path coordinate.
 						
 						
 					</div>
@@ -1459,8 +1429,7 @@ The segment starts in the current last path coordinate.
 									<b>color</b>
 									
 								</dt>
-								<dd>{color=}. optional parameter. determines the color to draw the segment with (if
-        being drawn by a CAAT.PathActor).</dd>
+								<dd>{color=}. optional parameter. determines the color to draw the segment with (if        being drawn by a CAAT.PathActor).</dd>
 							
 							</dl>
 						
@@ -1488,8 +1457,7 @@ The segment starts in the current last path coordinate.
 					
 					</div>
 					<div class="description">
-						Add a Quadric Bezier path segment to this path.
-The segment starts in the current last path coordinate.
+						Add a Quadric Bezier path segment to this path.The segment starts in the current last path coordinate.
 						
 						
 					</div>
@@ -1528,8 +1496,7 @@ The segment starts in the current last path coordinate.
 									<b>color</b>
 									
 								</dt>
-								<dd>{color=}. optional parameter. determines the color to draw the segment with (if
-        being drawn by a CAAT.PathActor).</dd>
+								<dd>{color=}. optional parameter. determines the color to draw the segment with (if        being drawn by a CAAT.PathActor).</dd>
 							
 							</dl>
 						
@@ -1726,10 +1693,7 @@ The segment starts in the current last path coordinate.
 					
 					</div>
 					<div class="description">
-						Set the path's starting point. The method startCurvePosition will return this coordinate.
-<p>
-If a call to any method of the form <code>add<Segment>To</code> is called before this calling
-this method, they will assume to start at -1,-1 and probably you'll get the wrong path.
+						Set the path's starting point. The method startCurvePosition will return this coordinate.<p>If a call to any method of the form <code>add<Segment>To</code> is called before this callingthis method, they will assume to start at -1,-1 and probably you'll get the wrong path.
 						
 						
 					</div>
@@ -1778,14 +1742,7 @@ this method, they will assume to start at -1,-1 and probably you'll get the wron
 					
 					</div>
 					<div class="description">
-						<del>Close the path by adding a line path segment from the current last path
-coordinate to startCurvePosition coordinate</del>.
-<p>
-This method closes a path by setting its last path segment's last control point
-to be the first path segment's first control point.
-<p>
-    This method also sets the path as finished, and calculates all path's information
-    such as length and bounding box.
+						<del>Close the path by adding a line path segment from the current last pathcoordinate to startCurvePosition coordinate</del>.<p>This method closes a path by setting its last path segment's last control pointto be the first path segment's first control point.<p>    This method also sets the path as finished, and calculates all path's information    such as length and bounding box.
 						
 						
 					</div>
@@ -1817,9 +1774,7 @@ to be the first path segment's first control point.
 					
 					</div>
 					<div class="description">
-						Drags a path's control point.
-If the method press has not set needed internal data to drag a control point, this
-method will do nothing, regardless the user is dragging on the CAAT.PathActor delegate.
+						Drags a path's control point.If the method press has not set needed internal data to drag a control point, thismethod will do nothing, regardless the user is dragging on the CAAT.PathActor delegate.
 						
 						
 					</div>
@@ -1931,13 +1886,7 @@ method will do nothing, regardless the user is dragging on the CAAT.PathActor de
 					
 					</div>
 					<div class="description">
-						Finishes the process of building the path. It involves calculating each path segments length
-and proportional length related to a normalized path length of 1.
-It also sets current paths length.
-These calculi are needed to traverse the path appropriately.
-<p>
-This method must be called explicitly, except when closing a path (that is, calling the
-method closePath) which calls this method as well.
+						Finishes the process of building the path. It involves calculating each path segments lengthand proportional length related to a normalized path length of 1.It also sets current paths length.These calculi are needed to traverse the path appropriately.<p>This method must be called explicitly, except when closing a path (that is, calling themethod closePath) which calls this method as well.
 						
 						
 					</div>
@@ -2229,16 +2178,7 @@ method closePath) which calls this method as well.
 					
 					</div>
 					<div class="description">
-						This method, returns a CAAT.Point instance indicating a coordinate in the path.
-The returned coordinate is the corresponding to normalizing the path's length to 1,
-and then finding what path segment and what coordinate in that path segment corresponds
-for the input time parameter.
-<p>
-The parameter time must be a value ranging 0..1.
-If not constrained to these values, the parameter will be modulus 1, and then, if less
-than 0, be normalized to 1+time, so that the value always ranges from 0 to 1.
-<p>
-This method is needed when traversing the path throughout a CAAT.Interpolator instance.
+						This method, returns a CAAT.Point instance indicating a coordinate in the path.The returned coordinate is the corresponding to normalizing the path's length to 1,and then finding what path segment and what coordinate in that path segment correspondsfor the input time parameter.<p>The parameter time must be a value ranging 0..1.If not constrained to these values, the parameter will be modulus 1, and then, if lessthan 0, be normalized to 1+time, so that the value always ranges from 0 to 1.<p>This method is needed when traversing the path throughout a CAAT.Interpolator instance.
 						
 						
 					</div>
@@ -2253,8 +2193,7 @@ This method is needed when traversing the path throughout a CAAT.Interpolator in
 									<b>time</b>
 									
 								</dt>
-								<dd>a value between 0 and 1 both inclusive. 0 will return path's starting coordinate.
-1 will return path's end coordinate.</dd>
+								<dd>a value between 0 and 1 both inclusive. 0 will return path's starting coordinate.1 will return path's end coordinate.</dd>
 							
 							</dl>
 						
@@ -2282,9 +2221,7 @@ This method is needed when traversing the path throughout a CAAT.Interpolator in
 					
 					</div>
 					<div class="description">
-						Analogously to the method getPosition, this method returns a CAAT.Point instance with
-the coordinate on the path that corresponds to the given length. The input length is
-related to path's length.
+						Analogously to the method getPosition, this method returns a CAAT.Point instance withthe coordinate on the path that corresponds to the given length. The input length isrelated to path's length.
 						
 						
 					</div>
@@ -2395,10 +2332,7 @@ related to path's length.
 					
 					</div>
 					<div class="description">
-						Paints the path.
-This method is called by CAAT.PathActor instances.
-If the path is set as interactive (by default) path segment will draw curve modification
-handles as well.
+						Paints the path.This method is called by CAAT.PathActor instances.If the path is set as interactive (by default) path segment will draw curve modificationhandles as well.
 						
 						
 					</div>
@@ -2501,8 +2435,7 @@ handles as well.
 					
 					</div>
 					<div class="description">
-						Remove a Behavior from the Actor.
-If the Behavior is not present at the actor behavior collection nothing happends.
+						Remove a Behavior from the Actor.If the Behavior is not present at the actor behavior collection nothing happends.
 						
 						
 					</div>
@@ -2538,8 +2471,7 @@ If the Behavior is not present at the actor behavior collection nothing happends
 					
 					</div>
 					<div class="description">
-						Remove a Behavior with id param as behavior identifier from this actor.
-This function will remove ALL behavior instances with the given id.
+						Remove a Behavior with id param as behavior identifier from this actor.This function will remove ALL behavior instances with the given id.
 						
 						
 					</div>
@@ -2554,8 +2486,7 @@ This function will remove ALL behavior instances with the given id.
 									<b>id</b>
 									
 								</dt>
-								<dd>{number} an integer.
-return this;</dd>
+								<dd>{number} an integer.return this;</dd>
 							
 							</dl>
 						
@@ -2909,9 +2840,7 @@ return this;</dd>
 					
 					</div>
 					<div class="description">
-						Reposition this path points.
-This operation will only take place if the supplied points array equals in size to
-this path's already set points.
+						Reposition this path points.This operation will only take place if the supplied points array equals in size tothis path's already set points.
 						
 						
 					</div>
@@ -3508,8 +3437,7 @@ this path's already set points.
 					
 					</div>
 					<div class="description">
-						Indicates that some path control point has changed, and that the path must recalculate
-its internal data, ie: length and bbox.
+						Indicates that some path control point has changed, and that the path must recalculateits internal data, ie: length and bbox.
 						
 						
 					</div>
@@ -3555,7 +3483,7 @@ its internal data, ie: length and bbox.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Dec 21 2012 15:50:26 GMT-0800 (PST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Jan 24 2013 11:41:36 GMT-0800 (PST)
 		</div>
 	</body>
 </html>

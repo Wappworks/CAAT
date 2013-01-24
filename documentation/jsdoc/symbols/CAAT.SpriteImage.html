@@ -421,8 +421,7 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.SpriteImage.html#getRef">getRef</a></b>()
 								</div>
-								<div class="description">Get a reference to the same image information (rows, columns, image and uv cache) of this
-SpriteImage.</div>
+								<div class="description">Get a reference to the same image information (rows, columns, image and uv cache) of thisSpriteImage.</div>
 							</td>
 						</tr>
 					
@@ -476,13 +475,7 @@ SpriteImage.</div>
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.SpriteImage.html#initializeAsMonoTypeFontMap">initializeAsMonoTypeFontMap</a></b>(image, chars)
 								</div>
-								<div class="description">This method creates a font sprite image based on a proportional font
-It assumes the font is evenly spaced in the image
-Example:
-var font =   new CAAT.SpriteImage().initializeAsMonoTypeFontMap(
- director.getImage('numbers'),
- "0123456789"
-);</div>
+								<div class="description">This method creates a font sprite image based on a proportional fontIt assumes the font is evenly spaced in the imageExample:var font =   new CAAT.SpriteImage().initializeAsMonoTypeFontMap( director.getImage('numbers'), "0123456789");</div>
 							</td>
 						</tr>
 					
@@ -491,8 +484,7 @@ var font =   new CAAT.SpriteImage().initializeAsMonoTypeFontMap(
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.SpriteImage.html#initializeFromMap">initializeFromMap</a></b>(image, map)
 								</div>
-								<div class="description">This method takes the output generated from the tool at http://labs.hyperandroid.com/static/texture/spriter.html
-and creates a map into that image.</div>
+								<div class="description">This method takes the output generated from the tool at http://labs.hyperandroid.com/static/texture/spriter.htmland creates a map into that image.</div>
 							</td>
 						</tr>
 					
@@ -555,8 +547,7 @@ and creates a map into that image.</div>
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.SpriteImage.html#paintStretchedVerticalTiledHorizontal">paintStretchedVerticalTiledHorizontal</a></b>(director, time, x, y)
 								</div>
-								<div class="description">Must be used to draw actor background and the actor should have setClip(true) so that the image tiles
-properly.</div>
+								<div class="description">Must be used to draw actor background and the actor should have setClip(true) so that the image tilesproperly.</div>
 							</td>
 						</tr>
 					
@@ -574,8 +565,7 @@ properly.</div>
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.SpriteImage.html#paintTiled">paintTiled</a></b>(director, time, x, y)
 								</div>
-								<div class="description">Must be used to draw actor background and the actor should have setClip(true) so that the image tiles
-properly.</div>
+								<div class="description">Must be used to draw actor background and the actor should have setClip(true) so that the image tilesproperly.</div>
 							</td>
 						</tr>
 					
@@ -584,8 +574,7 @@ properly.</div>
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.SpriteImage.html#paintTiledVerticalStretchedHorizontal">paintTiledVerticalStretchedHorizontal</a></b>(director, time, x, y)
 								</div>
-								<div class="description">Must be used to draw actor background and the actor should have setClip(true) so that the image tiles
-properly.</div>
+								<div class="description">Must be used to draw actor background and the actor should have setClip(true) so that the image tilesproperly.</div>
 							</td>
 						</tr>
 					
@@ -727,34 +716,7 @@ properly.</div>
 				</div>
 				
 				<div class="description">
-					This class is used by CAAT.Actor to draw images. It differs from CAAT.CompoundImage in that it
-manages the subimage change based on time and a list of animation sub-image indexes.
-A common use of this class will be:
-
-<code>
-    var si= new CAAT.SpriteImage().
-         initialize( an_image_instance, rows, columns ).
-         setAnimationImageIndex( [2,1,0,1] ).                // cycle throwout image with these indexes
-         setChangeFPS( 200 ).                                // change sprite every 200 ms.
-         setSpriteTransformation( CAAT.SpriteImage.TR_xx);   // optionally draw images inverted, ...
-</code>
-
-A SpriteImage is an sprite sheet. It encapsulates an Image and treates and references it as a two
-dimensional array of row by columns sub-images. The access form will be sequential so if defined a
-CompoundImage of more than one row, the subimages will be referenced by an index ranging from 0 to
-rows*columns-1. Each sumimage will be of size (image.width/columns) by (image.height/rows).
-
-<p>
-It is able to draw its sub-images in the following ways:
-<ul>
-<li>no transformed (default)
-<li>flipped horizontally
-<li>flipped vertically
-<li>flipped both vertical and horizontally
-</ul>
-
-<p>
-It is supposed to be used in conjunction with <code>CAAT.SpriteActor</code> instances.
+					This class is used by CAAT.Actor to draw images. It differs from CAAT.CompoundImage in that itmanages the subimage change based on time and a list of animation sub-image indexes.A common use of this class will be:<code>    var si= new CAAT.SpriteImage().         initialize( an_image_instance, rows, columns ).         setAnimationImageIndex( [2,1,0,1] ).                // cycle throwout image with these indexes         setChangeFPS( 200 ).                                // change sprite every 200 ms.         setSpriteTransformation( CAAT.SpriteImage.TR_xx);   // optionally draw images inverted, ...</code>A SpriteImage is an sprite sheet. It encapsulates an Image and treates and references it as a twodimensional array of row by columns sub-images. The access form will be sequential so if defined aCompoundImage of more than one row, the subimages will be referenced by an index ranging from 0 torows*columns-1. Each sumimage will be of size (image.width/columns) by (image.height/rows).<p>It is able to draw its sub-images in the following ways:<ul><li>no transformed (default)<li>flipped horizontally<li>flipped vertically<li>flipped both vertical and horizontally</ul><p>It is supposed to be used in conjunction with <code>CAAT.SpriteActor</code> instances.
 					
 				</div>
 				
@@ -986,9 +948,7 @@ It is supposed to be used in conjunction with <code>CAAT.SpriteActor</code> inst
 					
 					</div>
 					<div class="description">
-						Get a reference to the same image information (rows, columns, image and uv cache) of this
-SpriteImage. This means that re-initializing this objects image info (that is, calling initialize
-method) will change all reference's image information at the same time.
+						Get a reference to the same image information (rows, columns, image and uv cache) of thisSpriteImage. This means that re-initializing this objects image info (that is, calling initializemethod) will change all reference's image information at the same time.
 						
 						
 					</div>
@@ -1181,17 +1141,7 @@ method) will change all reference's image information at the same time.
 									<b>map</b>
 									
 								</dt>
-								<dd>object with pairs "<a char>" : {
-             id      : {number},
-             height  : {number},
-             xoffset : {number},
-             letter  : {string},
-             yoffset : {number},
-             width   : {number},
-             xadvance: {number},
-             y       : {number},
-             x       : {number}
-         }</dd>
+								<dd>object with pairs "<a char>" : {             id      : {number},             height  : {number},             xoffset : {number},             letter  : {string},             yoffset : {number},             width   : {number},             xadvance: {number},             y       : {number},             x       : {number}         }</dd>
 							
 							</dl>
 						
@@ -1212,13 +1162,7 @@ method) will change all reference's image information at the same time.
 					
 					</div>
 					<div class="description">
-						This method creates a font sprite image based on a proportional font
-It assumes the font is evenly spaced in the image
-Example:
-var font =   new CAAT.SpriteImage().initializeAsMonoTypeFontMap(
- director.getImage('numbers'),
- "0123456789"
-);
+						This method creates a font sprite image based on a proportional fontIt assumes the font is evenly spaced in the imageExample:var font =   new CAAT.SpriteImage().initializeAsMonoTypeFontMap( director.getImage('numbers'), "0123456789");
 						
 						
 					</div>
@@ -1260,8 +1204,7 @@ var font =   new CAAT.SpriteImage().initializeAsMonoTypeFontMap(
 					
 					</div>
 					<div class="description">
-						This method takes the output generated from the tool at http://labs.hyperandroid.com/static/texture/spriter.html
-and creates a map into that image.
+						This method takes the output generated from the tool at http://labs.hyperandroid.com/static/texture/spriter.htmland creates a map into that image.
 						
 						
 					</div>
@@ -1692,8 +1635,7 @@ and creates a map into that image.
 					
 					</div>
 					<div class="description">
-						Must be used to draw actor background and the actor should have setClip(true) so that the image tiles
-properly.
+						Must be used to draw actor background and the actor should have setClip(true) so that the image tilesproperly.
 						
 						
 					</div>
@@ -1801,8 +1743,7 @@ properly.
 					
 					</div>
 					<div class="description">
-						Must be used to draw actor background and the actor should have setClip(true) so that the image tiles
-properly.
+						Must be used to draw actor background and the actor should have setClip(true) so that the image tilesproperly.
 						
 						
 					</div>
@@ -1856,8 +1797,7 @@ properly.
 					
 					</div>
 					<div class="description">
-						Must be used to draw actor background and the actor should have setClip(true) so that the image tiles
-properly.
+						Must be used to draw actor background and the actor should have setClip(true) so that the image tilesproperly.
 						
 						
 					</div>
@@ -1936,13 +1876,7 @@ properly.
 					
 					</div>
 					<div class="description">
-						Set the sprite animation images index. This method accepts an array of objects which define indexes to
-subimages inside this sprite image.
-If the SpriteImage is instantiated by calling the method initialize( image, rows, cols ), the value of
-aAnimationImageIndex should be an array of numbers, which define the indexes into an array of subimages
-with size rows*columns.
-If the method InitializeFromMap( image, map ) is called, the value for aAnimationImageIndex is expected
-to be an array of strings which are the names of the subobjects contained in the map object.
+						Set the sprite animation images index. This method accepts an array of objects which define indexes tosubimages inside this sprite image.If the SpriteImage is instantiated by calling the method initialize( image, rows, cols ), the value ofaAnimationImageIndex should be an array of numbers, which define the indexes into an array of subimageswith size rows*columns.If the method InitializeFromMap( image, map ) is called, the value for aAnimationImageIndex is expectedto be an array of strings which are the names of the subobjects contained in the map object.
 						
 						
 					</div>
@@ -2063,8 +1997,7 @@ to be an array of strings which are the names of the subobjects contained in the
 					
 					</div>
 					<div class="description">
-						Set horizontal displacement to draw image. Positive values means drawing the image more to the
-right.
+						Set horizontal displacement to draw image. Positive values means drawing the image more to theright.
 						
 						
 					</div>
@@ -2107,8 +2040,7 @@ right.
 					
 					</div>
 					<div class="description">
-						Set vertical displacement to draw image. Positive values means drawing the image more to the
-bottom.
+						Set vertical displacement to draw image. Positive values means drawing the image more to thebottom.
 						
 						
 					</div>
@@ -2265,12 +2197,7 @@ bottom.
 					
 					</div>
 					<div class="description">
-						Set the transformation to apply to the Sprite image.
-Any value of
- <li>TR_NONE
- <li>TR_FLIP_HORIZONTAL
- <li>TR_FLIP_VERTICAL
- <li>TR_FLIP_ALL
+						Set the transformation to apply to the Sprite image.Any value of <li>TR_NONE <li>TR_FLIP_HORIZONTAL <li>TR_FLIP_VERTICAL <li>TR_FLIP_ALL
 						
 						
 					</div>
@@ -2426,7 +2353,7 @@ Any value of
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Dec 21 2012 15:50:27 GMT-0800 (PST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Jan 24 2013 11:41:37 GMT-0800 (PST)
 		</div>
 	</body>
 </html>

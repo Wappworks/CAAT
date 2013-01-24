@@ -521,8 +521,7 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.Behavior.html#setDelayTime">setDelayTime</a></b>(delay, duration)
 								</div>
-								<div class="description">Sets behavior start time and duration but instead as setFrameTime which sets initial time as absolute time
-regarding scene's time, it uses a relative time offset from current scene time.</div>
+								<div class="description">Sets behavior start time and duration but instead as setFrameTime which sets initial time as absolute timeregarding scene's time, it uses a relative time offset from current scene time.</div>
 							</td>
 						</tr>
 					
@@ -655,43 +654,7 @@ regarding scene's time, it uses a relative time offset from current scene time.<
 				</div>
 				
 				<div class="description">
-					Behavior base class.
-
-<p>
-A behavior is defined by a frame time (behavior duration) and a behavior application function called interpolator.
-In its default form, a behaviour is applied linearly, that is, the same amount of behavior is applied every same
-time interval.
-<p>
-A concrete Behavior, a rotateBehavior in example, will change a concrete Actor's rotationAngle during the specified
-period.
-<p>
-A behavior is guaranteed to notify (if any observer is registered) on behavior expiration.
-<p>
-A behavior can keep an unlimited observers. Observers are objects of the form:
-<p>
-<code>
-{
-     behaviorExpired : function( behavior, time, actor);
-     behaviorApplied : function( behavior, time, normalizedTime, actor, value);
-}
-</code>
-<p>
-<strong>behaviorExpired</strong>: function( behavior, time, actor). This method will be called for any registered observer when
-the scene time is greater than behavior's startTime+duration. This method will be called regardless of the time
-granurality.
-<p>
-<strong>behaviorApplied</strong> : function( behavior, time, normalizedTime, actor, value). This method will be called once per
-frame while the behavior is not expired and is in frame time (behavior startTime>=scene time). This method can be
-called multiple times.
-<p>
-Every behavior is applied to a concrete Actor.
-Every actor must at least define an start and end value. The behavior will set start-value at behaviorStartTime and
-is guaranteed to apply end-value when scene time= behaviorStartTime+behaviorDuration.
-<p>
-You can set behaviors to apply forever that is cyclically. When a behavior is cycle=true, won't notify
-behaviorExpired to its registered observers.
-<p>
-Other Behaviors simply must supply with the method <code>setForTime(time, actor)</code> overriden.
+					Behavior base class.<p>A behavior is defined by a frame time (behavior duration) and a behavior application function called interpolator.In its default form, a behaviour is applied linearly, that is, the same amount of behavior is applied every sametime interval.<p>A concrete Behavior, a rotateBehavior in example, will change a concrete Actor's rotationAngle during the specifiedperiod.<p>A behavior is guaranteed to notify (if any observer is registered) on behavior expiration.<p>A behavior can keep an unlimited observers. Observers are objects of the form:<p><code>{     behaviorExpired : function( behavior, time, actor);     behaviorApplied : function( behavior, time, normalizedTime, actor, value);}</code><p><strong>behaviorExpired</strong>: function( behavior, time, actor). This method will be called for any registered observer whenthe scene time is greater than behavior's startTime+duration. This method will be called regardless of the timegranurality.<p><strong>behaviorApplied</strong> : function( behavior, time, normalizedTime, actor, value). This method will be called once perframe while the behavior is not expired and is in frame time (behavior startTime>=scene time). This method can becalled multiple times.<p>Every behavior is applied to a concrete Actor.Every actor must at least define an start and end value. The behavior will set start-value at behaviorStartTime andis guaranteed to apply end-value when scene time= behaviorStartTime+behaviorDuration.<p>You can set behaviors to apply forever that is cyclically. When a behavior is cycle=true, won't notifybehaviorExpired to its registered observers.<p>Other Behaviors simply must supply with the method <code>setForTime(time, actor)</code> overriden.
 					
 				</div>
 				
@@ -789,8 +752,7 @@ Other Behaviors simply must supply with the method <code>setForTime(time, actor)
 					
 					</div>
 					<div class="description">
-						This method must no be called directly.
-The director loop will call this method in orther to apply actor behaviors.
+						This method must no be called directly.The director loop will call this method in orther to apply actor behaviors.
 						
 						
 					</div>
@@ -884,8 +846,7 @@ The director loop will call this method in orther to apply actor behaviors.
 									<b>normalizedTime</b>
 									
 								</dt>
-								<dd>the normalized time (0..1) considering 0 behavior start time and 1
-behaviorStartTime+behaviorDuration.</dd>
+								<dd>the normalized time (0..1) considering 0 behavior start time and 1behaviorStartTime+behaviorDuration.</dd>
 							
 								<dt>
 									<b>value</b>
@@ -1121,9 +1082,7 @@ behaviorStartTime+behaviorDuration.</dd>
 					
 					</div>
 					<div class="description">
-						Chekcs whether the behaviour is in scene time.
-In case it gets out of scene time, and has not been tagged as expired, the behavior is expired and observers
-are notified about that fact.
+						Chekcs whether the behaviour is in scene time.In case it gets out of scene time, and has not been tagged as expired, the behavior is expired and observersare notified about that fact.
 						
 						
 					</div>
@@ -1172,9 +1131,7 @@ are notified about that fact.
 					
 					</div>
 					<div class="description">
-						Convert scene time into something more manageable for the behavior.
-behaviorStartTime will be 0 and behaviorStartTime+behaviorDuration will be 1.
-the time parameter will be proportional to those values.
+						Convert scene time into something more manageable for the behavior.behaviorStartTime will be 0 and behaviorStartTime+behaviorDuration will be 1.the time parameter will be proportional to those values.
 						
 						
 					</div>
@@ -1278,11 +1235,7 @@ the time parameter will be proportional to those values.
 					
 					</div>
 					<div class="description">
-						Sets behavior start time and duration but instead as setFrameTime which sets initial time as absolute time
-regarding scene's time, it uses a relative time offset from current scene time.
-a call to
-  setFrameTime( scene.time, duration ) is equivalent to
-  setDelayTime( 0, duration )
+						Sets behavior start time and duration but instead as setFrameTime which sets initial time as absolute timeregarding scene's time, it uses a relative time offset from current scene time.a call to  setFrameTime( scene.time, duration ) is equivalent to  setDelayTime( 0, duration )
 						
 						
 					</div>
@@ -1360,8 +1313,7 @@ a call to
 					
 					</div>
 					<div class="description">
-						Sets the behavior as expired.
-This method must not be called directly. It is an auxiliary method to isBehaviorInTime method.
+						Sets the behavior as expired.This method must not be called directly. It is an auxiliary method to isBehaviorInTime method.
 						
 						
 					</div>
@@ -1403,8 +1355,7 @@ This method must not be called directly. It is an auxiliary method to isBehavior
 					
 					</div>
 					<div class="description">
-						This method must be overriden for every Behavior breed.
-Must not be called directly.
+						This method must be overriden for every Behavior breed.Must not be called directly.
 						
 						
 					</div>
@@ -1446,8 +1397,7 @@ Must not be called directly.
 					
 					</div>
 					<div class="description">
-						Sets behavior start time and duration.
-Scene time will be the time of the scene the behavior actor is bound to.
+						Sets behavior start time and duration.Scene time will be the time of the scene the behavior actor is bound to.
 						
 						
 					</div>
@@ -1525,9 +1475,7 @@ Scene time will be the time of the scene the behavior actor is bound to.
 					
 					</div>
 					<div class="description">
-						Changes behavior default interpolator to another instance of CAAT.Interpolator.
-If the behavior is not defined by CAAT.Interpolator factory methods, the interpolation function must return
-its values in the range 0..1. The behavior will only apply for such value range.
+						Changes behavior default interpolator to another instance of CAAT.Interpolator.If the behavior is not defined by CAAT.Interpolator factory methods, the interpolation function must returnits values in the range 0..1. The behavior will only apply for such value range.
 						
 						
 					</div>
@@ -1768,7 +1716,7 @@ its values in the range 0..1. The behavior will only apply for such value range.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Dec 21 2012 15:50:24 GMT-0800 (PST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Jan 24 2013 11:41:33 GMT-0800 (PST)
 		</div>
 	</body>
 </html>

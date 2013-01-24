@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 247
+Version: 0.4 build: 248
 
 Created on:
-DATE: 2012-12-21
-TIME: 15:48:23
+DATE: 2013-01-24
+TIME: 11:39:42
 */
 
 
@@ -5839,7 +5839,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 		rotationY:				.50,      // transformation. rotation center y
         rotationX:				.50,      // transformation. rotation center x
         alpha:					1,      // alpha transparency value
-        isGlobalAlpha:          false,  // is this a global alpha
+        isLocalAlpha:          false,  // is this a global alpha
         frameAlpha:             1,      // hierarchically calculated alpha for this Actor.
 		expired:				false,  // set when the actor has been expired
 		discardable:			false,  // set when you want this actor to be removed if expired
@@ -6324,8 +6324,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * If set to false, only this actor will have this alpha value.
          * @param global {boolean} whether the alpha value should be propagated to children.
          */
-        setGlobalAlpha : function( global ) {
-            this.isGlobalAlpha= global;
+        setLocalAlpha : function( global ) {
+            this.isLocalAlpha= global;
             return this;
         },
         /**
@@ -7433,7 +7433,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
             var ctx= director.ctx;
 
-            this.frameAlpha= this.parent ? this.parent.frameAlpha*this.alpha : 1;
+            this.frameAlpha= this.parent ? this.parent.frameAlpha*this.alpha : this.alpha;
             ctx.globalAlpha= this.frameAlpha;
 
             director.modelViewMatrix.transformRenderingContextSet( ctx );
@@ -7892,7 +7892,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 return;
             }
 
-            if ( !this.isGlobalAlpha ) {
+            if ( this.isLocalAlpha ) {
                 this.frameAlpha= this.parent ? this.parent.frameAlpha : 1;
             }
 
@@ -7920,7 +7920,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             ctx.setTransform( m[0], m[3], m[1], m[4], m[2], m[5], this.frameAlpha );
             this.paint(director, time);
 
-            if ( !this.isGlobalAlpha ) {
+            if ( this.isLocalAlpha ) {
                 this.frameAlpha= this.parent ? this.parent.frameAlpha : 1;
             }
 
@@ -7938,8 +7938,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
             CAAT.ActorContainer.superclass.paintActorGL.call(this,director,time);
 
-            if ( !this.isGlobalAlpha ) {
-                this.frameAlpha= this.parent.frameAlpha;
+            if ( this.isLocalAlpha ) {
+                this.frameAlpha= this.parent ? this.parent.frameAlpha : 1;
             }
 
             for( c= this.activeChildren; c; c=c.__next ) {

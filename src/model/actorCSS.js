@@ -82,7 +82,7 @@
         rotationY:				.50,    // transformation. rotation center y
         alpha:					1,      // alpha transparency value
         rotationX:				.50,    // transformation. rotation center x
-        isGlobalAlpha:          false,  // is this a global alpha
+        isLocalAlpha:          false,  // is this a global alpha
         frameAlpha:             1,      // hierarchically calculated alpha for this Actor.
         expired:				false,  // set when the actor has been expired
         discardable:			false,  // set when you want this actor to be removed if expired
@@ -725,12 +725,12 @@
             }
         },
         /**
-         * Set alpha composition scope. global will mean this alpha value will be its children maximum.
-         * If set to false, only this actor will have this alpha value.
-         * @param global {boolean} whether the alpha value should be propagated to children.
+         * Set alpha composition scope. local will mean this alpha value will only affect the current actor.
+         * If set to true, only this actor will have this alpha value.
+         * @param global {boolean} whether the alpha value should only affect this actor
          */
-        setGlobalAlpha : function( global ) {
-            this.isGlobalAlpha= global;
+        setLocalAlpha : function( local ) {
+            this.isLocalAlpha= local;
             return this;
         },
         /**

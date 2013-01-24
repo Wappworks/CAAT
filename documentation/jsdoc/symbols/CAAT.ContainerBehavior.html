@@ -340,8 +340,7 @@ ul.inheritsList
 							<div class="fixedFont">
 								<b><a href="../symbols/CAAT.ContainerBehavior.html#constructor">CAAT.ContainerBehavior</a></b>()
 							</div>
-							<div class="description"><p>
-A ContainerBehavior is a holder to sum up different behaviors.</div>
+							<div class="description"><p>A ContainerBehavior is a holder to sum up different behaviors.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -471,31 +470,7 @@ A ContainerBehavior is a holder to sum up different behaviors.</div>
 				</div>
 				
 				<div class="description">
-					<p>
-A ContainerBehavior is a holder to sum up different behaviors.
-<p>
-It imposes some constraints to contained Behaviors:
-<ul>
-<li>The time of every contained behavior will be zero based, so the frame time set for each behavior will
-be referred to the container's behaviorStartTime and not scene time as usual.
-<li>Cycling a ContainerBehavior means cycling every contained behavior.
-<li>The container will not impose any Interpolator, so calling the method <code>setInterpolator(CAAT.Interpolator)
-</code> will be useless.
-<li>The Behavior application time will be bounded to the Container's frame time. I.E. if we set a container duration
-to 10 seconds, setting a contained behavior's duration to 15 seconds will be useless since the container will stop
-applying the behavior after 10 seconds have elapsed.
-<li>Every ContainerBehavior adds itself as an observer for its contained Behaviors. The main reason is because
-ContainerBehaviors modify cycling properties of its contained Behaviors. When a contained
-Behavior is expired, if the Container has isCycle=true, will unexpire the contained Behavior, otherwise, it won't be
-applied in the next frame. It is left up to the developer to manage correctly the logic of other posible contained
-behaviors observers.
-</ul>
-
-<p>
-A ContainerBehavior can contain other ContainerBehaviors at will.
-<p>
-A ContainerBehavior will not apply any CAAT.Actor property change by itself, but will instrument its contained
-Behaviors to do so.
+					<p>A ContainerBehavior is a holder to sum up different behaviors.<p>It imposes some constraints to contained Behaviors:<ul><li>The time of every contained behavior will be zero based, so the frame time set for each behavior willbe referred to the container's behaviorStartTime and not scene time as usual.<li>Cycling a ContainerBehavior means cycling every contained behavior.<li>The container will not impose any Interpolator, so calling the method <code>setInterpolator(CAAT.Interpolator)</code> will be useless.<li>The Behavior application time will be bounded to the Container's frame time. I.E. if we set a container durationto 10 seconds, setting a contained behavior's duration to 15 seconds will be useless since the container will stopapplying the behavior after 10 seconds have elapsed.<li>Every ContainerBehavior adds itself as an observer for its contained Behaviors. The main reason is becauseContainerBehaviors modify cycling properties of its contained Behaviors. When a containedBehavior is expired, if the Container has isCycle=true, will unexpire the contained Behavior, otherwise, it won't beapplied in the next frame. It is left up to the developer to manage correctly the logic of other posible containedbehaviors observers.</ul><p>A ContainerBehavior can contain other ContainerBehaviors at will.<p>A ContainerBehavior will not apply any CAAT.Actor property change by itself, but will instrument its containedBehaviors to do so.
 					
 				</div>
 				
@@ -566,9 +541,7 @@ Behaviors to do so.
 					
 					</div>
 					<div class="description">
-						Applies every contained Behaviors.
-The application time the contained behaviors will receive will be ContainerBehavior related and not the
-received time.
+						Applies every contained Behaviors.The application time the contained behaviors will receive will be ContainerBehavior related and not thereceived time.
 						
 						
 					</div>
@@ -610,8 +583,7 @@ received time.
 					
 					</div>
 					<div class="description">
-						This method is the observer implementation for every contained behavior.
-If a container is Cycle=true, won't allow its contained behaviors to be expired.
+						This method is the observer implementation for every contained behavior.If a container is Cycle=true, won't allow its contained behaviors to be expired.
 						
 						
 					</div>
@@ -840,8 +812,7 @@ If a container is Cycle=true, won't allow its contained behaviors to be expired.
 					
 					</div>
 					<div class="description">
-						Implementation method of the behavior.
-Just call implementation method for its contained behaviors.
+						Implementation method of the behavior.Just call implementation method for its contained behaviors.
 						
 						
 					</div>
@@ -929,7 +900,7 @@ Just call implementation method for its contained behaviors.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Dec 21 2012 15:50:24 GMT-0800 (PST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Jan 24 2013 11:41:34 GMT-0800 (PST)
 		</div>
 	</body>
 </html>

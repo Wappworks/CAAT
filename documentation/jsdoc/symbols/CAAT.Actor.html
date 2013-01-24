@@ -431,8 +431,7 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.Actor.html#animate">animate</a></b>(director, time)
 								</div>
-								<div class="description">Private
-This method is called by the Director instance.</div>
+								<div class="description">PrivateThis method is called by the Director instance.</div>
 							</td>
 						</tr>
 					
@@ -486,8 +485,7 @@ This method is called by the Director instance.</div>
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.Actor.html#destroy">destroy</a></b>(time)
 								</div>
-								<div class="description">This method will be called internally by CAAT when an Actor is expired, and at the
-same time, is flagged as discardable.</div>
+								<div class="description">This method will be called internally by CAAT when an Actor is expired, and at thesame time, is flagged as discardable.</div>
 							</td>
 						</tr>
 					
@@ -505,8 +503,7 @@ same time, is flagged as discardable.</div>
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.Actor.html#drawScreenBoundingBox">drawScreenBoundingBox</a></b>(director, time)
 								</div>
-								<div class="description">Draw a bounding box with on-screen coordinates regardless of the transformations
-applied to the Actor.</div>
+								<div class="description">Draw a bounding box with on-screen coordinates regardless of the transformationsapplied to the Actor.</div>
 							</td>
 						</tr>
 					
@@ -551,9 +548,7 @@ applied to the Actor.</div>
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.Actor.html#findActorAtPosition">findActorAtPosition</a></b>(point)
 								</div>
-								<div class="description">Private
-This method does the needed point transformations across an Actor hierarchy to devise
-whether the parameter point coordinate lies inside the Actor.</div>
+								<div class="description">PrivateThis method does the needed point transformations across an Actor hierarchy to devisewhether the parameter point coordinate lies inside the Actor.</div>
 							</td>
 						</tr>
 					
@@ -643,8 +638,7 @@ whether the parameter point coordinate lies inside the Actor.</div>
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.Actor.html#glNeedsFlush">glNeedsFlush</a></b>(director)
 								</div>
-								<div class="description">Test for compulsory gl flushing:
- 1.</div>
+								<div class="description">Test for compulsory gl flushing: 1.</div>
 							</td>
 						</tr>
 					
@@ -707,8 +701,7 @@ whether the parameter point coordinate lies inside the Actor.</div>
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.Actor.html#modelToModel">modelToModel</a></b>(point, otherActor)
 								</div>
-								<div class="description">Transform a local coordinate point on this Actor's coordinate system into
-another point in otherActor's coordinate system.</div>
+								<div class="description">Transform a local coordinate point on this Actor's coordinate system intoanother point in otherActor's coordinate system.</div>
 							</td>
 						</tr>
 					
@@ -1066,15 +1059,6 @@ another point in otherActor's coordinate system.</div>
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/CAAT.Actor.html#setGlobalAlpha">setGlobalAlpha</a></b>(global)
-								</div>
-								<div class="description">Set alpha composition scope.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.Actor.html#setGlobalAnchor">setGlobalAnchor</a></b>(ax, ay)
 								</div>
 								<div class="description"></div>
@@ -1096,6 +1080,15 @@ another point in otherActor's coordinate system.</div>
 								<div class="fixedFont"><b><a href="../symbols/CAAT.Actor.html#setImageTransformation">setImageTransformation</a></b>(it)
 								</div>
 								<div class="description">Set this background image transformation.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/CAAT.Actor.html#setLocalAlpha">setLocalAlpha</a></b>(global)
+								</div>
+								<div class="description">Set alpha composition scope.</div>
 							</td>
 						</tr>
 					
@@ -1345,20 +1338,7 @@ another point in otherActor's coordinate system.</div>
 				</div>
 				
 				<div class="description">
-					This class is the base for all animable entities in CAAT.
-It defines an entity able to:
-
-<ul>
-<li>Position itself on screen.
-<li>Able to modify its presentation aspect via affine transforms.
-<li>Take control of parent/child relationship.
-<li>Take track of behaviors (@see CAAT.Behavior).
-<li>Define a region on screen.
-<li>Define alpha composition scope.
-<li>Expose lifecycle.
-<li>Manage itself in/out scene time.
-<li>etc.
-</ul>
+					This class is the base for all animable entities in CAAT.It defines an entity able to:<ul><li>Position itself on screen.<li>Able to modify its presentation aspect via affine transforms.<li>Take control of parent/child relationship.<li>Take track of behaviors (@see CAAT.Behavior).<li>Define a region on screen.<li>Define alpha composition scope.<li>Expose lifecycle.<li>Manage itself in/out scene time.<li>etc.</ul>
 					
 				</div>
 				
@@ -1390,18 +1370,7 @@ It defines an entity able to:
 					
 					</div>
 					<div class="description">
-						Reflection information needed to use the inspector.
-Each key defined identifies an object field. For each field, it could be specified:
-  + get  : accessor function or field name. if ended with () a function will be assumed.
-  + set  : mutator function or field name. if ended with () a function will be assumed.
-  + type : field or accessor function return type.
-
-If not get or set method is defined, the inspector will assume either the field can't be read and/or set.
-If neither get and set are defined, the property will be avoided.
-
-The key can contain a set of comma separated values. This means these properties must be set/modified
-at once in the inspector editor field (if any). The way these functions will be set will be by calling
-the set method (must be a method) as previously defined.
+						Reflection information needed to use the inspector.Each key defined identifies an object field. For each field, it could be specified:  + get  : accessor function or field name. if ended with () a function will be assumed.  + set  : mutator function or field name. if ended with () a function will be assumed.  + type : field or accessor function return type.If not get or set method is defined, the inspector will assume either the field can't be read and/or set.If neither get and set are defined, the property will be avoided.The key can contain a set of comma separated values. This means these properties must be set/modifiedat once in the inspector editor field (if any). The way these functions will be set will be by callingthe set method (must be a method) as previously defined.
 						
 						
 					</div>
@@ -1552,8 +1521,7 @@ the set method (must be a method) as previously defined.
 					
 					</div>
 					<div class="description">
-						Add a Behavior to the Actor.
-An Actor accepts an undefined number of Behaviors.
+						Add a Behavior to the Actor.An Actor accepts an undefined number of Behaviors.
 						
 						
 					</div>
@@ -1596,9 +1564,7 @@ An Actor accepts an undefined number of Behaviors.
 					
 					</div>
 					<div class="description">
-						Adds an Actor's life cycle listener.
-The developer must ensure the actorListener is not already a listener, otherwise
-it will notified more than once.
+						Adds an Actor's life cycle listener.The developer must ensure the actorListener is not already a listener, otherwiseit will notified more than once.
 						
 						
 					</div>
@@ -1613,8 +1579,7 @@ it will notified more than once.
 									<b>actorListener</b>
 									
 								</dt>
-								<dd>{object} an object with at least a method of the form:
-<code>actorLyfeCycleEvent( actor, string_event_type, long_time )</code></dd>
+								<dd>{object} an object with at least a method of the form:<code>actorLyfeCycleEvent( actor, string_event_type, long_time )</code></dd>
 							
 							</dl>
 						
@@ -1635,9 +1600,7 @@ it will notified more than once.
 					
 					</div>
 					<div class="description">
-						Private
-This method is called by the Director instance.
-It applies the list of behaviors the Actor has registered.
+						PrivateThis method is called by the Director instance.It applies the list of behaviors the Actor has registered.
 						
 						
 					</div>
@@ -1907,9 +1870,7 @@ It applies the list of behaviors the Actor has registered.
 					
 					</div>
 					<div class="description">
-						This method will be called internally by CAAT when an Actor is expired, and at the
-same time, is flagged as discardable.
-It notifies the Actor life cycle listeners about the destruction event.
+						This method will be called internally by CAAT when an Actor is expired, and at thesame time, is flagged as discardable.It notifies the Actor life cycle listeners about the destruction event.
 						
 						
 					</div>
@@ -1970,8 +1931,7 @@ It notifies the Actor life cycle listeners about the destruction event.
 					
 					</div>
 					<div class="description">
-						Draw a bounding box with on-screen coordinates regardless of the transformations
-applied to the Actor.
+						Draw a bounding box with on-screen coordinates regardless of the transformationsapplied to the Actor.
 						
 						
 					</div>
@@ -2045,11 +2005,7 @@ applied to the Actor.
 					
 					</div>
 					<div class="description">
-						Enables a default dragging routine for the Actor.
-This default dragging routine allows to:
- <li>scale the Actor by pressing shift+drag
- <li>rotate the Actor by pressing control+drag
- <li>scale non uniformly by pressing alt+shift+drag
+						Enables a default dragging routine for the Actor.This default dragging routine allows to: <li>scale the Actor by pressing shift+drag <li>rotate the Actor by pressing control+drag <li>scale non uniformly by pressing alt+shift+drag
 						
 						
 					</div>
@@ -2173,9 +2129,7 @@ This default dragging routine allows to:
 					
 					</div>
 					<div class="description">
-						Private
-This method does the needed point transformations across an Actor hierarchy to devise
-whether the parameter point coordinate lies inside the Actor.
+						PrivateThis method does the needed point transformations across an Actor hierarchy to devisewhether the parameter point coordinate lies inside the Actor.
 						
 						
 					</div>
@@ -2239,8 +2193,7 @@ whether the parameter point coordinate lies inside the Actor.
 									<b>time</b>
 									
 								</dt>
-								<dd>an integer indicating the time related to Scene's timeline when the event
-is being notified.</dd>
+								<dd>an integer indicating the time related to Scene's timeline when the eventis being notified.</dd>
 							
 							</dl>
 						
@@ -2405,8 +2358,7 @@ is being notified.</dd>
 					
 					</div>
 					<div class="description">
-						Private.
-Gets a given anchor position referred to the Actor.
+						Private.Gets a given anchor position referred to the Actor.
 						
 						
 					</div>
@@ -2578,9 +2530,7 @@ Gets a given anchor position referred to the Actor.
 					
 					</div>
 					<div class="description">
-						Test for compulsory gl flushing:
- 1.- opacity has changed.
- 2.- texture page has changed.
+						Test for compulsory gl flushing: 1.- opacity has changed. 2.- texture page has changed.
 						
 						
 					</div>
@@ -2738,9 +2688,7 @@ Gets a given anchor position referred to the Actor.
 					
 					</div>
 					<div class="description">
-						This method is called by the Director to know whether the actor is on Scene time.
-In case it was necessary, this method will notify any life cycle behaviors about
-an Actor expiration.
+						This method is called by the Director to know whether the actor is on Scene time.In case it was necessary, this method will notify any life cycle behaviors aboutan Actor expiration.
 						
 						
 					</div>
@@ -2801,8 +2749,7 @@ an Actor expiration.
 					
 					</div>
 					<div class="description">
-						Transform a local coordinate point on this Actor's coordinate system into
-another point in otherActor's coordinate system.
+						Transform a local coordinate point on this Actor's coordinate system intoanother point in otherActor's coordinate system.
 						
 						
 					</div>
@@ -2887,8 +2834,7 @@ another point in otherActor's coordinate system.
 					
 					</div>
 					<div class="description">
-						Default mouseClick handler.
-Mouse click events are received after a call to mouseUp method if no dragging was in progress.
+						Default mouseClick handler.Mouse click events are received after a call to mouseUp method if no dragging was in progress.
 						
 						
 					</div>
@@ -3248,8 +3194,7 @@ Mouse click events are received after a call to mouseUp method if no dragging wa
 					
 					</div>
 					<div class="description">
-						Move this actor to a position.
-It creates and adds a new PathBehavior.
+						Move this actor to a position.It creates and adds a new PathBehavior.
 						
 						
 					</div>
@@ -3309,8 +3254,7 @@ It creates and adds a new PathBehavior.
 					
 					</div>
 					<div class="description">
-						This method should me overriden by every custom Actor.
-It will be the drawing routine called by the Director to show every Actor.
+						This method should me overriden by every custom Actor.It will be the drawing routine called by the Director to show every Actor.
 						
 						
 					</div>
@@ -3401,8 +3345,7 @@ It will be the drawing routine called by the Director to show every Actor.
 					
 					</div>
 					<div class="description">
-						Set coordinates and uv values for this actor.
-This function uses Director's coords and indexCoords values.
+						Set coordinates and uv values for this actor.This function uses Director's coords and indexCoords values.
 						
 						
 					</div>
@@ -3444,8 +3387,7 @@ This function uses Director's coords and indexCoords values.
 					
 					</div>
 					<div class="description">
-						Remove a Behavior from the Actor.
-If the Behavior is not present at the actor behavior collection nothing happends.
+						Remove a Behavior from the Actor.If the Behavior is not present at the actor behavior collection nothing happends.
 						
 						
 					</div>
@@ -3481,8 +3423,7 @@ If the Behavior is not present at the actor behavior collection nothing happends
 					
 					</div>
 					<div class="description">
-						Remove a Behavior with id param as behavior identifier from this actor.
-This function will remove ALL behavior instances with the given id.
+						Remove a Behavior with id param as behavior identifier from this actor.This function will remove ALL behavior instances with the given id.
 						
 						
 					</div>
@@ -3497,8 +3438,7 @@ This function will remove ALL behavior instances with the given id.
 									<b>id</b>
 									
 								</dt>
-								<dd>{number} an integer.
-return this;</dd>
+								<dd>{number} an integer.return this;</dd>
 							
 							</dl>
 						
@@ -3519,8 +3459,7 @@ return this;</dd>
 					
 					</div>
 					<div class="description">
-						Removes an Actor's life cycle listener.
-It will only remove the first occurrence of the given actorListener.
+						Removes an Actor's life cycle listener.It will only remove the first occurrence of the given actorListener.
 						
 						
 					</div>
@@ -3911,9 +3850,7 @@ It will only remove the first occurrence of the given actorListener.
 					
 					</div>
 					<div class="description">
-						Stablishes the Alpha transparency for the Actor.
-If it globalAlpha enabled, this alpha will the maximum alpha for every contained actors.
-The alpha must be between 0 and 1.
+						Stablishes the Alpha transparency for the Actor.If it globalAlpha enabled, this alpha will the maximum alpha for every contained actors.The alpha must be between 0 and 1.
 						
 						
 					</div>
@@ -3956,11 +3893,7 @@ The alpha must be between 0 and 1.
 					
 					</div>
 					<div class="description">
-						Set this actor's background SpriteImage its animation sequence.
-In its simplet's form a SpriteImage treats a given image as an array of rows by columns
-subimages. If you define d Sprite Image of 2x2, you'll be able to draw any of the 4 subimages.
-This method defines the animation sequence so that it could be set [0,2,1,3,2,1] as the
-animation sequence
+						Set this actor's background SpriteImage its animation sequence.In its simplet's form a SpriteImage treats a given image as an array of rows by columnssubimages. If you define d Sprite Image of 2x2, you'll be able to draw any of the 4 subimages.This method defines the animation sequence so that it could be set [0,2,1,3,2,1] as theanimation sequence
 						
 						
 					</div>
@@ -3996,8 +3929,7 @@ animation sequence
 					
 					</div>
 					<div class="description">
-						Set this actor behavior as if it were a Button. The actor size will be set as SpriteImage's
-single size.
+						Set this actor behavior as if it were a Button. The actor size will be set as SpriteImage'ssingle size.
 						
 						
 					</div>
@@ -4063,18 +3995,7 @@ single size.
 					
 					</div>
 					<div class="description">
-						Set this actor's background image.
-The need of a background image is to kept compatibility with the new CSSDirector class.
-The image parameter can be either an Image/Canvas or a CAAT.SpriteImage instance. If an image
-is supplied, it will be wrapped into a CAAT.SriteImage instance of 1 row by 1 column.
-If the actor has set an image in the background, the paint method will draw the image, otherwise
-and if set, will fill its background with a solid color.
-If adjust_size_to_image is true, the host actor will be redimensioned to the size of one
-single image from the SpriteImage (either supplied or generated because of passing an Image or
-Canvas to the function). That means the size will be set to [width:SpriteImage.singleWidth,
-height:singleHeight].
-
-WARN: if using a CSS renderer, the image supplied MUST be a HTMLImageElement instance.
+						Set this actor's background image.The need of a background image is to kept compatibility with the new CSSDirector class.The image parameter can be either an Image/Canvas or a CAAT.SpriteImage instance. If an imageis supplied, it will be wrapped into a CAAT.SriteImage instance of 1 row by 1 column.If the actor has set an image in the background, the paint method will draw the image, otherwiseand if set, will fill its background with a solid color.If adjust_size_to_image is true, the host actor will be redimensioned to the size of onesingle image from the SpriteImage (either supplied or generated because of passing an Image orCanvas to the function). That means the size will be set to [width:SpriteImage.singleWidth,height:singleHeight].WARN: if using a CSS renderer, the image supplied MUST be a HTMLImageElement instance.
 						
 						
 					</div>
@@ -4130,9 +4051,7 @@ WARN: if using a CSS renderer, the image supplied MUST be a HTMLImageElement ins
 					
 					</div>
 					<div class="description">
-						Set this actor's background SpriteImage offset displacement.
-The values can be either positive or negative meaning the texture space of this background
-image does not start at (0,0) but at the desired position.
+						Set this actor's background SpriteImage offset displacement.The values can be either positive or negative meaning the texture space of this backgroundimage does not start at (0,0) but at the desired position.
 						
 						
 					</div>
@@ -4360,8 +4279,7 @@ image does not start at (0,0) but at the desired position.
 									<b>clipPath</b>
 									
 								</dt>
-								<dd>{CAAT.Path=} An optional path to apply clip with. If enabled and clipPath is not set,
- a rectangle will be used.</dd>
+								<dd>{CAAT.Path=} An optional path to apply clip with. If enabled and clipPath is not set, a rectangle will be used.</dd>
 							
 							</dl>
 						
@@ -4382,8 +4300,7 @@ image does not start at (0,0) but at the desired position.
 					
 					</div>
 					<div class="description">
-						Set discardable property. If an actor is discardable, upon expiration will be removed from
-scene graph and hence deleted.
+						Set discardable property. If an actor is discardable, upon expiration will be removed fromscene graph and hence deleted.
 						
 						
 					</div>
@@ -4426,9 +4343,7 @@ scene graph and hence deleted.
 					
 					</div>
 					<div class="description">
-						Sets this Actor as Expired.
-If this is a Container, all the contained Actors won't be nor drawn nor will receive
-any event. That is, expiring an Actor means totally taking it out the Scene's timeline.
+						Sets this Actor as Expired.If this is a Container, all the contained Actors won't be nor drawn nor will receiveany event. That is, expiring an Actor means totally taking it out the Scene's timeline.
 						
 						
 					</div>
@@ -4514,8 +4429,7 @@ any event. That is, expiring an Actor means totally taking it out the Scene's ti
 					
 					</div>
 					<div class="description">
-						Sets the time life cycle for an Actor.
-These values are related to Scene time.
+						Sets the time life cycle for an Actor.These values are related to Scene time.
 						
 						
 					</div>
@@ -4640,43 +4554,6 @@ These values are related to Scene time.
 
 					<hr />
 				
-					<a name="setGlobalAlpha"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>setGlobalAlpha</b>(global)
-					
-					</div>
-					<div class="description">
-						Set alpha composition scope. global will mean this alpha value will be its children maximum.
-If set to false, only this actor will have this alpha value.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>global</b>
-									
-								</dt>
-								<dd>{boolean} whether the alpha value should be propagated to children.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
 					<a name="setGlobalAnchor"> </a>
 					<div class="fixedFont">
 					
@@ -4763,8 +4640,7 @@ If set to false, only this actor will have this alpha value.
 					
 					</div>
 					<div class="description">
-						Set this background image transformation.
-If GL is enabled, this parameter has no effect.
+						Set this background image transformation.If GL is enabled, this parameter has no effect.
 						
 						
 					</div>
@@ -4793,6 +4669,42 @@ If GL is enabled, this parameter has no effect.
 								<dd>this</dd>
 							
 							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="setLocalAlpha"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setLocalAlpha</b>(global)
+					
+					</div>
+					<div class="description">
+						Set alpha composition scope. global will mean this alpha value will be its children maximum.If set to false, only this actor will have this alpha value.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>global</b>
+									
+								</dt>
+								<dd>{boolean} whether the alpha value should be propagated to children.</dd>
+							
+							</dl>
+						
+						
+						
+						
 						
 						
 						
@@ -4856,8 +4768,7 @@ If GL is enabled, this parameter has no effect.
 					
 					</div>
 					<div class="description">
-						Set this model view matrix if the actor is Dirty.
-
+						Set this model view matrix if the actor is Dirty.
              mm[2]+= this.x;
              mm[5]+= this.y;
              if ( this.rotationAngle ) {
@@ -5150,8 +5061,7 @@ If GL is enabled, this parameter has no effect.
 					
 					</div>
 					<div class="description">
-						A helper method for setRotationAnchored. This methods stablishes the center
-of rotation to be the center of the Actor.
+						A helper method for setRotationAnchored. This methods stablishes the centerof rotation to be the center of the Actor.
 						
 						
 					</div>
@@ -5389,9 +5299,7 @@ of rotation to be the center of the Actor.
 					
 					</div>
 					<div class="description">
-						Modify the dimensions on an Actor.
-The dimension will not affect the local coordinates system in opposition
-to setSize or setBounds.
+						Modify the dimensions on an Actor.The dimension will not affect the local coordinates system in oppositionto setSize or setBounds.
 						
 						
 					</div>
@@ -5452,9 +5360,7 @@ to setSize or setBounds.
 					
 					</div>
 					<div class="description">
-						Calculates the 2D bounding box in canvas coordinates of the Actor.
-This bounding box takes into account the transformations applied hierarchically for
-each Scene Actor.
+						Calculates the 2D bounding box in canvas coordinates of the Actor.This bounding box takes into account the transformations applied hierarchically foreach Scene Actor.
 						
 						
 					</div>
@@ -5705,9 +5611,7 @@ each Scene Actor.
 					
 					</div>
 					<div class="description">
-						Set this actor invisible.
-The actor is animated but not visible.
-A container won't show any of its children if set visible to false.
+						Set this actor invisible.The actor is animated but not visible.A container won't show any of its children if set visible to false.
 						
 						
 					</div>
@@ -5858,10 +5762,7 @@ A container won't show any of its children if set visible to false.
 					
 					</div>
 					<div class="description">
-						Transform a point from model to view space.
-<p>
-WARNING: every call to this method calculates
-actor's world model view matrix.
+						Transform a point from model to view space.<p>WARNING: every call to this method calculatesactor's world model view matrix.
 						
 						
 					</div>
@@ -5908,7 +5809,7 @@ actor's world model view matrix.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Dec 21 2012 15:50:23 GMT-0800 (PST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Jan 24 2013 11:41:33 GMT-0800 (PST)
 		</div>
 	</body>
 </html>
