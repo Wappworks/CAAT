@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 248
+Version: 0.4 build: 249
 
 Created on:
-DATE: 2013-01-24
-TIME: 11:39:42
+DATE: 2013-02-09
+TIME: 13:12:00
 */
 
 
@@ -6671,6 +6671,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
         setPositionAnchor : function( pax, pay ) {
             this.tAnchorX=  pax;
             this.tAnchorY=  pay;
+            this.dirty= true;
             return this;
         },
 
@@ -8462,12 +8463,9 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 this.textWidth= this.font.stringWidth( this.text );
                 this.textHeight=this.font.stringHeight();
                 this.spriteTextAlignOffset = null;
-                if (this.width===0) {
-                    this.width= this.textWidth;
-                }
-                if ( this.height===0 ) {
-                    this.height= this.textHeight;
-                }
+                this.width= this.width || this.textWidth;
+                this.height= this.height || this.textHeight;
+                this.dirty= true;
                 return this;
             }
 
@@ -8477,9 +8475,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             ctx.font= this.font;
 
             this.textWidth= ctx.measureText( this.text ).width;
-            if (this.width===0) {
-                this.width= this.textWidth;
-            }
+            this.width= this.width || this.textWidth;
 
             try {
                 var pos= this.font.indexOf("px");
@@ -8493,9 +8489,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 this.textHeight=20; // default height;
             }
 
-            if ( this.height===0 ) {
-                this.height= this.textHeight;
-            }
+            this.height= this.height || this.textHeight;
+            this.dirty= true;
 
             ctx.restore();
 

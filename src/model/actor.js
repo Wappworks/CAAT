@@ -953,6 +953,7 @@
         setPositionAnchor : function( pax, pay ) {
             this.tAnchorX=  pax;
             this.tAnchorY=  pay;
+            this.dirty= true;
             return this;
         },
 
@@ -2744,12 +2745,9 @@
                 this.textWidth= this.font.stringWidth( this.text );
                 this.textHeight=this.font.stringHeight();
                 this.spriteTextAlignOffset = null;
-                if (this.width===0) {
-                    this.width= this.textWidth;
-                }
-                if ( this.height===0 ) {
-                    this.height= this.textHeight;
-                }
+                this.width= this.width || this.textWidth;
+                this.height= this.height || this.textHeight;
+                this.dirty= true;
                 return this;
             }
 
@@ -2759,9 +2757,7 @@
             ctx.font= this.font;
 
             this.textWidth= ctx.measureText( this.text ).width;
-            if (this.width===0) {
-                this.width= this.textWidth;
-            }
+            this.width= this.width || this.textWidth;
 
             try {
                 var pos= this.font.indexOf("px");
@@ -2775,9 +2771,8 @@
                 this.textHeight=20; // default height;
             }
 
-            if ( this.height===0 ) {
-                this.height= this.textHeight;
-            }
+            this.height= this.height || this.textHeight;
+            this.dirty= true;
 
             ctx.restore();
 
