@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 249
+Version: 0.4 build: 250
 
 Created on:
-DATE: 2013-02-09
-TIME: 13:12:00
+DATE: 2013-02-20
+TIME: 23:09:47
 */
 
 
@@ -10167,7 +10167,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             this.setBounds(0, 0, width, height);
             this.enableEvents(proxy);
 
-            this.timeline = new Date().getTime();
+            this.timeline = -1;
 
             // transition scene
             this.transitionScene = new CAAT.Scene().setBounds(0, 0, width, height);
@@ -10231,7 +10231,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
                 this.crc = this.ctx;
                 this.enableEvents(canvas);
-                this.timeline = new Date().getTime();
+                this.timeline = -1;
 
                 this.glColorProgram = new CAAT.ColorProgram(this.gl).create().initialize();
                 this.glTextureProgram = new CAAT.TextureProgram(this.gl).create().initialize();
@@ -11289,7 +11289,15 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             CAAT.currentDirector= this;
 
             var t = new Date().getTime(),
-                    delta = t - this.timeline;
+                delta;
+
+            // Timeline reset? Treat the first frame after a timeline reset at 60 fps
+            if( this.timeline > 0 )
+                delta = t - this.timeline;
+            else
+                delta = 1000 / 60;
+
+            this.timeline = t;
 
             /*
             check for massive frame time. if for example the current browser tab is minified or taken out of
@@ -11312,8 +11320,6 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 this.debugInfo(this.statistics);
             }
 
-            this.timeline = t;
-
             if (this.onRenderEnd) {
                 this.onRenderEnd(delta);
             }
@@ -11327,7 +11333,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * If the director has renderingMode: DIRTY, the timeline must be reset to register accurate frame measurement.
          */
         resetTimeline : function() {
-            this.timeline= new Date().getTime();
+            this.timeline= -1;
         },
 
         endLoop : function () {
@@ -12365,7 +12371,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          */
         CAAT.Director.prototype.initialize= function(width, height, domElement, proxy) {
 
-            this.timeline = new Date().getTime();
+            this.timeline = -1;
             this.domElement= domElement;
             this.style('position','absolute');
             this.style('width',''+width+'px');
