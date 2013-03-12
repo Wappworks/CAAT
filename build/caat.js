@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 250
+Version: 0.4 build: 251
 
 Created on:
-DATE: 2013-02-20
-TIME: 23:09:47
+DATE: 2013-03-11
+TIME: 18:31:43
 */
 
 
@@ -3630,6 +3630,23 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             this.setStatus( CAAT.Behavior.Status.EXPIRED );
             this.behaviorStartTime= Number.MAX_VALUE;
             this.behaviorDuration= 0;
+            return this;
+        },
+        /**
+         * Sets behavior to end on the next cycle based on a time setting
+         * @param timeCurr {number}
+         */
+        setOutOfFrameOnCycleEndTime : function( timeCurr ) {
+            if( !this.cycleBehavior )
+                return this.setOutOfFrameTime();
+
+            this.setCycle( false );
+            if( this.status !== CAAT.Behavior.Status.STARTED )
+                return this;
+
+            // Adjust the start time so that the behavior has potentially one more loop left...
+            if( this.solved && timeCurr > this.behaviorStartTime )
+                this.behaviorStartTime = timeCurr - ((timeCurr-this.behaviorStartTime)%this.behaviorDuration);
             return this;
         },
         /**

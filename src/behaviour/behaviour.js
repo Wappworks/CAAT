@@ -191,6 +191,23 @@
             return this;
         },
         /**
+         * Sets behavior to end on the next cycle based on a time setting
+         * @param timeCurr {number}
+         */
+        setOutOfFrameOnCycleEndTime : function( timeCurr ) {
+            if( !this.cycleBehavior )
+                return this.setOutOfFrameTime();
+
+            this.setCycle( false );
+            if( this.status !== CAAT.Behavior.Status.STARTED )
+                return this;
+
+            // Adjust the start time so that the behavior has potentially one more loop left...
+            if( this.solved && timeCurr > this.behaviorStartTime )
+                this.behaviorStartTime = timeCurr - ((timeCurr-this.behaviorStartTime)%this.behaviorDuration);
+            return this;
+        },
+        /**
          * Changes behavior default interpolator to another instance of CAAT.Interpolator.
          * If the behavior is not defined by CAAT.Interpolator factory methods, the interpolation function must return
          * its values in the range 0..1. The behavior will only apply for such value range.
