@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 251
+Version: 0.4 build: 252
 
 Created on:
-DATE: 2013-03-11
-TIME: 18:31:43
+DATE: 2013-03-28
+TIME: 13:24:30
 */
 
 
@@ -13474,12 +13474,12 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
 
             var w= this.ownerActor.width;
             var h= this.getHeight();
-            var xpos = this.offsetX + x;
+            var xpos = (this.offsetX + x) >> 0;
             var yoff= (this.offsetY + y) % h;
             if ( yoff> 0 ) {
                 yoff= yoff-h;
             }
-            var ypos = yoff + y;
+            var ypos = (yoff + y) >> 0;
 
             var nh= (((this.ownerActor.height-yoff)/h)>>0)+1;
             var i;
@@ -13490,7 +13490,7 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
                     this.image,
                     el.x, el.y,
                     el.width, el.height,
-                    xpos, ypos + (i*el.height)>>0,
+                    xpos, ypos + (i*el.height),
                     w, el.height);
             }
         },
@@ -13510,11 +13510,11 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
             var w= this.getWidth();
             var h= this.ownerActor.height;
             var xoff = (this.offsetX + x) % w;
-            var ypos= this.offsetY + y;
+            var ypos= (this.offsetY + y)>>0;
             if ( xoff> 0 ) {
                 xoff = xoff - w;
             }
-            var xpos = xoff + x;
+            var xpos = (xoff + x)>>0;
 
             var nw= (((this.ownerActor.width-xoff)/w)>>0)+1;
             var i;
@@ -13525,7 +13525,7 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
                     this.image,
                     el.x, el.y,
                     el.width, el.height,
-                    xpos + (i*el.width)>>0, ypos,
+                    xpos + (i*el.width), ypos,
                     el.width, h);
             }
         },

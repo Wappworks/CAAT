@@ -316,12 +316,12 @@
 
             var w= this.ownerActor.width;
             var h= this.getHeight();
-            var xpos = this.offsetX + x;
+            var xpos = (this.offsetX + x) >> 0;
             var yoff= (this.offsetY + y) % h;
             if ( yoff> 0 ) {
                 yoff= yoff-h;
             }
-            var ypos = yoff + y;
+            var ypos = (yoff + y) >> 0;
 
             var nh= (((this.ownerActor.height-yoff)/h)>>0)+1;
             var i;
@@ -332,7 +332,7 @@
                     this.image,
                     el.x, el.y,
                     el.width, el.height,
-                    xpos, ypos + (i*el.height)>>0,
+                    xpos, ypos + (i*el.height),
                     w, el.height);
             }
         },
@@ -352,11 +352,11 @@
             var w= this.getWidth();
             var h= this.ownerActor.height;
             var xoff = (this.offsetX + x) % w;
-            var ypos= this.offsetY + y;
+            var ypos= (this.offsetY + y)>>0;
             if ( xoff> 0 ) {
                 xoff = xoff - w;
             }
-            var xpos = xoff + x;
+            var xpos = (xoff + x)>>0;
 
             var nw= (((this.ownerActor.width-xoff)/w)>>0)+1;
             var i;
@@ -367,7 +367,7 @@
                     this.image,
                     el.x, el.y,
                     el.width, el.height,
-                    xpos + (i*el.width)>>0, ypos,
+                    xpos + (i*el.width), ypos,
                     el.width, h);
             }
         },
