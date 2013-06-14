@@ -125,6 +125,8 @@
         frameAlpha:             1,      // hierarchically calculated alpha for this Actor.
 		expired:				false,  // set when the actor has been expired
 		discardable:			false,  // set when you want this actor to be removed if expired
+        alwaysPaint:            false,  // skip paint check
+        fastAABB:               false,  // set to calculate a fast AABB
 		pointed:				false,  // is the mouse pointer inside this actor
 		mouseEnabled:			true,   // events enabled ?
 
@@ -1439,7 +1441,7 @@
 
             this.inFrame= true;
 
-            return this.AABB.intersects( director.AABB );
+            return this.alwaysPaint || this.AABB.intersects( director.AABB );
 
             //return true;
 		},
@@ -1616,86 +1618,108 @@
                 return this;
             }
 
+            if( !this.fastAABB || CAAT.GLRENDER || (CAAT.DEBUGAABB && CAAT.DEBUGBB) ) {
+                var vvv;
 
-            var vvv;
+                vvv= vv[0];
+                vvv.x=0;
+                vvv.y=0;
+                vvv= vv[1];
+                vvv.x=this.width;
+                vvv.y=0;
+                vvv= vv[2];
+                vvv.x=this.width;
+                vvv.y=this.height;
+                vvv= vv[3];
+                vvv.x=0;
+                vvv.y=this.height;
 
-            vvv= vv[0];
-            vvv.x=0;
-            vvv.y=0;
-            vvv= vv[1];
-            vvv.x=this.width;
-            vvv.y=0;
-            vvv= vv[2];
-            vvv.x=this.width;
-            vvv.y=this.height;
-            vvv= vv[3];
-            vvv.x=0;
-            vvv.y=this.height;
+                this.modelToView( this.viewVertices );
 
-            this.modelToView( this.viewVertices );
+                var xmin= Number.MAX_VALUE, xmax=-Number.MAX_VALUE;
+                var ymin= Number.MAX_VALUE, ymax=-Number.MAX_VALUE;
 
-            var xmin= Number.MAX_VALUE, xmax=-Number.MAX_VALUE;
-            var ymin= Number.MAX_VALUE, ymax=-Number.MAX_VALUE;
+                vvv= vv[0];
+                if ( vvv.x < xmin ) {
+                    xmin=vvv.x;
+                }
+                if ( vvv.x > xmax ) {
+                    xmax=vvv.x;
+                }
+                if ( vvv.y < ymin ) {
+                    ymin=vvv.y;
+                }
+                if ( vvv.y > ymax ) {
+                    ymax=vvv.y;
+                }
+                var vvv= vv[1];
+                if ( vvv.x < xmin ) {
+                    xmin=vvv.x;
+                }
+                if ( vvv.x > xmax ) {
+                    xmax=vvv.x;
+                }
+                if ( vvv.y < ymin ) {
+                    ymin=vvv.y;
+                }
+                if ( vvv.y > ymax ) {
+                    ymax=vvv.y;
+                }
+                var vvv= vv[2];
+                if ( vvv.x < xmin ) {
+                    xmin=vvv.x;
+                }
+                if ( vvv.x > xmax ) {
+                    xmax=vvv.x;
+                }
+                if ( vvv.y < ymin ) {
+                    ymin=vvv.y;
+                }
+                if ( vvv.y > ymax ) {
+                    ymax=vvv.y;
+                }
+                var vvv= vv[3];
+                if ( vvv.x < xmin ) {
+                    xmin=vvv.x;
+                }
+                if ( vvv.x > xmax ) {
+                    xmax=vvv.x;
+                }
+                if ( vvv.y < ymin ) {
+                    ymin=vvv.y;
+                }
+                if ( vvv.y > ymax ) {
+                    ymax=vvv.y;
+                }
 
-            vvv= vv[0];
-            if ( vvv.x < xmin ) {
-                xmin=vvv.x;
-            }
-            if ( vvv.x > xmax ) {
-                xmax=vvv.x;
-            }
-            if ( vvv.y < ymin ) {
-                ymin=vvv.y;
-            }
-            if ( vvv.y > ymax ) {
-                ymax=vvv.y;
-            }
-            var vvv= vv[1];
-            if ( vvv.x < xmin ) {
-                xmin=vvv.x;
-            }
-            if ( vvv.x > xmax ) {
-                xmax=vvv.x;
-            }
-            if ( vvv.y < ymin ) {
-                ymin=vvv.y;
-            }
-            if ( vvv.y > ymax ) {
-                ymax=vvv.y;
-            }
-            var vvv= vv[2];
-            if ( vvv.x < xmin ) {
-                xmin=vvv.x;
-            }
-            if ( vvv.x > xmax ) {
-                xmax=vvv.x;
-            }
-            if ( vvv.y < ymin ) {
-                ymin=vvv.y;
-            }
-            if ( vvv.y > ymax ) {
-                ymax=vvv.y;
-            }
-            var vvv= vv[3];
-            if ( vvv.x < xmin ) {
-                xmin=vvv.x;
-            }
-            if ( vvv.x > xmax ) {
-                xmax=vvv.x;
-            }
-            if ( vvv.y < ymin ) {
-                ymin=vvv.y;
-            }
-            if ( vvv.y > ymax ) {
-                ymax=vvv.y;
+                AABB.x= xmin;
+                AABB.y= ymin;
+                AABB.x1= xmax;
+                AABB.y1= ymax;
+                AABB.width=  (xmax-xmin);
+                AABB.height= (ymax-ymin);
+
+                return this;
             }
 
-            AABB.x= xmin;
-            AABB.y= ymin;
-            AABB.x1= xmax;
-            AABB.y1= ymax;
-            AABB.width=  (xmax-xmin);
-            AABB.height= (ymax-ymin);
+            // If we get here, we're trying to do a fast AABB...
+            var w= this.width;
+            var h= this.height;
+            var vvv = this.modelToView({
+                x: w,
+                y: h
+            });
+            var len = w > h ? w + (h *0.41414) : h + (w * 0.41414);
+            var halfLen = len * 0.5;
+
+            var m= this.worldModelViewMatrix.matrix;
+
+            AABB.x= ((m[2] + vvv.x) * 0.5) - halfLen;
+            AABB.y= ((m[5] + vvv.y) * 0.5) - halfLen;
+            AABB.x1= AABB.x + len;
+            AABB.y1= AABB.y + len;
+            AABB.width = len;
+            AABB.heigt = len;
 
             return this;
         },
