@@ -280,7 +280,23 @@
 			
 		},
         /**
-         * Chekcs whether the behaviour is in scene time.
+         * @param time  {Number}        The current time in ms
+         *
+         * @return {Number} an integer indicating the behavior's estimated end time in ms.
+         */
+        getEndTimeEstimate: function( time ) {
+            if( this.status == CAAT.Behavior.Status.EXPIRED )
+                return time;
+
+            if( this.cycleBehavior )
+                return Number.POSITIVE_INFINITY;
+
+            var startTime = this.behaviorStartTime + (this.solved ? 0 : time);
+            return startTime + Math.max( 0, (this.behaviorDuration * (1 - this.timeOffset)) );
+        },
+
+        /**
+         * Checks whether the behaviour is in scene time.
          * In case it gets out of scene time, and has not been tagged as expired, the behavior is expired and observers
          * are notified about that fact.
          * @param time the scene time to check the behavior against.

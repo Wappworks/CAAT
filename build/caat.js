@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 253
+Version: 0.4 build: 254
 
 Created on:
-DATE: 2013-06-13
-TIME: 20:12:58
+DATE: 2013-06-15
+TIME: 22:17:35
 */
 
 
@@ -3722,7 +3722,23 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 			
 		},
         /**
-         * Chekcs whether the behaviour is in scene time.
+         * @param time  {Number}        The current time in ms
+         *
+         * @return {Number} an integer indicating the behavior's estimated end time in ms.
+         */
+        getEndTimeEstimate: function( time ) {
+            if( this.status == CAAT.Behavior.Status.EXPIRED )
+                return time;
+
+            if( this.cycleBehavior )
+                return Number.POSITIVE_INFINITY;
+
+            var startTime = this.behaviorStartTime + (this.solved ? 0 : time);
+            return startTime + Math.max( 0, (this.behaviorDuration * (1 - this.timeOffset)) );
+        },
+
+        /**
+         * Checks whether the behaviour is in scene time.
          * In case it gets out of scene time, and has not been tagged as expired, the behavior is expired and observers
          * are notified about that fact.
          * @param time the scene time to check the behavior against.
