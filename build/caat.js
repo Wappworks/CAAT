@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 254
+Version: 0.4 build: 255
 
 Created on:
-DATE: 2013-06-15
-TIME: 22:17:35
+DATE: 2013-06-20
+TIME: 17:25:57
 */
 
 
@@ -7943,8 +7943,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             var ctx= director.ctx;
 
             ctx.save();
-
             CAAT.ActorContainer.superclass.paintActor.call(this,director,time);
+            ctx.restore();
 
             if ( this.cached===__CD ) {
                 return;
@@ -7954,6 +7954,13 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 this.frameAlpha= this.parent ? this.parent.frameAlpha : 1;
             }
 
+            this.paintChildren( director, time );
+
+            return true;
+        },
+        paintChildren: function( director, time ) {
+            var ctx= director.ctx;
+
             for( var actor= this.activeChildren; actor; actor=actor.__next ) {
                 if ( actor.visible ) {
                     ctx.save();
@@ -7961,10 +7968,6 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                     ctx.restore();
                 }
             }
-
-            ctx.restore();
-
-            return true;
         },
         __paintActor : function(director, time ) {
             if (!this.visible) {

@@ -2192,8 +2192,8 @@
             var ctx= director.ctx;
 
             ctx.save();
-
             CAAT.ActorContainer.superclass.paintActor.call(this,director,time);
+            ctx.restore();
 
             if ( this.cached===__CD ) {
                 return;
@@ -2203,6 +2203,13 @@
                 this.frameAlpha= this.parent ? this.parent.frameAlpha : 1;
             }
 
+            this.paintChildren( director, time );
+
+            return true;
+        },
+        paintChildren: function( director, time ) {
+            var ctx= director.ctx;
+
             for( var actor= this.activeChildren; actor; actor=actor.__next ) {
                 if ( actor.visible ) {
                     ctx.save();
@@ -2210,10 +2217,6 @@
                     ctx.restore();
                 }
             }
-
-            ctx.restore();
-
-            return true;
         },
         __paintActor : function(director, time ) {
             if (!this.visible) {
