@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 255
+Version: 0.4 build: 256
 
 Created on:
-DATE: 2013-06-20
-TIME: 17:25:57
+DATE: 2013-07-06
+TIME: 23:24:02
 */
 
 
@@ -11509,7 +11509,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             }
             this.modelViewMatrixI.transformCoord(pt);
             posx= pt.x;
-            posy= pt.y
+            posy= pt.y;
 
             point.set(posx, posy);
             this.screenMousePoint.set(posx, posy);
@@ -11618,8 +11618,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             if (this.isMouseDown && null !== this.lastSelectedActor) {
 
                 lactor = this.lastSelectedActor;
-                pos = lactor.viewToModel(
-                    new CAAT.Point(this.screenMousePoint.x, this.screenMousePoint.y, 0));
+                pos = lactor.viewToModel(mp.set(this.screenMousePoint.x, this.screenMousePoint.y, 0));
 
                 // check for mouse move threshold.
                 if (!this.dragging) {
@@ -11691,8 +11690,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             if (lactor !== this.lastSelectedActor) {
                 if (null !== this.lastSelectedActor) {
 
-                    pos = this.lastSelectedActor.viewToModel(
-                        new CAAT.Point(this.screenMousePoint.x, this.screenMousePoint.y, 0));
+                    pos = this.lastSelectedActor.viewToModel(mp.set(this.screenMousePoint.x, this.screenMousePoint.y, 0));
 
                     this.lastSelectedActor.mouseExit(
                         new CAAT.MouseEvent().init(
@@ -11705,8 +11703,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 }
 
                 if (null !== lactor) {
-                    pos = lactor.viewToModel(
-                        new CAAT.Point( this.screenMousePoint.x, this.screenMousePoint.y, 0));
+                    pos = lactor.viewToModel(mp.set( this.screenMousePoint.x, this.screenMousePoint.y, 0));
 
                     lactor.mouseEnter(
                         new CAAT.MouseEvent().init(
@@ -11719,8 +11716,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 }
             }
 
-            pos = lactor.viewToModel(
-                new CAAT.Point(this.screenMousePoint.x, this.screenMousePoint.y, 0));
+            pos = lactor.viewToModel(mp.set(this.screenMousePoint.x, this.screenMousePoint.y, 0));
 
             if (null !== lactor) {
 
@@ -11750,7 +11746,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             if (null !== this.lastSelectedActor ) {
 
                 this.getCanvasCoord(this.mousePoint, e);
-                var pos = new CAAT.Point(this.mousePoint.x, this.mousePoint.y, 0);
+                var pos = this.mousePoint.set( this.mousePoint.x, this.mousePoint.y, 0);
                 this.lastSelectedActor.viewToModel(pos);
 
                 var ev= new CAAT.MouseEvent().init(
@@ -11795,8 +11791,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
                 if (null !== lactor) {
 
-                    pos = lactor.viewToModel(
-                        new CAAT.Point(this.screenMousePoint.x, this.screenMousePoint.y, 0));
+                    pos = lactor.viewToModel(mp.set(this.screenMousePoint.x, this.screenMousePoint.y, 0));
 
                     ev= new CAAT.MouseEvent().init(
                             pos.x,
@@ -11840,18 +11835,15 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             }
 
             if (null !== this.lastSelectedActor) {
-/*
-                var pos = this.lastSelectedActor.viewToModel(
-                    new CAAT.Point(this.screenMousePoint.x, this.screenMousePoint.y, 0));
-*/
+                var pos = this.lastSelectedActor.viewToModel(mp.set(this.screenMousePoint.x, this.screenMousePoint.y, 0));
                 this.lastSelectedActor.mouseDblClick(
                     new CAAT.MouseEvent().init(
-                            mp.x,
-                            mp.y,
-                            e,
-                            this.lastSelectedActor,
-                            this.screenMousePoint,
-                            this.currentScene.time));
+                        pos.x,
+                        pos.y,
+                        e,
+                        this.lastSelectedActor,
+                        this.screenMousePoint,
+                        this.currentScene.time));
             }
 
             return true;
@@ -11869,8 +11861,15 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 var ee= e.changedTouches[0];
 
                 CAAT.currentDirector = this;
-                if( this.__mouseDownHandler(ee) )
+                if( this.__mouseDownHandler(ee) ) {
                     this.touching = ee.identifier;
+
+                    // For single touch cases, simulating the mouse requires us to reset the previous mouse position
+                    if (null !== this.lastSelectedActor) {
+                        var pos = this.lastSelectedActor.viewToModel(this.mousePoint.set(this.screenMousePoint.x, this.screenMousePoint.y, 0));
+                        this.prevMousePoint.set( pos.x, pos.y );
+                    }
+                }
                 CAAT.currentDirector = null;
             }
         },
@@ -11880,7 +11879,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             if ( this.touching !== null ) {
                 e.preventDefault();
 
-                for( var i=0; i<e.targetTouches.length; i++ ) {
+                for( var i=0; i<e.changedTouches.length; i++ ) {
                     var ee= e.changedTouches[i];
 
                     if( ee.identifier === this.touching ) {
@@ -11907,7 +11906,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                     return;
                 }
 
-                for( var i=0; i<e.targetTouches.length; i++ ) {
+                for( var i=0; i<e.changedTouches.length; i++ ) {
                     var ee= e.changedTouches[i];
 
                     if( ee.identifier === this.touching ) {
@@ -12282,7 +12281,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             }, false );
 
             window.addEventListener('mousedown', function(e) {
-                if ( e.target===canvas && me.touching === null || me.touching === mouseTouchId ) {
+                if ( e.target===canvas && (me.touching === null || me.touching === mouseTouchId) ) {
                     e.preventDefault();
                     e.cancelBubble = true;
                     if (e.stopPropagation) e.stopPropagation();
@@ -12297,7 +12296,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             }, false );
 
             window.addEventListener('mouseover',function(e) {
-                if ( e.target===canvas ) {
+                if ( e.target===canvas && (me.touching === null || me.touching === mouseTouchId) ) {
                     e.preventDefault();
                     e.cancelBubble = true;
                     if (e.stopPropagation) e.stopPropagation();
@@ -12309,7 +12308,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             }, false);
 
             window.addEventListener('mouseout',function(e) {
-                if ( e.target===canvas ) {
+                if ( e.target===canvas && (me.touching === null || me.touching === mouseTouchId) ) {
                     e.preventDefault();
                     e.cancelBubble = true;
                     if (e.stopPropagation) e.stopPropagation();
@@ -12321,17 +12320,21 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             }, false);
 
             window.addEventListener('mousemove', function(e) {
-                    e.preventDefault();
-                    e.cancelBubble = true;
-                    if (e.stopPropagation) e.stopPropagation();
+                // Allow touching to "override" mouse move events
+                if( me.touching !== null && me.touching !== mouseTouchId )
+                    return;
 
-                    CAAT.currentDirector = me;
-                    me.__mouseMoveHandler(e);
-                    CAAT.currentDirector = null;
+                e.preventDefault();
+                e.cancelBubble = true;
+                if (e.stopPropagation) e.stopPropagation();
+
+                CAAT.currentDirector = me;
+                me.__mouseMoveHandler(e);
+                CAAT.currentDirector = null;
             }, false);
 
             window.addEventListener("dblclick", function(e) {
-                if ( e.target===canvas ) {
+                if ( e.target===canvas && (me.touching === null || me.touching === mouseTouchId) )  {
                     e.preventDefault();
                     e.cancelBubble = true;
                     if (e.stopPropagation) e.stopPropagation();
