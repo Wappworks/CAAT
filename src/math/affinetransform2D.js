@@ -45,6 +45,17 @@
 
 			return point;
 		},
+        transformVect: function(vect) {
+            var x= vect.x;
+            var y= vect.y;
+            var z= vect.z;
+
+            vect.x= x*this.matrix[0][0] + y*this.matrix[0][1] + z*this.matrix[0][2];
+            vect.y= x*this.matrix[1][0] + y*this.matrix[1][1] + z*this.matrix[1][2];
+            vect.z= x*this.matrix[2][0] + y*this.matrix[2][1] + z*this.matrix[2][2];
+
+            return point;
+        },
 	    initialize : function( x0,y0,z0, x1,y1,z1, x2,y2,z2 ) {
 		    this.identity( );
 		    this.matrix[0][0]= x0;
@@ -577,6 +588,22 @@
 
 			return point;
 		},
+        /**
+         * Transform a vector by this matrix. The parameter point will be modified with the transformation values.
+         * @param vect {CAAT.Point}.
+         * @return {CAAT.Point} the parameter point.
+         */
+        transformVect : function(vect) {
+            var x= vect.x;
+            var y= vect.y;
+
+            var tm= this.matrix;
+
+            vect.x= x*tm[0] + y*tm[1];
+            vect.y= x*tm[3] + y*tm[4];
+
+            return vect;
+        },
         /**
          * Create a new rotation matrix and set it up for the specified angle in radians.
          * @param angle {number}

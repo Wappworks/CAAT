@@ -15,7 +15,7 @@
 CAAT.TouchInfo= function( id, point, screenPoint, target ) {
 
     this.identifier= id;
-    this.startPoint= new CAAT.Point().set( point.x, point.y );
+    this.screenPointStart= new CAAT.Point().set( screenPoint.x, screenPoint.y );
     this.point= new CAAT.Point().set( point.x, point.y );
     this.screenPoint= new CAAT.Point().set( screenPoint.x, screenPoint.y );
     this.target= target;

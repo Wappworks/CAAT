@@ -39,7 +39,7 @@
 
         // input related variables initialization
         this.mousePoint = new CAAT.Point(0, 0, 0);
-        this.prevMousePoint = new CAAT.Point(0, 0, 0);
+        this.prevScreenMousePoint = new CAAT.Point(0, 0, 0);
         this.screenMousePoint = new CAAT.Point(0, 0, 0);
         this.isMouseDown = false;
         this.lastSelectedActor = null;
@@ -76,7 +76,7 @@
 
         // input related attributes
         mousePoint:         null,   // mouse coordinate related to canvas 0,0 coord.
-        prevMousePoint:     null,   // previous mouse position cache. Needed for drag events.
+        prevScreenMousePoint:     null,   // previous mouse position cache. Needed for drag events.
         screenMousePoint:   null,   // screen mouse coordinates.
         isMouseDown:        false,  // is the left mouse button pressed ?
         lastSelectedActor:  null,   // director's last actor receiving input.
@@ -1696,16 +1696,16 @@
 
             if (this.isMouseDown && null !== this.lastSelectedActor) {
 
-                lactor = this.lastSelectedActor;
-                pos = lactor.viewToModel(mp.set(this.screenMousePoint.x, this.screenMousePoint.y, 0));
-
                 // check for mouse move threshold.
                 if (!this.dragging) {
-                    if (Math.abs(this.prevMousePoint.x - pos.x) < CAAT.DRAG_THRESHOLD_X &&
-                        Math.abs(this.prevMousePoint.y - pos.y) < CAAT.DRAG_THRESHOLD_Y) {
+                    if (Math.abs(this.prevScreenMousePoint.x - this.screenMousePoint.x) < CAAT.DRAG_THRESHOLD_X &&
+                        Math.abs(this.prevScreenMousePoint.y - this.screenMousePoint.y) < CAAT.DRAG_THRESHOLD_Y) {
                         return;
                     }
                 }
+
+                lactor = this.lastSelectedActor;
+                pos = lactor.viewToModel(mp.set(this.screenMousePoint.x, this.screenMousePoint.y, 0));
 
                 this.dragging = true;
 
@@ -1722,8 +1722,8 @@
                                 this.screenMousePoint.y),
                             ct));
 
-                this.prevMousePoint.x= pos.x;
-                this.prevMousePoint.y= pos.y;
+                this.prevScreenMousePoint.x= this.screenMousePoint.x;
+                this.prevScreenMousePoint.y= this.screenMousePoint.y;
 
                 /**
                  * Element has not moved after drag, so treat it as a button.
@@ -1809,8 +1809,8 @@
                         ct));
             }
 
-            this.prevMousePoint.x= pos.x;
-            this.prevMousePoint.y= pos.y;
+            this.prevScreenMousePoint.x= this.screenMousePoint.x;
+            this.prevScreenMousePoint.y= this.screenMousePoint.y;
 
             this.lastSelectedActor = lactor;
             return true;
@@ -1945,8 +1945,7 @@
 
                     // For single touch cases, simulating the mouse requires us to reset the previous mouse position
                     if (null !== this.lastSelectedActor) {
-                        var pos = this.lastSelectedActor.viewToModel(this.mousePoint.set(this.screenMousePoint.x, this.screenMousePoint.y, 0));
-                        this.prevMousePoint.set( pos.x, pos.y );
+                        this.prevScreenMousePoint.set( this.screenMousePoint.x, this.screenMousePoint.y );
                     }
                 }
                 CAAT.currentDirector = null;

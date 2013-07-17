@@ -1131,6 +1131,45 @@
             return point;
         },
         /**
+         * Transform a point or array of vectors in model space to view space.
+         *
+         * @param vect {CAAT.Point|Array} an object of the form {x : float, y: float}
+         *
+         * @return the source transformed elements.
+         *
+         * @private
+         *
+         */
+        modelToViewVect : function(vect) {
+            var x, y, pt, tm;
+
+            if ( this.dirty ) {
+                this.setModelViewMatrix();
+            }
+
+            tm= this.worldModelViewMatrix.matrix;
+
+            if ( vect instanceof Array ) {
+                for( var i=0; i<vect.length; i++ ) {
+                    //this.worldModelViewMatrix.transformVect(vect[i]);
+                    pt= vect[i];
+                    x= pt.x;
+                    y= pt.y;
+                    pt.x= x*tm[0] + y*tm[1];
+                    pt.y= x*tm[3] + y*tm[4];
+                }
+            }
+            else {
+//                this.worldModelViewMatrix.transformVect(vect);
+                x= vect.x;
+                y= vect.y;
+                vect.x= x*tm[0] + y*tm[1];
+                vect.y= x*tm[3] + y*tm[4];
+            }
+
+            return vect;
+        },
+        /**
          * Transform a local coordinate point on this Actor's coordinate system into
          * another point in otherActor's coordinate system.
          * @param point {CAAT.Point}
@@ -1144,12 +1183,12 @@
             return otherActor.viewToModel( this.modelToView( point ) );
         },
         /**
-         * Transform a point from model to view space.
+         * Transform a point in view to model space.
          * <p>
          * WARNING: every call to this method calculates
          * actor's world model view matrix.
          *
-         * @param point {CAAT.Point} a point in screen space to be transformed to model space.
+         * @param point     {CAAT.Point} a point in screen space to be transformed to model space.
          *
          * @return the source point object
          *
@@ -1163,6 +1202,26 @@
             this.worldModelViewMatrixI.transformCoord(point);
 			return point;
 		},
+        /**
+         * Transform a vector in view to model space.
+         * <p>
+         * WARNING: every call to this method calculates
+         * actor's world model view matrix.
+         *
+         * @param vect     {CAAT.Point} a vector in screen space to be transformed to model space.
+         *
+         * @return the source point object
+         *
+         *
+         */
+        viewToModelVect : function(vect) {
+            if ( this.dirty ) {
+                this.setModelViewMatrix();
+            }
+            this.worldModelViewMatrixI= this.worldModelViewMatrix.getInverse();
+            this.worldModelViewMatrixI.transformVect(vect);
+            return vect;
+        },
         /**
          * Private
          * This method does the needed point transformations across an Actor hierarchy to devise

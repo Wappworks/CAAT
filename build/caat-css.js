@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 256
+Version: 0.4 build: 257
 
 Created on:
-DATE: 2013-07-06
-TIME: 23:24:06
+DATE: 2013-07-16
+TIME: 17:30:32
 */
 
 
@@ -513,6 +513,17 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
 			return point;
 		},
+        transformVect: function(vect) {
+            var x= vect.x;
+            var y= vect.y;
+            var z= vect.z;
+
+            vect.x= x*this.matrix[0][0] + y*this.matrix[0][1] + z*this.matrix[0][2];
+            vect.y= x*this.matrix[1][0] + y*this.matrix[1][1] + z*this.matrix[1][2];
+            vect.z= x*this.matrix[2][0] + y*this.matrix[2][1] + z*this.matrix[2][2];
+
+            return point;
+        },
 	    initialize : function( x0,y0,z0, x1,y1,z1, x2,y2,z2 ) {
 		    this.identity( );
 		    this.matrix[0][0]= x0;
@@ -1045,6 +1056,22 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
 			return point;
 		},
+        /**
+         * Transform a vector by this matrix. The parameter point will be modified with the transformation values.
+         * @param vect {CAAT.Point}.
+         * @return {CAAT.Point} the parameter point.
+         */
+        transformVect : function(vect) {
+            var x= vect.x;
+            var y= vect.y;
+
+            var tm= this.matrix;
+
+            vect.x= x*tm[0] + y*tm[1];
+            vect.y= x*tm[3] + y*tm[4];
+
+            return vect;
+        },
         /**
          * Create a new rotation matrix and set it up for the specified angle in radians.
          * @param angle {number}
@@ -7066,8 +7093,31 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             }
 
             return point;
-        },        /**
-         * Transform a point from model to view space.
+        },
+        /**
+         * Transform a point or array of vectors in model space to view space.
+         *
+         * @param vect {CAAT.Point|Array} an object of the form {x : float, y: float}
+         *
+         * @return the source transformed elements.
+         *
+         * @private
+         *
+         */
+        modelToViewVect : function(vect) {
+            if ( vect instanceof Array ) {
+                for( var i=0; i<vect.length; i++ ) {
+                    this.worldModelViewMatrix.transformVect(vect[i]);
+                }
+            }
+            else {
+                this.worldModelViewMatrix.transformVect(vect);
+            }
+
+            return vect;
+        },
+        /**
+         * Transform a point in view to model space.
          * <p>
          * WARNING: every call to this method calculates
          * actor's world model view matrix.
@@ -7083,6 +7133,23 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             this.worldModelViewMatrixI.transformCoord(point);
 			return point;
 		},
+        /**
+         * Transform a vector in view to model space.
+         * <p>
+         * WARNING: every call to this method calculates
+         * actor's world model view matrix.
+         *
+         * @param vect {CAAT.Point} a vector in screen space to be transformed to model space.
+         *
+         * @return the source point object
+         *
+         *
+         */
+        viewToModelVect : function(vect) {
+            this.worldModelViewMatrixI= this.worldModelViewMatrix.getInverse();
+            this.worldModelViewMatrixI.transformVect(vect);
+            return vect;
+        },
         /**
          * Transform a local coordinate point on this Actor's coordinate system into
          * another point in otherActor's coordinate system.
@@ -8846,7 +8913,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
         // input related variables initialization
         this.mousePoint = new CAAT.Point(0, 0, 0);
-        this.prevMousePoint = new CAAT.Point(0, 0, 0);
+        this.prevScreenMousePoint = new CAAT.Point(0, 0, 0);
         this.screenMousePoint = new CAAT.Point(0, 0, 0);
         this.isMouseDown = false;
         this.lastSelectedActor = null;
@@ -8883,7 +8950,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
         // input related attributes
         mousePoint:         null,   // mouse coordinate related to canvas 0,0 coord.
-        prevMousePoint:     null,   // previous mouse position cache. Needed for drag events.
+        prevScreenMousePoint:     null,   // previous mouse position cache. Needed for drag events.
         screenMousePoint:   null,   // screen mouse coordinates.
         isMouseDown:        false,  // is the left mouse button pressed ?
         lastSelectedActor:  null,   // director's last actor receiving input.
@@ -10503,16 +10570,16 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
             if (this.isMouseDown && null !== this.lastSelectedActor) {
 
-                lactor = this.lastSelectedActor;
-                pos = lactor.viewToModel(mp.set(this.screenMousePoint.x, this.screenMousePoint.y, 0));
-
                 // check for mouse move threshold.
                 if (!this.dragging) {
-                    if (Math.abs(this.prevMousePoint.x - pos.x) < CAAT.DRAG_THRESHOLD_X &&
-                        Math.abs(this.prevMousePoint.y - pos.y) < CAAT.DRAG_THRESHOLD_Y) {
+                    if (Math.abs(this.prevScreenMousePoint.x - this.screenMousePoint.x) < CAAT.DRAG_THRESHOLD_X &&
+                        Math.abs(this.prevScreenMousePoint.y - this.screenMousePoint.y) < CAAT.DRAG_THRESHOLD_Y) {
                         return;
                     }
                 }
+
+                lactor = this.lastSelectedActor;
+                pos = lactor.viewToModel(mp.set(this.screenMousePoint.x, this.screenMousePoint.y, 0));
 
                 this.dragging = true;
 
@@ -10529,8 +10596,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                                 this.screenMousePoint.y),
                             ct));
 
-                this.prevMousePoint.x= pos.x;
-                this.prevMousePoint.y= pos.y;
+                this.prevScreenMousePoint.x= this.screenMousePoint.x;
+                this.prevScreenMousePoint.y= this.screenMousePoint.y;
 
                 /**
                  * Element has not moved after drag, so treat it as a button.
@@ -10616,8 +10683,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                         ct));
             }
 
-            this.prevMousePoint.x= pos.x;
-            this.prevMousePoint.y= pos.y;
+            this.prevScreenMousePoint.x= this.screenMousePoint.x;
+            this.prevScreenMousePoint.y= this.screenMousePoint.y;
 
             this.lastSelectedActor = lactor;
             return true;
@@ -10752,8 +10819,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
                     // For single touch cases, simulating the mouse requires us to reset the previous mouse position
                     if (null !== this.lastSelectedActor) {
-                        var pos = this.lastSelectedActor.viewToModel(this.mousePoint.set(this.screenMousePoint.x, this.screenMousePoint.y, 0));
-                        this.prevMousePoint.set( pos.x, pos.y );
+                        this.prevScreenMousePoint.set( this.screenMousePoint.x, this.screenMousePoint.y );
                     }
                 }
                 CAAT.currentDirector = null;
@@ -11438,7 +11504,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 CAAT.TouchInfo= function( id, point, screenPoint, target ) {
 
     this.identifier= id;
-    this.startPoint= new CAAT.Point().set( point.x, point.y );
+    this.screenPointStart= new CAAT.Point().set( screenPoint.x, screenPoint.y );
     this.point= new CAAT.Point().set( point.x, point.y );
     this.screenPoint= new CAAT.Point().set( screenPoint.x, screenPoint.y );
     this.target= target;
