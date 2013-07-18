@@ -492,12 +492,13 @@
          * subimages. If you define d Sprite Image of 2x2, you'll be able to draw any of the 4 subimages.
          * This method defines the animation sequence so that it could be set [0,2,1,3,2,1] as the
          * animation sequence
-         * @param ii {Array<number>} an array of integers.
+         * @param ii        {Array<number>} an array of integers.
+         * @param [cycle]   {Boolean}       whether to cycle or not (by default, it cycles)
          */
-        setAnimationImageIndex : function( ii ) {
+        setAnimationImageIndex : function( ii, cycle ) {
             if ( this.backgroundImage ) {
                 this.backgroundImage.resetAnimationTime();
-                this.backgroundImage.setAnimationImageIndex(ii);
+                this.backgroundImage.setAnimationImageIndex(ii, cycle);
             }
             return this;
         },

@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 257
+Version: 0.4 build: 258
 
 Created on:
-DATE: 2013-07-16
-TIME: 17:30:32
+DATE: 2013-07-17
+TIME: 20:29:29
 */
 
 
@@ -6349,11 +6349,12 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * subimages. If you define d Sprite Image of 2x2, you'll be able to draw any of the 4 subimages.
          * This method defines the animation sequence so that it could be set [0,2,1,3,2,1] as the
          * animation sequence
-         * @param ii {array<integer>} an array of integers.
+         * @param ii        {array<integer>}    an array of integers.
+         * @param [cycle]   {Boolean}           whether to cycle or not (by default, it cycles)
          */
-        setAnimationImageIndex : function( ii ) {
+        setAnimationImageIndex : function( ii, cycle ) {
             if ( this.backgroundImage ) {
-                this.backgroundImage.setAnimationImageIndex(ii);
+                this.backgroundImage.setAnimationImageIndex(ii, cycle);
                 this.style(
                         'background',
                         'url('+this.backgroundImage.image.src+') '+
@@ -12240,6 +12241,7 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
     CAAT.SpriteImage.prototype = {
 
         animationImageIndex:    null,   // an Array defining the sprite frame sequence
+        animationCycle:         true,
         prevAnimationTime:		-1,
         changeFPS:				1000,   // how much Scene time to take before changing an Sprite frame.
         transformation:			0,      // any of the TR_* constants.
@@ -12838,9 +12840,11 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
          * to be an array of strings which are the names of the subobjects contained in the map object.
          *
          * @param aAnimationImageIndex an array indicating the Sprite's frames.
+         * @param [cycle]   whether to cycle the animation or not
          */
-		setAnimationImageIndex : function( aAnimationImageIndex ) {
+		setAnimationImageIndex : function( aAnimationImageIndex, cycle ) {
 			this.animationImageIndex= aAnimationImageIndex;
+            this.animationCycle= cycle != null ? cycle : true;
 			this.spriteIndex= aAnimationImageIndex[0];
             this.prevAnimationTime= -1;
 
@@ -12868,7 +12872,12 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
                     var ttime= time;
                     ttime-= this.prevAnimationTime;
                     ttime/= this.changeFPS;
-                    ttime%= this.animationImageIndex.length;
+
+                    if( this.animationCycle )
+                        ttime%= this.animationImageIndex.length;
+                    else
+                        ttime = Math.min( ttime, this.animationImageIndex.length - 1 );
+
                     this.spriteIndex= this.animationImageIndex[Math.floor(ttime)];
                 }
             }

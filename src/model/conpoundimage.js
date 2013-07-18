@@ -84,6 +84,7 @@
     CAAT.SpriteImage.prototype = {
 
         animationImageIndex:    null,   // an Array defining the sprite frame sequence
+        animationCycle:         true,
         prevAnimationTime:		-1,
         changeFPS:				1000,   // how much Scene time to take before changing an Sprite frame.
         transformation:			0,      // any of the TR_* constants.
@@ -682,9 +683,11 @@
          * to be an array of strings which are the names of the subobjects contained in the map object.
          *
          * @param aAnimationImageIndex an array indicating the Sprite's frames.
+         * @param [cycle]   whether to cycle the animation or not
          */
-		setAnimationImageIndex : function( aAnimationImageIndex ) {
+		setAnimationImageIndex : function( aAnimationImageIndex, cycle ) {
 			this.animationImageIndex= aAnimationImageIndex;
+            this.animationCycle= cycle != null ? cycle : true;
 			this.spriteIndex= aAnimationImageIndex[0];
             this.prevAnimationTime= -1;
 
@@ -712,7 +715,12 @@
                     var ttime= time;
                     ttime-= this.prevAnimationTime;
                     ttime/= this.changeFPS;
-                    ttime%= this.animationImageIndex.length;
+
+                    if( this.animationCycle )
+                        ttime%= this.animationImageIndex.length;
+                    else
+                        ttime = Math.min( ttime, this.animationImageIndex.length - 1 );
+
                     this.spriteIndex= this.animationImageIndex[Math.floor(ttime)];
                 }
             }
