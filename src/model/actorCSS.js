@@ -1290,8 +1290,7 @@
          *
          */
 		destroy : function(time)	{
-            this.parent= null;
-            this.domParent= null;
+            this.setParent(null);
             this.fireEvent('destroyed',time);
 		},
         /**
@@ -2176,7 +2175,6 @@
 		addChild : function(child) {
             child.setParent( this );
             this.childrenList.push(child);
-            child.dirty= true;
 
             /**
              * if Conforming size, recalc new bountainer size.
@@ -2229,22 +2227,19 @@
 
 			if( index <= 0 ) {
                 //this.childrenList.unshift(child);  // unshift unsupported on IE
-                child.parent= this;
-                child.dirty= true;
+                child.setParent(this);
                 this.childrenList.splice( 0, 0, child );
 				return this;
-            } else {
-                if ( index>=this.childrenList.length ) {
-                    index= this.childrenList.length;
-                }
+            }
+
+            if ( index>=this.childrenList.length ) {
+                index= this.childrenList.length;
             }
 
 			child.setParent(this);
 			this.childrenList.splice(index, 0, child);
 
             this.domElement.insertBefore(child.domElement, this.domElement.childNodes[index]);
-
-            child.dirty= true;
 
             return this;
 		},

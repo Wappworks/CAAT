@@ -1391,7 +1391,10 @@
          * @param scene {CAAT.Scene} a scene object.
          */
         addChild : function(scene) {
-            scene.parent = this;
+            // Link the scene to the director but don't change its dirtiness setting...
+            var sceneDirtyPrev = scene.dirty;
+            scene.setParent(this);
+            scene.dirty = sceneDirtyPrev;
             this.childrenList.push(scene);
         },
         /**

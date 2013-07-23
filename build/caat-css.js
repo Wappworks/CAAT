@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 258
+Version: 0.4 build: 259
 
 Created on:
-DATE: 2013-07-17
-TIME: 20:29:29
+DATE: 2013-07-23
+TIME: 14:04:28
 */
 
 
@@ -7069,8 +7069,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          *
          */
 		destroy : function(time)	{
-            this.parent= null;
-            this.domParent= null;
+            this.setParent(null);
             this.fireEvent('destroyed',time);
 		},
         /**
@@ -7955,7 +7954,6 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 		addChild : function(child) {
             child.setParent( this );
             this.childrenList.push(child);
-            child.dirty= true;
 
             /**
              * if Conforming size, recalc new bountainer size.
@@ -8008,22 +8006,19 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
 			if( index <= 0 ) {
                 //this.childrenList.unshift(child);  // unshift unsupported on IE
-                child.parent= this;
-                child.dirty= true;
+                child.setParent(this);
                 this.childrenList.splice( 0, 0, child );
 				return this;
-            } else {
-                if ( index>=this.childrenList.length ) {
-                    index= this.childrenList.length;
-                }
+            }
+
+            if ( index>=this.childrenList.length ) {
+                index= this.childrenList.length;
             }
 
 			child.setParent(this);
 			this.childrenList.splice(index, 0, child);
 
             this.domElement.insertBefore(child.domElement, this.domElement.childNodes[index]);
-
-            child.dirty= true;
 
             return this;
 		},
@@ -10266,7 +10261,10 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * @param scene {CAAT.Scene} a scene object.
          */
         addChild : function(scene) {
-            scene.parent = this;
+            // Link the scene to the director but don't change its dirtiness setting...
+            var sceneDirtyPrev = scene.dirty;
+            scene.setParent(this);
+            scene.dirty = sceneDirtyPrev;
             this.childrenList.push(scene);
         },
         /**

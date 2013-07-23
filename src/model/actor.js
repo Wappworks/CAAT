@@ -410,6 +410,7 @@
          */
         setParent : function(parent) {
             this.parent= parent;
+            this.dirty= true;
             return this;
         },
         /**
@@ -2434,9 +2435,8 @@
                 throw('adding to a container an element with parent.');
             }
 
-            child.parent= this;
+            child.setParent(this);
             this.childrenList.push(child);
-            child.dirty= true;
 
             /**
              * if Conforming size, recalc new bountainer size.
@@ -2488,19 +2488,17 @@
 		addChildAt : function(child, index) {
 
 			if( index <= 0 ) {
-                child.parent= this;
-                child.dirty= true;
+                child.setParent(this);
                 //this.childrenList.unshift(child);  // unshift unsupported on IE
                 this.childrenList.splice( 0, 0, child );
 				return this;
-            } else {
-                if ( index>=this.childrenList.length ) {
-                    index= this.childrenList.length;
-                }
             }
 
-			child.parent= this;
-            child.dirty= true;
+            if ( index>=this.childrenList.length ) {
+                index= this.childrenList.length;
+            }
+
+			child.setParent(this);
 			this.childrenList.splice(index, 0, child);
 
             return this;
@@ -2560,7 +2558,7 @@
 		},
         removeFirstChild : function() {
             var first= this.childrenList.shift();
-            first.parent= null;
+            first.setParent(null);
             return first;
         },
         /**

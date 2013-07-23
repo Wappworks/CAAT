@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 258
+Version: 0.4 build: 259
 
 Created on:
-DATE: 2013-07-17
-TIME: 20:29:25
+DATE: 2013-07-23
+TIME: 14:04:24
 */
 
 
@@ -6188,6 +6188,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          */
         setParent : function(parent) {
             this.parent= parent;
+            this.dirty= true;
             return this;
         },
         /**
@@ -8212,9 +8213,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 throw('adding to a container an element with parent.');
             }
 
-            child.parent= this;
+            child.setParent(this);
             this.childrenList.push(child);
-            child.dirty= true;
 
             /**
              * if Conforming size, recalc new bountainer size.
@@ -8266,19 +8266,17 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 		addChildAt : function(child, index) {
 
 			if( index <= 0 ) {
-                child.parent= this;
-                child.dirty= true;
+                child.setParent(this);
                 //this.childrenList.unshift(child);  // unshift unsupported on IE
                 this.childrenList.splice( 0, 0, child );
 				return this;
-            } else {
-                if ( index>=this.childrenList.length ) {
-                    index= this.childrenList.length;
-                }
             }
 
-			child.parent= this;
-            child.dirty= true;
+            if ( index>=this.childrenList.length ) {
+                index= this.childrenList.length;
+            }
+
+			child.setParent(this);
 			this.childrenList.splice(index, 0, child);
 
             return this;
@@ -8338,7 +8336,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 		},
         removeFirstChild : function() {
             var first= this.childrenList.shift();
-            first.parent= null;
+            first.setParent(null);
             return first;
         },
         /**
@@ -11399,7 +11397,10 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * @param scene {CAAT.Scene} a scene object.
          */
         addChild : function(scene) {
-            scene.parent = this;
+            // Link the scene to the director but don't change its dirtiness setting...
+            var sceneDirtyPrev = scene.dirty;
+            scene.setParent(this);
+            scene.dirty = sceneDirtyPrev;
             this.childrenList.push(scene);
         },
         /**
