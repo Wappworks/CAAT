@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 259
+Version: 0.4 build: 260
 
 Created on:
-DATE: 2013-07-23
-TIME: 14:04:28
+DATE: 2013-07-25
+TIME: 11:01:48
 */
 
 
@@ -3547,13 +3547,13 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
 	CAAT.Behavior.prototype = {
 
-		lifecycleListenerList: null,   // observer list.
-		behaviorStartTime: -1,             // scene time to start applying the behavior
-		behaviorDuration: -1,             // behavior duration in ms.
-		cycleBehavior: false,          // apply forever ?
-        reversed:           false,          // direction of behavior?
+		lifecycleListenerList: null,    // observer list.
+		behaviorStartTime: -1,          // scene time to start applying the behavior
+		behaviorDuration: -1,           // behavior duration in ms.
+		cycleBehavior: false,           // apply forever ?
+        reversed: false,                // direction of behavior?
 
-        status: CAAT.Behavior.NOT_STARTED,
+        status: CAAT.Behavior.Status.NOT_STARTED,
 
 		interpolator: null,           // behavior application function. linear by default.
         actor: null,           // actor the Behavior acts on.

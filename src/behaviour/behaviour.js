@@ -77,13 +77,13 @@
 
 	CAAT.Behavior.prototype = {
 
-		lifecycleListenerList: null,   // observer list.
-		behaviorStartTime: -1,             // scene time to start applying the behavior
-		behaviorDuration: -1,             // behavior duration in ms.
-		cycleBehavior: false,          // apply forever ?
-        reversed:           false,          // direction of behavior?
+		lifecycleListenerList: null,    // observer list.
+		behaviorStartTime: -1,          // scene time to start applying the behavior
+		behaviorDuration: -1,           // behavior duration in ms.
+		cycleBehavior: false,           // apply forever ?
+        reversed: false,                // direction of behavior?
 
-        status: CAAT.Behavior.NOT_STARTED,
+        status: CAAT.Behavior.Status.NOT_STARTED,
 
 		interpolator: null,           // behavior application function. linear by default.
         actor: null,           // actor the Behavior acts on.
