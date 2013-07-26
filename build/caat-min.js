@@ -22,11 +22,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 260
+Version: 0.4 build: 261
 
 Created on:
 DATE: 2013-07-25
-TIME: 11:01:32
+TIME: 19:12:41
 */
 
 
@@ -186,7 +186,7 @@ this.pendingChildrenList=[];var e=[],f=this.childrenList;this.size_total=this.si
 addChild:function(a){if(null!=a.parent)throw"adding to a container an element with parent.";a.setParent(this);this.childrenList.push(a);this.addHint===CAAT.ActorContainer.AddHint.CONFORM&&this.recalcSize();return this},recalcSize:function(){var a=this.boundingBox;a.setEmpty();for(var c=this.childrenList,b,d=0;d<c.length;d++)b=c[d],this.runion.setBounds(0>b.x?0:b.x,0>b.y?0:b.y,b.width,b.height),a.unionRectangle(this.runion);this.setSize(a.x1,a.y1);return this},addChildDelayed:function(a){this.pendingChildrenList.push(a);
 return this},addChildAt:function(a,c){if(0>=c)return a.setParent(this),this.childrenList.splice(0,0,a),this;c>=this.childrenList.length&&(c=this.childrenList.length);a.setParent(this);this.childrenList.splice(c,0,a);return this},findActorById:function(a){for(var c=this.childrenList,b=0,d=c.length;b<d;b++)if(c[b].id===a)return c[b];return null},findChild:function(a){for(var c=this.childrenList,b=0,d=c.length,b=0;b<d;b++)if(c[b]===a)return b;return-1},removeChild:function(a){var a=this.findChild(a),
 c=this.childrenList;-1!==a&&(c[a].setParent(null),c.splice(a,1));return this},removeFirstChild:function(){var a=this.childrenList.shift();a.setParent(null);return a},findActorAtPosition:function(a){if(null===CAAT.ActorContainer.superclass.findActorAtPosition.call(this,a))return null;for(var c=this.childrenList.length-1;0<=c;c--){var b=this.childrenList[c],d=new CAAT.Point(a.x,a.y,0),b=b.findActorAtPosition(d);if(null!==b)return b}return this.localMouseEnabled?this:null},destroy:function(){for(var a=
-this.childrenList,c=a.length-1;0<=c;c--)a[c].destroy();CAAT.ActorContainer.superclass.destroy.call(this);return this},getNumChildren:function(){return this.childrenList.length},getNumActiveChildren:function(){return this.activeChildren.length},getChildAt:function(a){return this.childrenList[a]},setZOrder:function(a,c){var b=this.findChild(a);if(-1!==b){var d=this.childrenList;c!==b&&(c>=d.length?(d.splice(b,1),d.push(a)):(b=d.splice(b,1),0>c?c=0:c>d.length&&(c=d.length),d.splice(c,0,b[0])))}}};extend(CAAT.ActorContainer,
+this.childrenList,c=a.length-1;0<=c;c--)a[c].destroy();CAAT.ActorContainer.superclass.destroy.call(this);return this},getNumChildren:function(){return this.childrenList.length},getNumActiveChildren:function(){return this.activeChildren.length},getChildAt:function(a){return this.childrenList[a]},setZOrder:function(a,c){var b=this.findChild(a);if(-1!==b){var d=this.childrenList,e=d.length;c!==b&&(d.splice(b,1),c>=e?d.push(a):0>=c?d.unshift(a):(b<c&&c--,d.splice(c,0,a)))}}};extend(CAAT.ActorContainer,
 CAAT.Actor,null)})();
 (function(){CAAT.TextActor=function(){CAAT.TextActor.superclass.constructor.call(this);this.font="10px sans-serif";this.textAlign="left";this.textBaseline="top";this.outlineColor="black";this.clip=!1;return this};CAAT.TextActor.TRAVERSE_PATH_FORWARD=1;CAAT.TextActor.TRAVERSE_PATH_BACKWARD=-1;CAAT.TextActor.prototype={font:null,textAlign:null,textBaseline:null,fill:!0,textFillStyle:"#eee",text:null,textWidth:0,textHeight:0,outline:!1,outlineColor:null,path:null,pathInterpolator:null,pathDuration:1E4,
 sign:1,spriteTextAlignOffset:null,setFill:function(a){this.fill=a;return this},setTextFillStyle:function(a){this.textFillStyle=a;return this},setOutline:function(a){this.outline=a;return this},setPathTraverseDirection:function(a){this.sign=a;return this},setOutlineColor:function(a){this.outlineColor=a;return this},setText:function(a){this.text=a;if(null===this.text||""===this.text)this.width=this.height=0;this.calcTextSize(CAAT.director[0]);return this},setTextAlign:function(a){this.textAlign=a;this.spriteTextAlignOffset=

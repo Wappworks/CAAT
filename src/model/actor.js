@@ -2633,24 +2633,26 @@
             var actorPos= this.findChild(actor);
             // the actor is present
             if ( -1!==actorPos ) {
-                var cl= this.childrenList;
+                var cl= this.childrenList,
+                    clLength = cl.length;
+
                 // trivial reject.
                 if ( index===actorPos ) {
                     return;
                 }
 
-                if ( index>=cl.length ) {
-					cl.splice(actorPos,1);
-					cl.push(actor);
-                } else {
-                    var nActor= cl.splice(actorPos,1);
-                    if ( index<0 ) {
-                        index=0;
-                    } else if ( index>cl.length ) {
-                        index= cl.length;
-                    }
+                cl.splice(actorPos,1);
 
-                    cl.splice( index, 0, nActor[0] );
+                if ( index>=clLength ) {
+					cl.push(actor);
+                } else if( index <= 0 ) {
+                    cl.unshift(actor);
+                } else {
+                    // Account for the position shift when the actor is removed from an earlier position...
+                    if( actorPos < index )
+                        index--;
+
+                    cl.splice( index, 0, actor );
                 }
             }
         }

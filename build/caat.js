@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 260
+Version: 0.4 build: 261
 
 Created on:
 DATE: 2013-07-25
-TIME: 11:01:43
+TIME: 19:12:57
 */
 
 
@@ -8411,24 +8411,26 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             var actorPos= this.findChild(actor);
             // the actor is present
             if ( -1!==actorPos ) {
-                var cl= this.childrenList;
+                var cl= this.childrenList,
+                    clLength = cl.length;
+
                 // trivial reject.
                 if ( index===actorPos ) {
                     return;
                 }
 
-                if ( index>=cl.length ) {
-					cl.splice(actorPos,1);
-					cl.push(actor);
-                } else {
-                    var nActor= cl.splice(actorPos,1);
-                    if ( index<0 ) {
-                        index=0;
-                    } else if ( index>cl.length ) {
-                        index= cl.length;
-                    }
+                cl.splice(actorPos,1);
 
-                    cl.splice( index, 0, nActor[0] );
+                if ( index>=clLength ) {
+					cl.push(actor);
+                } else if( index <= 0 ) {
+                    cl.unshift(actor);
+                } else {
+                    // Account for the position shift when the actor is removed from an earlier position...
+                    if( actorPos < index )
+                        index--;
+
+                    cl.splice( index, 0, actor );
                 }
             }
         }
