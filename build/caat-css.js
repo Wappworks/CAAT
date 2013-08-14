@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 261
+Version: 0.4 build: 262
 
 Created on:
-DATE: 2013-07-25
-TIME: 19:13:02
+DATE: 2013-08-14
+TIME: 12:08:33
 */
 
 
@@ -5861,7 +5861,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
         rotationY:				.50,    // transformation. rotation center y
         alpha:					1,      // alpha transparency value
         rotationX:				.50,    // transformation. rotation center x
-        isLocalAlpha:          false,  // is this a global alpha
+        inheritAlpha:          false,  // is this a global alpha
         frameAlpha:             1,      // hierarchically calculated alpha for this Actor.
         expired:				false,  // set when the actor has been expired
         discardable:			false,  // set when you want this actor to be removed if expired
@@ -6510,7 +6510,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * @param global {boolean} whether the alpha value should only affect this actor
          */
         setLocalAlpha : function( local ) {
-            this.isLocalAlpha= local;
+            this.inheritAlpha= local;
             return this;
         },
         /**

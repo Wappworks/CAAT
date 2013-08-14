@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 261
+Version: 0.4 build: 262
 
 Created on:
-DATE: 2013-07-25
-TIME: 19:12:57
+DATE: 2013-08-14
+TIME: 12:08:29
 */
 
 
@@ -5892,14 +5892,14 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
         scaleX:					0,      // transformation. width scale parameter
 		scaleY:					0,      // transformation. height scale parameter
-		scaleTX:				.50,      // transformation. scale anchor x position
-		scaleTY:				.50,      // transformation. scale anchor y position
+		scaleTX:				.50,    // transformation. scale anchor x position
+		scaleTY:				.50,    // transformation. scale anchor y position
 		scaleAnchor:			0,      // transformation. scale anchor
 		rotationAngle:			0,      // transformation. rotation angle in radians
-		rotationY:				.50,      // transformation. rotation center y
-        rotationX:				.50,      // transformation. rotation center x
+		rotationY:				.50,    // transformation. rotation center y
+        rotationX:				.50,    // transformation. rotation center x
         alpha:					1,      // alpha transparency value
-        isLocalAlpha:          false,  // is this a global alpha
+        inheritAlpha:           false,  // is this inherited alpha
         frameAlpha:             1,      // hierarchically calculated alpha for this Actor.
 		expired:				false,  // set when the actor has been expired
 		discardable:			false,  // set when you want this actor to be removed if expired
@@ -6384,12 +6384,12 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             }
         },
         /**
-         * Set alpha composition scope. global will mean this alpha value will be its children maximum.
-         * If set to false, only this actor will have this alpha value.
+         * Set alpha composition scope. set inherit to inherit alpha from the parent
+         * If set to false, only this actor will have an independent alpha value.
          * @param global {boolean} whether the alpha value should be propagated to children.
          */
-        setLocalAlpha : function( global ) {
-            this.isLocalAlpha= global;
+        setInheritAlpha : function( inherit ) {
+            this.inheritAlpha= inherit;
             return this;
         },
         /**
@@ -7579,7 +7579,9 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
             var ctx= director.ctx;
 
-            this.frameAlpha= this.parent ? this.parent.frameAlpha*this.alpha : this.alpha;
+            this.frameAlpha= this.alpha;
+            if( this.inheritAlpha && this.parent )
+                this.frameAlpha *= this.parent.frameAlpha;
             ctx.globalAlpha= this.frameAlpha;
 
             director.modelViewMatrix.transformRenderingContextSet( ctx );
@@ -7599,25 +7601,6 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
             return true;
         },
-        /**
-         * for js2native
-         * @param director
-         * @param time
-         */
-        __paintActor : function(director, time) {
-            if (!this.visible) {
-                return true;
-            }
-            var ctx= director.ctx;
-
-            // global opt: set alpha as owns alpha, not take globalAlpha procedure.
-            this.frameAlpha= this.alpha;
-
-            var m= this.worldModelViewMatrix.matrix;
-            ctx.setTransform( m[0], m[3], m[1], m[4], m[2], m[5], this.frameAlpha );
-            this.paint(director, time);
-            return true;
-        },
 
         /**
          * Set coordinates and uv values for this actor.
@@ -7627,7 +7610,9 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          */
         paintActorGL : function(director,time) {
 
-            this.frameAlpha= this.parent.frameAlpha*this.alpha;
+            this.frameAlpha= this.alpha;
+            if( this.inheritAlpha && this.parent )
+                this.frameAlpha *= this.parent.frameAlpha;
 
             if ( !this.glEnabled || !this.visible) {
                 return;
@@ -7779,8 +7764,14 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             };
 
             this.cached= false;
+            var inheritAlphaPrev    = this.inheritAlpha;
+            var alphaPrev           = this.alpha;
+            this.inheritAlpha       = false;
+            this.alpha              = 1.0;
             this.paintActor(director,time);
             this.setBackgroundImage(canvas);
+            this.inheritAlpha       = inheritAlphaPrev;
+            this.alpha              = alphaPrev;
 
             this.cached= strategy ? strategy : CAAT.Actor.CACHE_SIMPLE;
 
@@ -7927,11 +7918,6 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             return this;
         }
 	};
-/*
-    if ( CAAT.NO_PERF ) {
-        CAAT.Actor.prototype.paintActor= CAAT.Actor.prototype.__paintActor;
-    }
-*/
 })();
 
 (function() {
@@ -8038,10 +8024,6 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 return;
             }
 
-            if ( this.isLocalAlpha ) {
-                this.frameAlpha= this.parent ? this.parent.frameAlpha : 1;
-            }
-
             this.paintChildren( director, time );
 
             return true;
@@ -8057,27 +8039,6 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                 }
             }
         },
-        __paintActor : function(director, time ) {
-            if (!this.visible) {
-                return true;
-            }
-
-            var ctx= director.ctx;
-
-            this.frameAlpha= this.parent ? this.parent.frameAlpha*this.alpha : 1;
-            var m= this.worldModelViewMatrix.matrix;
-            ctx.setTransform( m[0], m[3], m[1], m[4], m[2], m[5], this.frameAlpha );
-            this.paint(director, time);
-
-            if ( this.isLocalAlpha ) {
-                this.frameAlpha= this.parent ? this.parent.frameAlpha : 1;
-            }
-
-            for( var actor= this.activeChildren; actor; actor=actor.__next ) {
-                actor.paintActor(director,time);
-            }
-            return true;
-        },
         paintActorGL : function(director,time) {
 
             var i, c;
@@ -8086,10 +8047,6 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             }
 
             CAAT.ActorContainer.superclass.paintActorGL.call(this,director,time);
-
-            if ( this.isLocalAlpha ) {
-                this.frameAlpha= this.parent ? this.parent.frameAlpha : 1;
-            }
 
             for( c= this.activeChildren; c; c=c.__next ) {
                 c.paintActorGL(director,time);
@@ -8435,11 +8392,6 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             }
         }
 	};
-/*
-    if ( CAAT.NO_PERF ) {
-        CAAT.ActorContainer.prototype.paintActor= CAAT.ActorContainer.prototype.__paintActor;
-    }
-*/
     extend( CAAT.ActorContainer, CAAT.Actor, null);
 
 })();

@@ -82,7 +82,7 @@
         rotationY:				.50,    // transformation. rotation center y
         alpha:					1,      // alpha transparency value
         rotationX:				.50,    // transformation. rotation center x
-        isLocalAlpha:          false,  // is this a global alpha
+        inheritAlpha:          false,  // is this a global alpha
         frameAlpha:             1,      // hierarchically calculated alpha for this Actor.
         expired:				false,  // set when the actor has been expired
         discardable:			false,  // set when you want this actor to be removed if expired
@@ -731,7 +731,7 @@
          * @param global {boolean} whether the alpha value should only affect this actor
          */
         setLocalAlpha : function( local ) {
-            this.isLocalAlpha= local;
+            this.inheritAlpha= local;
             return this;
         },
         /**
