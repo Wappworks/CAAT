@@ -605,6 +605,7 @@
             var ne = this.childrenList.length;
             var i, tt, c;
             var ctx= this.ctx;
+            var canvas= this.canvas;
 
             if (this.glEnabled) {
 
@@ -659,11 +660,11 @@
                         }
                         ctx.clip();
                     } else {
-                        ctx.clearRect(0, 0, this.width, this.height);
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
                     }
 
                 } else if (this.clear===true ) {
-                    ctx.clearRect(0, 0, this.width, this.height);
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
                 }
 
                 for (i = 0; i < ne; i++) {

@@ -121,7 +121,7 @@
 		rotationY:				.50,    // transformation. rotation center y
         rotationX:				.50,    // transformation. rotation center x
         alpha:					1,      // alpha transparency value
-        inheritAlpha:           false,  // is this inherited alpha
+        inheritAlpha:           true,   // is this inherited alpha
         frameAlpha:             1,      // hierarchically calculated alpha for this Actor.
 		expired:				false,  // set when the actor has been expired
 		discardable:			false,  // set when you want this actor to be removed if expired

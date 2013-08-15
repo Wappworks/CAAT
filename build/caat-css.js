@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 262
+Version: 0.4 build: 263
 
 Created on:
 DATE: 2013-08-14
-TIME: 12:08:33
+TIME: 17:38:18
 */
 
 
@@ -9475,6 +9475,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             var ne = this.childrenList.length;
             var i, tt, c;
             var ctx= this.ctx;
+            var canvas= this.canvas;
 
             if (this.glEnabled) {
 
@@ -9529,11 +9530,11 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                         }
                         ctx.clip();
                     } else {
-                        ctx.clearRect(0, 0, this.width, this.height);
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
                     }
 
                 } else if (this.clear===true ) {
-                    ctx.clearRect(0, 0, this.width, this.height);
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
                 }
 
                 for (i = 0; i < ne; i++) {
