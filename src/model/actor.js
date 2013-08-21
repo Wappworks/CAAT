@@ -1178,6 +1178,10 @@
          * @param otherActor {CAAT.Actor}
          */
         modelToModel : function( point, otherActor )   {
+            // Degenerative case - we're transforming into our own space...
+            if( otherActor == this )
+                return point;
+
             if ( this.dirty ) {
                 this.setModelViewMatrix();
             }

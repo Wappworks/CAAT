@@ -81,7 +81,6 @@
 		behaviorStartTime: -1,          // scene time to start applying the behavior
 		behaviorDuration: -1,           // behavior duration in ms.
 		cycleBehavior: false,           // apply forever ?
-        reversed: false,                // direction of behavior?
 
         status: CAAT.Behavior.Status.NOT_STARTED,
 
@@ -109,12 +108,6 @@
 
         setDiscardable: function( discardable ) {
             this.discardable = discardable;
-
-            return this;
-        },
-
-        setReversed: function( reversed ) {
-            this.reversed = reversed;
 
             return this;
         },
@@ -280,11 +273,13 @@
 			
 		},
         /**
+         * Returns the estimated end time
+         *
          * @param time  {Number}        The current time in ms
          *
          * @return {Number} an integer indicating the behavior's estimated end time in ms.
          */
-        getEndTimeEstimate: function( time ) {
+        getEstimateEndTimeMs: function( time ) {
             if( this.status == CAAT.Behavior.Status.EXPIRED )
                 return time;
 
@@ -294,7 +289,31 @@
             var startTime = this.behaviorStartTime + (this.solved ? 0 : time);
             return startTime + Math.max( 0, (this.behaviorDuration * (1 - this.timeOffset)) );
         },
+        /**
+         * Returns the time elapsed into the behavior
+         *
+         * @param time  {Number}        The current time in ms
+         *
+         * @return {Number} the amount of elapsed time into the behavior
+         */
+        getEstimateElapsedTimeMs: function( time ) {
+            if( this.status == CAAT.Behavior.Status.EXPIRED )
+                return this.behaviorDuration;
 
+            // Not solved yet? It means it hasn't started yet!
+            if( !this.solved )
+                return 0;
+
+            // Is it a cycle? Figure out how deep into the cycle it's come...
+            var behaviorTimeElapsed = time + (this.timeOffset* this.behaviorDuration) - this.behaviorStartTime;
+            if( behaviorTimeElapsed <= 0 )
+                return 0;
+
+            if( this.cycleBehavior )
+                return behaviorTimeElapsed % this.behaviorDuration;
+
+            return Math.min( this.behaviorDuration, behaviorTimeElapsed );
+        },
         /**
          * Checks whether the behaviour is in scene time.
          * In case it gets out of scene time, and has not been tagged as expired, the behavior is expired and observers
@@ -382,9 +401,6 @@
 			if ( this.cycleBehavior )	{
 				time%=this.behaviorDuration;
 			}
-            if( this.reversed ) {
-                time = this.behaviorDuration - time;
-            }
 
 			return this.interpolator.getPosition(time/this.behaviorDuration).y;
 		},
@@ -399,13 +415,14 @@
 		setExpired : function(actor,time) {
             // set for final interpolator value.
             this.status= CAAT.Behavior.Status.EXPIRED;
-			this.setForTime(this.interpolator.getPosition( this.reversed ? 0 : 1 ).y,actor);
+			this.setForTime(this.interpolator.getPosition( 1 ).y,actor);
 			this.fireBehaviorExpiredEvent(actor,time);
 
             if ( this.discardable ) {
                 actor.removeBehavior( this );
             }
 		},
+
         /**
          * This method must be overriden for every Behavior breed.
          * Must not be called directly.
