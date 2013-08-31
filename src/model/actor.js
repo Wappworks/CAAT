@@ -2598,7 +2598,7 @@
                     clLength = cl.length;
 
                 // trivial reject.
-                if ( index===actorPos || (index + 1)===actorPos ) {
+                if ( index===actorPos ) {
                     return;
                 }
 
