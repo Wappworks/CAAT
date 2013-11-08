@@ -286,8 +286,14 @@
                 yoff= yoff-h;
             }
 
-            var nw= (((r.width-xoff)/w)>>0)+1;
-            var nh= (((r.height-yoff)/h)>>0)+1;
+            var nwReal  = (r.width-xoff)/w;
+            var nw      = nwReal >> 0;
+            if( nw < nwReal )
+                nw++;
+            var nhReal  = (r.height-yoff)/h;
+            var nh      = nhReal >> 0;
+            if( nh < nhReal )
+                nh++;
             var i,j;
             var ctx= director.ctx;
 
@@ -324,7 +330,10 @@
             }
             var ypos = (yoff + y) >> 0;
 
-            var nh= (((this.ownerActor.height-yoff)/h)>>0)+1;
+            var nhReal  = (this.ownerActor.height-yoff)/h;
+            var nh      = nhReal >> 0;
+            if( nh < nhReal )
+                nh++;
             var i;
             var ctx= director.ctx;
 
@@ -359,7 +368,10 @@
             }
             var xpos = (xoff + x)>>0;
 
-            var nw= (((this.ownerActor.width-xoff)/w)>>0)+1;
+            var nwReal  = (this.ownerActor.width-xoff)/w;
+            var nw      = nwReal >> 0;
+            if( nw < nwReal )
+                nw++;
             var i;
             var ctx= director.ctx;
 

@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 266
+Version: 0.4 build: 267
 
 Created on:
-DATE: 2013-08-31
-TIME: 15:49:17
+DATE: 2013-11-07
+TIME: 19:53:08
 */
 
 
@@ -12459,8 +12459,14 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
                 yoff= yoff-h;
             }
 
-            var nw= (((r.width-xoff)/w)>>0)+1;
-            var nh= (((r.height-yoff)/h)>>0)+1;
+            var nwReal  = (r.width-xoff)/w;
+            var nw      = nwReal >> 0;
+            if( nw < nwReal )
+                nw++;
+            var nhReal  = (r.height-yoff)/h;
+            var nh      = nhReal >> 0;
+            if( nh < nhReal )
+                nh++;
             var i,j;
             var ctx= director.ctx;
 
@@ -12497,7 +12503,10 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
             }
             var ypos = (yoff + y) >> 0;
 
-            var nh= (((this.ownerActor.height-yoff)/h)>>0)+1;
+            var nhReal  = (this.ownerActor.height-yoff)/h;
+            var nh      = nhReal >> 0;
+            if( nh < nhReal )
+                nh++;
             var i;
             var ctx= director.ctx;
 
@@ -12532,7 +12541,10 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
             }
             var xpos = (xoff + x)>>0;
 
-            var nw= (((this.ownerActor.width-xoff)/w)>>0)+1;
+            var nwReal  = (this.ownerActor.width-xoff)/w;
+            var nw      = nwReal >> 0;
+            if( nw < nwReal )
+                nw++;
             var i;
             var ctx= director.ctx;
 
