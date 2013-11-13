@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 267
+Version: 0.4 build: 268
 
 Created on:
-DATE: 2013-11-07
-TIME: 19:53:06
+DATE: 2013-11-13
+TIME: 13:40:45
 */
 
 
@@ -8442,6 +8442,45 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
     CAAT.TextActor.TRAVERSE_PATH_FORWARD= 1;
     CAAT.TextActor.TRAVERSE_PATH_BACKWARD= -1;
 
+    CAAT.TextActor.calcTextSize = function( text, font, director ) {
+        if ( text == null || text.length <= 0 )
+            return { width: 0, height: 0 };
+
+        if ( font instanceof CAAT.SpriteImage )
+            return {
+                width:  font.stringWidth( text ),
+                height: font.stringHeight()
+            };
+
+        // TODO: Support WebGL...
+        if ( director.glEnabled ) {
+            return { width: 0, height: 0 };
+        }
+
+        var ctx= director.ctx;
+
+        ctx.save();
+        ctx.font= font;
+
+        var textWidth= ctx.measureText( text ).width;
+        var textHeight= 20;             // default height
+        try {
+            var matches= font.match( /(\d+)px/ );
+            var fontHeight=parseInt(matches[1],10);
+            if( isFinite(fontHeight) )
+                textHeight= fontHeight;
+        } catch(e) {
+            textHeight=20; // default height;
+        }
+
+        ctx.restore();
+
+        return {
+            width:  textWidth,
+            height: textHeight
+        };
+    };
+
 	CAAT.TextActor.prototype= {
 		font:			    null,   // a valid canvas rendering context font description. Default font
                                     // will be "10px sans-serif".
@@ -8568,51 +8607,14 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * @return this
          */
         calcTextSize : function(director) {
+            var textSize = CAAT.TextActor.calcTextSize( this.text, this.font, director );
 
-            if ( typeof this.text==='undefined' || null===this.text || ""===this.text ) {
-                this.textWidth= 0;
-                this.textHeight= 0;
-                return this;
-            }
-
-            if ( director.glEnabled ) {
-                return this;
-            }
-
-            if ( this.font instanceof CAAT.SpriteImage ) {
-                this.textWidth= this.font.stringWidth( this.text );
-                this.textHeight=this.font.stringHeight();
-                this.spriteTextAlignOffset = null;
-                this.width= this.width || this.textWidth;
-                this.height= this.height || this.textHeight;
-                this.dirty= true;
-                return this;
-            }
-
-            var ctx= director.ctx;
-
-            ctx.save();
-            ctx.font= this.font;
-
-            this.textWidth= ctx.measureText( this.text ).width;
+            this.textWidth= textSize.width;
+            this.textHeight= textSize.height;
+            this.spriteTextAlignOffset= null;
             this.width= this.width || this.textWidth;
-
-            try {
-                var pos= this.font.indexOf("px");
-                var s =  this.font.substring(0, pos );
-                this.textHeight= parseInt(s,10);
-
-                // needed to calculate the descent.
-                // no context.getDescent(font) WTF !!!
-                this.textHeight+= (this.textHeight/4)>>0;
-            } catch(e) {
-                this.textHeight=20; // default height;
-            }
-
             this.height= this.height || this.textHeight;
             this.dirty= true;
-
-            ctx.restore();
 
             return this;
         },
