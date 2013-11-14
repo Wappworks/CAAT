@@ -114,6 +114,8 @@
 
         id:                     null,
 
+        __scene:                undefined,
+
         __d_ax:                 -1,     // for drag-enabled actors.
         __d_ay:                 -1,
         gestureEnabled:         false,
@@ -458,6 +460,7 @@
             } else {
                 this.domParent= null;
             }
+            this.__scene= undefined;
 
             this.dirty= true;
 
@@ -872,6 +875,23 @@
 			this.setScaleAnchored( sx, sy, .5, .5 );
             return this;
 		},
+        /**
+         * Get the actor's scene (if applicable)
+         * @return {CAAT.Scene?}
+         */
+        getScene : function() {
+            if( this.__scene === undefined ) {
+                var parent= this.parent;
+                if( parent instanceof CAAT.Scene )
+                    this.__scene = parent;
+                else if( parent == null )
+                    this.__scene = null;
+                else
+                    this.__scene = parent.getScene();
+            }
+
+            return this.__scene;
+        },
         /**
          * Private.
          * Gets a given anchor position referred to the Actor.

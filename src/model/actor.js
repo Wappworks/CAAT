@@ -168,6 +168,8 @@
         size_active:            1,      // number of animated children
         size_total:             1,
 
+        __scene:                undefined,
+
         __next:                 null,
 
         __d_ax:                 -1,     // for drag-enabled actors.
@@ -410,6 +412,8 @@
          */
         setParent : function(parent) {
             this.parent= parent;
+            this.__scene= undefined;
+
             this.dirty= true;
             return this;
         },
@@ -551,6 +555,23 @@
          */
         centerAt : function(x,y) {
             return this.centerOn(x,y);
+        },
+        /**
+         * Get the actor's scene (if applicable)
+         * @return {CAAT.Scene?}
+         */
+        getScene : function() {
+            if( this.__scene === undefined ) {
+                var parent= this.parent;
+                if( parent instanceof CAAT.Scene )
+                    this.__scene = parent;
+                else if( parent == null )
+                    this.__scene = null;
+                else
+                    this.__scene = parent.getScene();
+            }
+
+            return this.__scene;
         },
         /**
          * If GL is enables, get this background image's texture page, otherwise it will fail.
@@ -2673,7 +2694,7 @@
             var matches= font.match( /(\d+)px/ );
             var fontHeight=parseInt(matches[1],10);
             if( isFinite(fontHeight) )
-                textHeight= fontHeight;
+                textHeight= (fontHeight * 1.1) >> 0;
         } catch(e) {
             textHeight=20; // default height;
         }

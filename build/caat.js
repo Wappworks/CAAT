@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 268
+Version: 0.4 build: 269
 
 Created on:
-DATE: 2013-11-13
-TIME: 13:40:45
+DATE: 2013-11-14
+TIME: 13:59:16
 */
 
 
@@ -5963,6 +5963,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
         size_active:            1,      // number of animated children
         size_total:             1,
 
+        __scene:                undefined,
+
         __next:                 null,
 
         __d_ax:                 -1,     // for drag-enabled actors.
@@ -6205,6 +6207,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          */
         setParent : function(parent) {
             this.parent= parent;
+            this.__scene= undefined;
+
             this.dirty= true;
             return this;
         },
@@ -6346,6 +6350,23 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          */
         centerAt : function(x,y) {
             return this.centerOn(x,y);
+        },
+        /**
+         * Get the actor's scene (if applicable)
+         * @return {CAAT.Scene?}
+         */
+        getScene : function() {
+            if( this.__scene === undefined ) {
+                var parent= this.parent;
+                if( parent instanceof CAAT.Scene )
+                    this.__scene = parent;
+                else if( parent == null )
+                    this.__scene = null;
+                else
+                    this.__scene = parent.getScene();
+            }
+
+            return this.__scene;
         },
         /**
          * If GL is enables, get this background image's texture page, otherwise it will fail.
@@ -8468,7 +8489,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             var matches= font.match( /(\d+)px/ );
             var fontHeight=parseInt(matches[1],10);
             if( isFinite(fontHeight) )
-                textHeight= fontHeight;
+                textHeight= (fontHeight * 1.1) >> 0;
         } catch(e) {
             textHeight=20; // default height;
         }
@@ -14561,6 +14582,15 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
             this.checkTimers(time);
             CAAT.Scene.superclass.animate.call(this,director,time);
             this.removeExpiredTimers();
+        },
+        /**
+         * Get the actor's scene (if applicable)
+         * @override
+         *
+         * @return {CAAT.Scene?}
+         */
+        getScene : function() {
+            return this;
         },
         /**
          * Helper method to manage alpha transparency fading on Scene switch by the Director.

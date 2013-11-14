@@ -141,6 +141,15 @@
             this.removeExpiredTimers();
         },
         /**
+         * Get the actor's scene (if applicable)
+         * @override
+         *
+         * @return {CAAT.Scene?}
+         */
+        getScene : function() {
+            return this;
+        },
+        /**
          * Helper method to manage alpha transparency fading on Scene switch by the Director.
          * @param time {number} integer indicating the time in milliseconds the fading will take.
          * @param isIn {boolean} boolean indicating whether this Scene in the switch process is

@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 268
+Version: 0.4 build: 269
 
 Created on:
-DATE: 2013-11-13
-TIME: 13:40:47
+DATE: 2013-11-14
+TIME: 13:59:18
 */
 
 
@@ -5910,6 +5910,8 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
         id:                     null,
 
+        __scene:                undefined,
+
         __d_ax:                 -1,     // for drag-enabled actors.
         __d_ay:                 -1,
         gestureEnabled:         false,
@@ -6254,6 +6256,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             } else {
                 this.domParent= null;
             }
+            this.__scene= undefined;
 
             this.dirty= true;
 
@@ -6668,6 +6671,23 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 			this.setScaleAnchored( sx, sy, .5, .5 );
             return this;
 		},
+        /**
+         * Get the actor's scene (if applicable)
+         * @return {CAAT.Scene?}
+         */
+        getScene : function() {
+            if( this.__scene === undefined ) {
+                var parent= this.parent;
+                if( parent instanceof CAAT.Scene )
+                    this.__scene = parent;
+                else if( parent == null )
+                    this.__scene = null;
+                else
+                    this.__scene = parent.getScene();
+            }
+
+            return this.__scene;
+        },
         /**
          * Private.
          * Gets a given anchor position referred to the Actor.
