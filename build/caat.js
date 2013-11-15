@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 270
+Version: 0.4 build: 271
 
 Created on:
-DATE: 2013-11-14
-TIME: 15:27:55
+DATE: 2013-11-15
+TIME: 14:34:25
 */
 
 
@@ -8014,7 +8014,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
         boundingBox         :   null,
         runion              :   new CAAT.Rectangle(),   // Watch out. one for every container.
 
-        mouseEventMode           :   CAAT.ActorContainer.EventMode.normal,
+        mouseEventMode      :   CAAT.ActorContainer.EventMode.normal,
 
         /**
          * Set the event mode
@@ -8478,7 +8478,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
     CAAT.TextActor.TRAVERSE_PATH_BACKWARD= -1;
 
     CAAT.TextActor.calcTextSize = function( text, font, director ) {
-        if ( text == null || text.length <= 0 )
+        if ( typeof text != "string" )
             return { width: 0, height: 0 };
 
         if ( font instanceof CAAT.SpriteImage )

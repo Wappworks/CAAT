@@ -2683,7 +2683,7 @@
     CAAT.TextActor.TRAVERSE_PATH_BACKWARD= -1;
 
     CAAT.TextActor.calcTextSize = function( text, font, director ) {
-        if ( text == null || text.length <= 0 )
+        if ( typeof text != "string" )
             return { width: 0, height: 0 };
 
         if ( font instanceof CAAT.SpriteImage )
