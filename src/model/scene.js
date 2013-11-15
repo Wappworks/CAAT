@@ -552,11 +552,9 @@
                     var ill= il[i];
                     for( j=0; j<ill.length; j++ ) {
                         p.set(point.x, point.y);
-                        var modelViewMatrixI= ill[j].worldModelViewMatrix.getInverse();
-                        modelViewMatrixI.transformCoord(p);
-                        if ( ill[j].contains(p.x, p.y) ) {
-                            return ill[j];
-                        }
+                        var result = ill[j].findActorAtPosition(p);
+                        if( result != null )
+                            return result;
                     }
                 }
             }

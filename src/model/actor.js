@@ -154,7 +154,7 @@
         wdirty:                 true,   // world model view is dirty ?
         oldX:                   -1,
         oldY:                   -1,
-        
+
         modelViewMatrix:        null,   // model view matrix.
         worldModelViewMatrix:   null,   // world model view matrix.
         modelViewMatrixI:       null,   // model view matrix.
@@ -455,7 +455,7 @@
             } else {
                 this.backgroundImage= null;
             }
-            
+
             return this;
         },
         /**
@@ -578,7 +578,7 @@
          * @return {CAAT.GLTexturePage}
          */
         getTextureGLPage : function() {
-            return this.backgroundImage.image.__texturePage;            
+            return this.backgroundImage.image.__texturePage;
         },
         /**
          * Set this actor invisible.
@@ -2027,7 +2027,7 @@
         /**
          * Set this actor behavior as if it were a Button. The actor size will be set as SpriteImage's
          * single size.
-         * 
+         *
          * @param buttonImage {CAAT.SpriteImage} sprite image with button's state images.
          * @param _iNormal {number} button's normal state image index
          * @param _iOver {number} button's mouse over state image index
@@ -2038,7 +2038,7 @@
         setAsButton : function( buttonImage, iNormal, iOver, iPress, iDisabled, fn ) {
 
             var me= this;
-            
+
             this.setBackgroundImage(buttonImage, true);
 
             this.iNormal=       iNormal || 0;
@@ -2170,6 +2170,11 @@
 (function() {
 
     var __CD= 2;
+    var MOUSEMODEBIT = {
+        child:  0x1,
+        self:   0x2
+    };
+
 
     /**
      * This class is a general container of CAAT.Actor instances. It extends the concept of an Actor
@@ -2198,6 +2203,12 @@
         CONFORM     :    1
     };
 
+    CAAT.ActorContainer.EventMode={
+        normal:     MOUSEMODEBIT.child|MOUSEMODEBIT.self,
+        childOnly:  MOUSEMODEBIT.child,
+        selfOnly:   MOUSEMODEBIT.self
+    };
+
 	CAAT.ActorContainer.prototype= {
 
         childrenList        :   null,       // the list of children contained.
@@ -2208,15 +2219,16 @@
         boundingBox         :   null,
         runion              :   new CAAT.Rectangle(),   // Watch out. one for every container.
 
-        localMouseEnabled   : true,                     // Container accepts events locally?
+        mouseEventMode      :   CAAT.ActorContainer.EventMode.normal,
 
         /**
-         * Enable or disable local mouse handling for this actor
-         * @param enable {boolean} a boolean indicating whether the event is handled
+         * Set the event mode
+         * @param mode  {Number}
+         *
          * @return this
          */
-        enableLocalEvents : function( enable ) {
-            this.localMouseEnabled= enable;
+        setEventMode: function( mode ) {
+            this.mouseEventMode = mode;
             return this;
         },
 
@@ -2559,18 +2571,20 @@
 			}
 
 			// z-order
-            var cl= this.childrenList;
-			for( var i=cl.length-1; i>=0; i-- ) {
-                var child= this.childrenList[i];
+            if( (this.mouseEventMode & MOUSEMODEBIT.child) != 0 ) {
+                var cl= this.childrenList;
+                for( var i=cl.length-1; i>=0; i-- ) {
+                    var child= this.childrenList[i];
 
-                var np= new CAAT.Point( point.x, point.y, 0 );
-                var contained= child.findActorAtPosition( np );
-                if ( null!==contained ) {
-                    return contained;
+                    var np= new CAAT.Point( point.x, point.y, 0 );
+                    var contained= child.findActorAtPosition( np );
+                    if ( null!==contained ) {
+                        return contained;
+                    }
                 }
-			}
+            }
 
-			return this.localMouseEnabled ? this : null;
+			return (this.mouseEventMode & MOUSEMODEBIT.self) != 0 ? this : null;
 		},
         /**
          * Destroys this ActorContainer.
@@ -2870,7 +2884,7 @@
             }
 
 			var ctx= director.ctx;
-			
+
 			if ( this.font instanceof CAAT.SpriteImage ) {
 				return this.drawSpriteText(director,time);
 			}
@@ -2968,7 +2982,7 @@
 				textWidth+= charWidth;
 			}
 		},
-		
+
 		/**
          * Private.
          * Draw the text using a sprited font instead of a canvas font.
@@ -2997,7 +3011,7 @@
 				this.drawSpriteTextOnPath(director, time);
 			}
 		},
-		
+
 		/**
          * Private.
          * Draw the text traversing a path using a sprited font.
@@ -3029,9 +3043,9 @@
 
 				context.translate( p0.x|0, p0.y|0 );
 				context.rotate( angle );
-				
+
 				var y = this.textBaseline === "bottom" ? 0 - this.font.height : 0;
-				
+
 				this.font.drawString(context,character, 0, y);
 
 				context.restore();
@@ -3039,7 +3053,7 @@
 				textWidth+= charWidth;
 			}
 		},
-		
+
         /**
          * Set the path, interpolator and duration to draw the text on.
          * @param path a valid CAAT.Path instance.
@@ -3099,7 +3113,7 @@
         SHAPE_RECTANGLE:1,
 
         /**
-         * 
+         *
          * @param l {number>0}
          */
         setLineWidth : function(l)  {
@@ -3356,7 +3370,7 @@
             return this;
         },
         /**
-         * 
+         *
          * @param angle {number} number in radians.
          */
         setInitialAngle : function(angle) {
@@ -3428,7 +3442,7 @@
                 centerY + r1*Math.sin(this.initialAngle) );
 
             ctx.closePath();
-            
+
             if ( this.fillStyle ) {
                 ctx.fillStyle= this.fillStyle;
                 ctx.fill();
