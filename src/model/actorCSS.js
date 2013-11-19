@@ -699,7 +699,7 @@
          * @return this
          */
         setOutOfFrameTime : function() {
-            this.setFrameTime(-1,0);
+            this.setFrameTime(Number.MAX_VALUE,0);
             this.style( 'display', 'none' );
             return this;
         },

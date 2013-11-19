@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 271
+Version: 0.4 build: 272
 
 Created on:
-DATE: 2013-11-15
-TIME: 14:34:28
+DATE: 2013-11-19
+TIME: 10:02:46
 */
 
 
@@ -6495,7 +6495,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * @return this
          */
         setOutOfFrameTime : function() {
-            this.setFrameTime(-1,0);
+            this.setFrameTime(Number.MAX_VALUE,0);
             this.style( 'display', 'none' );
             return this;
         },
