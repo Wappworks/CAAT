@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 272
+Version: 0.4 build: 273
 
 Created on:
-DATE: 2013-11-19
-TIME: 10:02:44
+DATE: 2013-11-21
+TIME: 12:58:47
 */
 
 
@@ -13581,35 +13581,44 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
 
             var w= this.getWidth();
             var h= this.getHeight();
-            var xoff= (this.offsetX-this.ownerActor.x) % w;
-            if ( xoff> 0 ) {
-                xoff= xoff-w;
+            var xpos= (this.offsetX + x) % w;
+            if ( xpos > 0 ) {
+                xpos= xpos-w;
             }
-            var yoff= (this.offsetY-this.ownerActor.y) % h;
-            if ( yoff> 0 ) {
-                yoff= yoff-h;
-            }
+            xpos = xpos >> 0;
 
-            var nwReal  = (r.width-xoff)/w;
+            var ypos= (this.offsetY + y) % h;
+            if ( ypos> 0 ) {
+                ypos= ypos-h;
+            }
+            ypos = ypos >> 0;
+
+            var nwReal  = (r.width-xpos)/w;
             var nw      = nwReal >> 0;
             if( nw < nwReal )
                 nw++;
-            var nhReal  = (r.height-yoff)/h;
+            var nhReal  = (r.height-ypos)/h;
             var nh      = nhReal >> 0;
             if( nh < nhReal )
                 nh++;
             var i,j;
             var ctx= director.ctx;
 
+            var xstart = xpos;
             for( i=0; i<nh; i++ ) {
+                xpos = xstart;
                 for( j=0; j<nw; j++ ) {
                     ctx.drawImage(
                         this.image,
                         el.x, el.y,
                         el.width, el.height,
-                        (r.x-this.ownerActor.x+xoff+j*el.width)>>0, (r.y-this.ownerActor.y+yoff+i*el.height)>>0,
+                        xpos, ypos,
                         el.width, el.height);
+
+                    xpos += el.width;
                 }
+
+                ypos += el.height;
             }
         },
 
@@ -13628,13 +13637,13 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
             var w= this.ownerActor.width;
             var h= this.getHeight();
             var xpos = (this.offsetX + x) >> 0;
-            var yoff= (this.offsetY + y) % h;
-            if ( yoff> 0 ) {
-                yoff= yoff-h;
+            var ypos = (this.offsetY + y) % h;
+            if ( ypos> 0 ) {
+                ypos= ypos-h;
             }
-            var ypos = (yoff + y) >> 0;
+            ypos = ypos >> 0;
 
-            var nhReal  = (this.ownerActor.height-yoff)/h;
+            var nhReal  = (this.ownerActor.height-ypos)/h;
             var nh      = nhReal >> 0;
             if( nh < nhReal )
                 nh++;
@@ -13646,8 +13655,10 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
                     this.image,
                     el.x, el.y,
                     el.width, el.height,
-                    xpos, ypos + (i*el.height),
+                    xpos, ypos,
                     w, el.height);
+
+                ypos += el.height;
             }
         },
 
@@ -13665,14 +13676,14 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
 
             var w= this.getWidth();
             var h= this.ownerActor.height;
-            var xoff = (this.offsetX + x) % w;
+            var xpos = (this.offsetX + x) % w;
             var ypos= (this.offsetY + y)>>0;
-            if ( xoff> 0 ) {
-                xoff = xoff - w;
+            if ( xpos> 0 ) {
+                xpos = xpos - w;
             }
-            var xpos = (xoff + x)>>0;
+            xpos = xpos >> 0;
 
-            var nwReal  = (this.ownerActor.width-xoff)/w;
+            var nwReal  = (this.ownerActor.width-xpos)/w;
             var nw      = nwReal >> 0;
             if( nw < nwReal )
                 nw++;
@@ -13684,8 +13695,10 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
                     this.image,
                     el.x, el.y,
                     el.width, el.height,
-                    xpos + (i*el.width), ypos,
+                    xpos, ypos,
                     el.width, h);
+
+                xpos += el.width;
             }
         },
 
@@ -13858,6 +13871,8 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
                 cssRepeat = "repeat";
             else if( transformation===this.TR_TILE_VERTICAL )
                 cssRepeat = "repeat-y";
+            else if( transformation===this.TR_TILE_HORIZONTAL )
+                cssRepeat = "repeat-x";
 
             return ''+x+'px '+
                 y+'px '+
