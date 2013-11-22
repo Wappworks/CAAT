@@ -597,8 +597,10 @@
          * @return this
          */
         setOutOfFrameTime : function() {
-            this.setFrameTime(Number.MAX_VALUE,0);
-            return this;
+            if( this.expired )
+                return this;
+
+            return this.setFrameTime(-1,0);
         },
         /**
          * Adds an Actor's life cycle listener.
@@ -1108,10 +1110,10 @@
          *
          */
 		destroy : function(time)	{
-            if ( this.parent ) {
+            if ( this.parent )
                 this.parent.removeChild(this);
-            }
-
+            if( !this.expired )
+                this.setExpired(time || this.time);
             this.fireEvent('destroyed',time);
 		},
         /**
@@ -2594,6 +2596,7 @@
          */
         destroy : function() {
             var cl= this.childrenList;
+            this.childrenList = [];
             for( var i=cl.length-1; i>=0; i-- ) {
                 cl[i].destroy();
             }

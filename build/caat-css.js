@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 273
+Version: 0.4 build: 274
 
 Created on:
-DATE: 2013-11-21
-TIME: 12:58:48
+DATE: 2013-11-22
+TIME: 10:36:39
 */
 
 
@@ -6495,9 +6495,10 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * @return this
          */
         setOutOfFrameTime : function() {
-            this.setFrameTime(Number.MAX_VALUE,0);
-            this.style( 'display', 'none' );
-            return this;
+            if( this.expired )
+                return this;
+
+            return this.setFrameTime(-1,0);
         },
         /**
          * Adds an Actor's life cycle listener.
@@ -7106,7 +7107,10 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          *
          */
 		destroy : function(time)	{
-            this.setParent(null);
+            if ( this.parent )
+                this.parent.removeChild(this);
+            if( !this.expired )
+                this.setExpired(time || this.time);
             this.fireEvent('destroyed',time);
 		},
         /**
@@ -8129,8 +8133,10 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * @return this
          */
         destroy : function() {
-            for( var i=this.childrenList.length-1; i>=0; i-- ) {
-                this.childrenList[i].destroy();
+            var childrenList    = this.childrenList;
+            this.childrenList   = [];
+            for( var i=childrenList.length-1; i>=0; i-- ) {
+                childrenList[i].destroy();
             }
             CAAT.ActorContainer.superclass.destroy.call(this);
 
@@ -12710,11 +12716,72 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
 
             return this;
         },
+        /**
+         * Paint a chunk of the sprite image
+         *
+         * @param ctx   {CanvasRenderingContext2D}
+         * @param dx    {Number}
+         * @param dy    {Number}
+         * @param x     {Number}
+         * @param y     {Number}
+         * @param w     {Number}
+         * @param h     {Number}
+         */
         paintChunk : function( ctx, dx,dy, x, y, w, h ) {
             ctx.drawImage( this.image, x,y,w,h, dx,dy,w,h );
         },
-        paintTile : function(ctx, index, x, y) {
+        /**
+         * Paint a chunk of the sprite image
+         *
+         * @param ctx       {CanvasRenderingContext2D}
+         * @param index     {Number|String?}
+         * @param ux        {Number}
+         * @param uy        {Number}
+         * @param vx        {Number}
+         * @param vy        {Number}
+         * @param dx        {Number}
+         * @param dy        {Number}
+         * @param [dw]      {Number}
+         * @param [dh]      {Number}
+         */
+        paintTileChunk : function( ctx, index, ux, uy, vx, vy, dx,dy, dw, dh ) {
+            if( index != null )
+                index = this.spriteIndex;
             var el= this.mapInfo[index];
+            if( el == null )
+                return this;
+
+            ux = Math.max( 0, Math.min(1, ux) );
+            uy = Math.max( 0, Math.min(1, uy) );
+            vx = Math.max( ux, Math.min(1, vx) );
+            vy = Math.max( uy, Math.min(1, vy) );
+            if( dw == null )
+                dw = el.width * (vx - ux);
+            if( dh == null )
+                dh = el.height * (vy - uy);
+            ctx.drawImage(
+                this.image,
+                el.x + ((el.width * ux) >> 0), el.y + ((el.height * uy) >> 0),
+                (el.width * vx) >> 0, (el.height * vy) >> 0,
+                dx >> 0, dy >> 0,
+                dw >> 0, dh >> 0 );
+
+            return this;
+        },
+        /**
+         * Paint a tile
+         *
+         * @param ctx       {CanvasRenderingContext2D}
+         * @param index     {Number|String?}
+         * @param x        {Number}
+         * @param y        {Number}
+         */
+        paintTile : function(ctx, index, x, y) {
+            if( index != null )
+                index = this.spriteIndex;
+            var el= this.mapInfo[index];
+            if( el == null )
+                return this;
             ctx.drawImage(
                 this.image,
                 el.x, el.y,
@@ -12726,12 +12793,10 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
         },
         /**
          * Draws the subimage pointed by imageIndex scaled to the size of w and h.
-         * @param canvas a canvas context.
-         * @param imageIndex {number} a subimage index.
+         * @param director {CAAT.Director}
+         * @param time {number}
          * @param x {number} x position in canvas to draw the image.
          * @param y {number} y position in canvas to draw the image.
-         * @param w {number} new width of the subimage.
-         * @param h {number} new height of the subimage.
          *
          * @return this
          */

@@ -493,7 +493,7 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.SpriteImage.html#paintChunk">paintChunk</a></b>(ctx, dx, dy, x, y, w, h)
 								</div>
-								<div class="description"></div>
+								<div class="description">Paint a chunk of the sprite image</div>
 							</td>
 						</tr>
 					
@@ -536,7 +536,7 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/CAAT.SpriteImage.html#paintScaled">paintScaled</a></b>(canvas, imageIndex, x, y, w, h)
+								<div class="fixedFont"><b><a href="../symbols/CAAT.SpriteImage.html#paintScaled">paintScaled</a></b>(director, time, x, y)
 								</div>
 								<div class="description">Draws the subimage pointed by imageIndex scaled to the size of w and h.</div>
 							</td>
@@ -556,7 +556,16 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.SpriteImage.html#paintTile">paintTile</a></b>(ctx, index, x, y)
 								</div>
-								<div class="description"></div>
+								<div class="description">Paint a tile</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/CAAT.SpriteImage.html#paintTileChunk">paintTileChunk</a></b>(ctx, index, ux, uy, vx, vy, dx, dy, dw, dh)
+								</div>
+								<div class="description">Paint a chunk of the sprite image</div>
 							</td>
 						</tr>
 					
@@ -1246,7 +1255,7 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						
+						Paint a chunk of the sprite image
 						
 						
 					</div>
@@ -1261,43 +1270,43 @@ ul.inheritsList
 									<b>ctx</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>{CanvasRenderingContext2D}</dd>
 							
 								<dt>
 									<b>dx</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>{Number}</dd>
 							
 								<dt>
 									<b>dy</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>{Number}</dd>
 							
 								<dt>
 									<b>x</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>{Number}</dd>
 							
 								<dt>
 									<b>y</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>{Number}</dd>
 							
 								<dt>
 									<b>w</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>{Number}</dd>
 							
 								<dt>
 									<b>h</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>{Number}</dd>
 							
 							</dl>
 						
@@ -1558,7 +1567,7 @@ ul.inheritsList
 					<div class="fixedFont">
 					
 					
-					<b>paintScaled</b>(canvas, imageIndex, x, y, w, h)
+					<b>paintScaled</b>(director, time, x, y)
 					
 					</div>
 					<div class="description">
@@ -1574,16 +1583,16 @@ ul.inheritsList
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>canvas</b>
+									<b>director</b>
 									
 								</dt>
-								<dd>a canvas context.</dd>
+								<dd>{CAAT.Director}</dd>
 							
 								<dt>
-									<b>imageIndex</b>
+									<b>time</b>
 									
 								</dt>
-								<dd>{number} a subimage index.</dd>
+								<dd>{number}</dd>
 							
 								<dt>
 									<b>x</b>
@@ -1596,18 +1605,6 @@ ul.inheritsList
 									
 								</dt>
 								<dd>{number} y position in canvas to draw the image.</dd>
-							
-								<dt>
-									<b>w</b>
-									
-								</dt>
-								<dd>{number} new width of the subimage.</dd>
-							
-								<dt>
-									<b>h</b>
-									
-								</dt>
-								<dd>{number} new height of the subimage.</dd>
 							
 							</dl>
 						
@@ -1689,7 +1686,7 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						
+						Paint a tile
 						
 						
 					</div>
@@ -1704,25 +1701,115 @@ ul.inheritsList
 									<b>ctx</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>{CanvasRenderingContext2D}</dd>
 							
 								<dt>
 									<b>index</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>{Number|String?}</dd>
 							
 								<dt>
 									<b>x</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>{Number}</dd>
 							
 								<dt>
 									<b>y</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>{Number}</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="paintTileChunk"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>paintTileChunk</b>(ctx, index, ux, uy, vx, vy, dx, dy, dw, dh)
+					
+					</div>
+					<div class="description">
+						Paint a chunk of the sprite image
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>ctx</b>
+									
+								</dt>
+								<dd>{CanvasRenderingContext2D}</dd>
+							
+								<dt>
+									<b>index</b>
+									
+								</dt>
+								<dd>{Number|String?}</dd>
+							
+								<dt>
+									<b>ux</b>
+									
+								</dt>
+								<dd>{Number}</dd>
+							
+								<dt>
+									<b>uy</b>
+									
+								</dt>
+								<dd>{Number}</dd>
+							
+								<dt>
+									<b>vx</b>
+									
+								</dt>
+								<dd>{Number}</dd>
+							
+								<dt>
+									<b>vy</b>
+									
+								</dt>
+								<dd>{Number}</dd>
+							
+								<dt>
+									<b>dx</b>
+									
+								</dt>
+								<dd>{Number}</dd>
+							
+								<dt>
+									<b>dy</b>
+									
+								</dt>
+								<dd>{Number}</dd>
+							
+								<dt>
+									<b>dw</b>
+									<i>Optional</i>
+								</dt>
+								<dd>{Number}</dd>
+							
+								<dt>
+									<b>dh</b>
+									<i>Optional</i>
+								</dt>
+								<dd>{Number}</dd>
 							
 							</dl>
 						
@@ -2359,7 +2446,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Nov 21 2013 12:59:37 GMT-0800 (PST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Nov 22 2013 10:37:17 GMT-0800 (PST)
 		</div>
 	</body>
 </html>
