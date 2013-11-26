@@ -546,7 +546,7 @@
          * @param [dh]      {Number}
          */
         paintTileChunk : function( ctx, index, ux, uy, vx, vy, dx,dy, dw, dh ) {
-            if( index != null )
+            if( index == null )
                 index = this.spriteIndex;
             var el= this.mapInfo[index];
             if( el == null )
@@ -574,11 +574,11 @@
          *
          * @param ctx       {CanvasRenderingContext2D}
          * @param index     {Number|String?}
-         * @param x        {Number}
-         * @param y        {Number}
+         * @param x         {Number}
+         * @param y         {Number}
          */
         paintTile : function(ctx, index, x, y) {
-            if( index != null )
+            if( index == null )
                 index = this.spriteIndex;
             var el= this.mapInfo[index];
             if( el == null )

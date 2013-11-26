@@ -22,11 +22,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 274
+Version: 0.4 build: 275
 
 Created on:
-DATE: 2013-11-22
-TIME: 10:36:28
+DATE: 2013-11-25
+TIME: 16:57:36
 */
 
 
@@ -310,7 +310,7 @@ f++;g=(e.height-d)/g;e=g>>0;e<g&&e++;for(var h=a.ctx,i=b,a=0;a<e;a++){b=i;for(g=
 c.x,c.y,c.width,c.height,b,d,e,c.height),d+=c.height},paintStretchedVerticalTiledHorizontal:function(a,c,b,d){this.setSpriteIndexAtTime(c);var c=this.mapInfo[this.spriteIndex],e=this.getWidth(),f=this.ownerActor.height,b=(this.offsetX+b)%e,d=this.offsetY+d>>0;0<b&&(b-=e);var b=b>>0,g=(this.ownerActor.width-b)/e,e=g>>0;e<g&&e++;g=a.ctx;for(a=0;a<e;a++)g.drawImage(this.image,c.x,c.y,c.width,c.height,b,d,c.width,f),b+=c.width},paintInvertedH:function(a,c,b,d){this.setSpriteIndexAtTime(c);c=this.mapInfo[this.spriteIndex];
 a=a.ctx;a.save();a.translate((b|0)+c.width,d|0);a.scale(-1,1);a.drawImage(this.image,c.x,c.y,c.width,c.height,this.offsetX>>0,this.offsetY>>0,c.width,c.height);a.restore();return this},paintInvertedV:function(a,c,b,d){this.setSpriteIndexAtTime(c);c=this.mapInfo[this.spriteIndex];a=a.ctx;a.save();a.translate(b|0,d+c.height|0);a.scale(1,-1);a.drawImage(this.image,c.x,c.y,c.width,c.height,this.offsetX>>0,this.offsetY>>0,c.width,c.height);a.restore();return this},paintInvertedHV:function(a,c,b,d){this.setSpriteIndexAtTime(c);
 c=this.mapInfo[this.spriteIndex];a=a.ctx;a.save();a.translate(b|0,d+c.height|0);a.scale(1,-1);a.translate(c.width,0);a.scale(-1,1);a.drawImage(this.image,c.x,c.y,c.width,c.height,this.offsetX>>0,this.offsetY>>0,c.width,c.height);a.restore();return this},paintN:function(a,c,b,d){this.setSpriteIndexAtTime(c);c=this.mapInfo[this.spriteIndex];a.ctx.drawImage(this.image,c.x,c.y,c.width,c.height,this.offsetX+b>>0,this.offsetY+d>>0,c.width,c.height);return this},paintChunk:function(a,c,b,d,e,f,g){a.drawImage(this.image,
-d,e,f,g,c,b,f,g)},paintTileChunk:function(a,c,b,d,e,f,g,h,i,j){null!=c&&(c=this.spriteIndex);c=this.mapInfo[c];if(null==c)return this;b=Math.max(0,Math.min(1,b));d=Math.max(0,Math.min(1,d));e=Math.max(b,Math.min(1,e));f=Math.max(d,Math.min(1,f));null==i&&(i=c.width*(e-b));null==j&&(j=c.height*(f-d));a.drawImage(this.image,c.x+(c.width*b>>0),c.y+(c.height*d>>0),c.width*e>>0,c.height*f>>0,g>>0,h>>0,i>>0,j>>0);return this},paintTile:function(a,c,b,d){null!=c&&(c=this.spriteIndex);c=this.mapInfo[c];if(null==
+d,e,f,g,c,b,f,g)},paintTileChunk:function(a,c,b,d,e,f,g,h,i,j){null==c&&(c=this.spriteIndex);c=this.mapInfo[c];if(null==c)return this;b=Math.max(0,Math.min(1,b));d=Math.max(0,Math.min(1,d));e=Math.max(b,Math.min(1,e));f=Math.max(d,Math.min(1,f));null==i&&(i=c.width*(e-b));null==j&&(j=c.height*(f-d));a.drawImage(this.image,c.x+(c.width*b>>0),c.y+(c.height*d>>0),c.width*e>>0,c.height*f>>0,g>>0,h>>0,i>>0,j>>0);return this},paintTile:function(a,c,b,d){null==c&&(c=this.spriteIndex);c=this.mapInfo[c];if(null==
 c)return this;a.drawImage(this.image,c.x,c.y,c.width,c.height,this.offsetX+b>>0,this.offsetY+d>>0,c.width,c.height);return this},paintScaled:function(a,c,b,d){this.setSpriteIndexAtTime(c);c=this.mapInfo[this.spriteIndex];a.ctx.drawImage(this.image,c.x,c.y,c.width,c.height,this.offsetX+b>>0,this.offsetY+d>>0,this.ownerActor.width,this.ownerActor.height);return this},getCurrentSpriteImageCSSPosition:function(){var a=this.mapInfo[this.spriteIndex],c=-(a.x-this.offsetX),a=-(a.y-this.offsetY),b=this.ownerActor.transformation,
 d="no repeat";b===this.TR_TILE?d="repeat":b===this.TR_TILE_VERTICAL?d="repeat-y":b===this.TR_TILE_HORIZONTAL&&(d="repeat-x");return""+c+"px "+a+"px "+d},getNumImages:function(){return this.rows*this.columns},setUV:function(a,c){var b=this.image;if(b.__texturePage){var d=c,e=this.mapInfo[this.spriteIndex],f=e.u,g=e.v,h=e.u1,e=e.v1;if(this.offsetX||this.offsetY)f=b.__texturePage,g=-this.offsetY/f.height,h=(this.ownerActor.width-this.offsetX)/f.width,e=(this.ownerActor.height-this.offsetY)/f.height,
 f=-this.offsetX/f.width+b.__u,g+=b.__v,h+=b.__u,e+=b.__v;b.inverted?(a[d++]=h,a[d++]=g,a[d++]=h,a[d++]=e,a[d++]=f,a[d++]=e,a[d++]=f,a[d++]=g):(a[d++]=f,a[d++]=g,a[d++]=h,a[d++]=g,a[d++]=h,a[d++]=e,a[d++]=f,a[d++]=e)}},setChangeFPS:function(a){this.changeFPS=a;return this},setSpriteTransformation:function(a){this.transformation=a;switch(a){case this.TR_FLIP_HORIZONTAL:this.paint=this.paintInvertedH;break;case this.TR_FLIP_VERTICAL:this.paint=this.paintInvertedV;break;case this.TR_FLIP_ALL:this.paint=

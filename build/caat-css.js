@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 274
+Version: 0.4 build: 275
 
 Created on:
-DATE: 2013-11-22
-TIME: 10:36:39
+DATE: 2013-11-25
+TIME: 16:57:49
 */
 
 
@@ -12745,7 +12745,7 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
          * @param [dh]      {Number}
          */
         paintTileChunk : function( ctx, index, ux, uy, vx, vy, dx,dy, dw, dh ) {
-            if( index != null )
+            if( index == null )
                 index = this.spriteIndex;
             var el= this.mapInfo[index];
             if( el == null )
@@ -12773,11 +12773,11 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
          *
          * @param ctx       {CanvasRenderingContext2D}
          * @param index     {Number|String?}
-         * @param x        {Number}
-         * @param y        {Number}
+         * @param x         {Number}
+         * @param y         {Number}
          */
         paintTile : function(ctx, index, x, y) {
-            if( index != null )
+            if( index == null )
                 index = this.spriteIndex;
             var el= this.mapInfo[index];
             if( el == null )
