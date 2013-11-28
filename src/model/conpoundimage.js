@@ -1003,20 +1003,22 @@
         },
 
         drawString : function( ctx, str, x, y ) {
-            var i, l, charInfo, w;
+            var i, l, charInfo, w, h;
             var charArr = str.split("");
 
             for( i=0; i<charArr.length; i++ ) {
                 charInfo= this.mapInfo[ charArr[i] ];
                   if ( charInfo ) {
                       w= charInfo.width;
-                      ctx.drawImage(
-                          this.image,
-                          charInfo.x, charInfo.y,
-                          w, charInfo.height,
+                      h= charInfo.height;
+                      if( w > 0 && h > 0 )
+                          ctx.drawImage(
+                              this.image,
+                              charInfo.x, charInfo.y,
+                              w, h,
 
-                          x + charInfo.xoffset, y + charInfo.yoffset,
-                          w, charInfo.height );
+                              x + charInfo.xoffset, y + charInfo.yoffset,
+                              w, h );
 
                       x+= charInfo.xadvance;
                   }
