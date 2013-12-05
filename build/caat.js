@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 276
+Version: 0.4 build: 277
 
 Created on:
-DATE: 2013-11-28
-TIME: 11:54:28
+DATE: 2013-12-05
+TIME: 09:03:21
 */
 
 
@@ -8500,16 +8500,24 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
         ctx.save();
         ctx.font= font;
 
-        var textWidth= ctx.measureText( text ).width;
-        var textHeight= 20;             // default height
-        try {
-            var matches= font.match( /(\d+)px/ );
-            var fontHeight=parseInt(matches[1],10);
-            if( isFinite(fontHeight) )
-                textHeight= (fontHeight * 1.1) >> 0;
-        } catch(e) {
-            textHeight=20; // default height;
+        function getFontHeight( font ) {
+            var matches;
+
+            // Check for pixel size first...
+            matches = font.match( /(\d+)px/ );
+            if( matches != null )
+                return parseInt(matches[1],10);
+
+            // Check for em/rem size next...
+            matches = font.match( /(\d+)r?em/ );
+            if( matches != null )
+                return (16 * parseFloat(matches[1],10)) >> 0;
+
+            return 20;
         }
+
+        var textWidth= ctx.measureText( text ).width;
+        var textHeight= getFontHeight( font );
 
         ctx.restore();
 

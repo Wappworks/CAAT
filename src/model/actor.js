@@ -2705,16 +2705,24 @@
         ctx.save();
         ctx.font= font;
 
-        var textWidth= ctx.measureText( text ).width;
-        var textHeight= 20;             // default height
-        try {
-            var matches= font.match( /(\d+)px/ );
-            var fontHeight=parseInt(matches[1],10);
-            if( isFinite(fontHeight) )
-                textHeight= (fontHeight * 1.1) >> 0;
-        } catch(e) {
-            textHeight=20; // default height;
+        function getFontHeight( font ) {
+            var matches;
+
+            // Check for pixel size first...
+            matches = font.match( /(\d+)px/ );
+            if( matches != null )
+                return parseInt(matches[1],10);
+
+            // Check for em/rem size next...
+            matches = font.match( /(\d+)r?em/ );
+            if( matches != null )
+                return (16 * parseFloat(matches[1],10)) >> 0;
+
+            return 20;
         }
+
+        var textWidth= ctx.measureText( text ).width;
+        var textHeight= getFontHeight( font );
 
         ctx.restore();
 
