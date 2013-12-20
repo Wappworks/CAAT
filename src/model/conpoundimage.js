@@ -545,7 +545,7 @@
          * @param [dw]      {Number}
          * @param [dh]      {Number}
          */
-        paintTileChunk : function( ctx, index, ux, uy, vx, vy, dx,dy, dw, dh ) {
+        paintTileChunk : function( ctx, index, ux, uy, vx, vy, dx, dy, dw, dh ) {
             if( index == null )
                 index = this.spriteIndex;
             var el= this.mapInfo[index];
@@ -556,14 +556,17 @@
             uy = Math.max( 0, Math.min(1, uy) );
             vx = Math.max( ux, Math.min(1, vx) );
             vy = Math.max( uy, Math.min(1, vy) );
+
+            var sw = (el.width * (vx - ux)) >> 0;
+            var sh = (el.height * (vy - uy)) >> 0;
             if( dw == null )
-                dw = el.width * (vx - ux);
+                dw = sw;
             if( dh == null )
-                dh = el.height * (vy - uy);
+                dh = sh;
             ctx.drawImage(
                 this.image,
                 el.x + ((el.width * ux) >> 0), el.y + ((el.height * uy) >> 0),
-                (el.width * vx) >> 0, (el.height * vy) >> 0,
+                sw, sh,
                 dx >> 0, dy >> 0,
                 dw >> 0, dh >> 0 );
 
@@ -583,6 +586,7 @@
             var el= this.mapInfo[index];
             if( el == null )
                 return this;
+
             ctx.drawImage(
                 this.image,
                 el.x, el.y,
