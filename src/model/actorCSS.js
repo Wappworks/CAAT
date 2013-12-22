@@ -114,8 +114,6 @@
 
         id:                     null,
 
-        __scene:                undefined,
-
         __d_ax:                 -1,     // for drag-enabled actors.
         __d_ay:                 -1,
         gestureEnabled:         false,
@@ -460,7 +458,6 @@
             } else {
                 this.domParent= null;
             }
-            this.__scene= undefined;
 
             this.dirty= true;
 
@@ -881,17 +878,12 @@
          * @return {CAAT.Scene?}
          */
         getScene : function() {
-            if( this.__scene === undefined ) {
-                var parent= this.parent;
-                if( parent instanceof CAAT.Scene )
-                    this.__scene = parent;
-                else if( parent == null )
-                    this.__scene = null;
-                else
-                    this.__scene = parent.getScene();
-            }
-
-            return this.__scene;
+            var parent= this.parent;
+            if( parent == null )
+                return null;
+            if( parent instanceof CAAT.Scene )
+                return parent;
+            return parent.getScene();
         },
         /**
          * Private.

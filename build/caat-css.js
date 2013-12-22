@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 278
+Version: 0.4 build: 279
 
 Created on:
-DATE: 2013-12-19
-TIME: 17:18:47
+DATE: 2013-12-21
+TIME: 17:07:26
 */
 
 
@@ -5910,8 +5910,6 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 
         id:                     null,
 
-        __scene:                undefined,
-
         __d_ax:                 -1,     // for drag-enabled actors.
         __d_ay:                 -1,
         gestureEnabled:         false,
@@ -6256,7 +6254,6 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             } else {
                 this.domParent= null;
             }
-            this.__scene= undefined;
 
             this.dirty= true;
 
@@ -6677,17 +6674,12 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * @return {CAAT.Scene?}
          */
         getScene : function() {
-            if( this.__scene === undefined ) {
-                var parent= this.parent;
-                if( parent instanceof CAAT.Scene )
-                    this.__scene = parent;
-                else if( parent == null )
-                    this.__scene = null;
-                else
-                    this.__scene = parent.getScene();
-            }
-
-            return this.__scene;
+            var parent= this.parent;
+            if( parent == null )
+                return null;
+            if( parent instanceof CAAT.Scene )
+                return parent;
+            return parent.getScene();
         },
         /**
          * Private.

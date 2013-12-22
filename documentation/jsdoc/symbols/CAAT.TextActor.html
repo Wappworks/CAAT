@@ -365,20 +365,20 @@ ul.inheritsList
 					<tbody>
 					
 						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">CAAT.TextActor.<b><a href="../symbols/CAAT.TextActor.html#.calcTextSize">calcTextSize</a></b>(text, font, director)
+								</div>
+								<div class="description">Calculate the text size</div>
+							</td>
+						</tr>
+					
+						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.TextActor.html#calcTextSize">calcTextSize</a></b>(director)
 								</div>
 								<div class="description">Calculates the text dimension in pixels and stores the values in textWidth and textHeightattributes.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">CAAT.TextActor.<b><a href="../symbols/CAAT.TextActor.html#.calcTextSize">calcTextSize</a></b>(text, font, director)
-								</div>
-								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -433,15 +433,6 @@ ul.inheritsList
 								<div class="fixedFont"><b><a href="../symbols/CAAT.TextActor.html#setBaseline">setBaseline</a></b>(baseline)
 								</div>
 								<div class="description"></div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/CAAT.TextActor.html#setFill">setFill</a></b>(fill)
-								</div>
-								<div class="description">Set the text to be filled.</div>
 							</td>
 						</tr>
 					
@@ -522,7 +513,7 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/CAAT.TextActor.html#setTextFillStyle">setTextFillStyle</a></b>(style)
 								</div>
-								<div class="description"></div>
+								<div class="description">Set the text fill.</div>
 							</td>
 						</tr>
 					
@@ -578,6 +569,61 @@ ul.inheritsList
 					Method Detail
 				</div>
 				
+					<a name=".calcTextSize"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{{width:Number|height:Number}}</span>
+					<span class="light">CAAT.TextActor.</span><b>calcTextSize</b>(text, font, director)
+					
+					</div>
+					<div class="description">
+						Calculate the text size
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>text</b>
+									
+								</dt>
+								<dd>{String}</dd>
+							
+								<dt>
+									<b>font</b>
+									
+								</dt>
+								<dd>{String|CAAT.SpriteImage}</dd>
+							
+								<dt>
+									<b>director</b>
+									<i>Optional</i>
+								</dt>
+								<dd>{CAAT.Director}</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{{width:Number|height:Number}}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
 					<a name="calcTextSize"> </a>
 					<div class="fixedFont">
 					
@@ -599,7 +645,7 @@ ul.inheritsList
 							
 								<dt>
 									<b>director</b>
-									
+									<i>Optional</i>
 								</dt>
 								<dd>a CAAT.Director instance.</dd>
 							
@@ -615,54 +661,6 @@ ul.inheritsList
 								<dd>this</dd>
 							
 							</dl>
-						
-						
-						
-
-					<hr />
-				
-					<a name=".calcTextSize"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">CAAT.TextActor.</span><b>calcTextSize</b>(text, font, director)
-					
-					</div>
-					<div class="description">
-						
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>text</b>
-									
-								</dt>
-								<dd></dd>
-							
-								<dt>
-									<b>font</b>
-									
-								</dt>
-								<dd></dd>
-							
-								<dt>
-									<b>director</b>
-									
-								</dt>
-								<dd></dd>
-							
-							</dl>
-						
-						
-						
-						
 						
 						
 						
@@ -916,49 +914,6 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name="setFill"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>setFill</b>(fill)
-					
-					</div>
-					<div class="description">
-						Set the text to be filled. The default Filling style will be set by calling setFillStyle method.Default value is true.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>fill</b>
-									
-								</dt>
-								<dd>{boolean} a boolean indicating whether the text will be filled.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd>this;</dd>
-							
-							</dl>
-						
-						
-						
-
-					<hr />
-				
 					<a name="setFont"> </a>
 					<div class="fixedFont">
 					
@@ -1025,7 +980,7 @@ ul.inheritsList
 									<b>outline</b>
 									
 								</dt>
-								<dd>{boolean} a boolean indicating whether the text will be outlined.</dd>
+								<dd>{Number}</dd>
 							
 							</dl>
 						
@@ -1295,7 +1250,7 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						
+						Set the text fill.
 						
 						
 					</div>
@@ -1310,13 +1265,20 @@ ul.inheritsList
 									<b>style</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>{String} The text fill style</dd>
 							
 							</dl>
 						
 						
 						
 						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>this;</dd>
+							
+							</dl>
 						
 						
 						
@@ -1335,7 +1297,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Dec 19 2013 17:19:27 GMT-0800 (PST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Sat Dec 21 2013 17:08:10 GMT-0800 (PST)
 		</div>
 	</body>
 </html>

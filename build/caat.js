@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 278
+Version: 0.4 build: 279
 
 Created on:
-DATE: 2013-12-19
-TIME: 17:18:46
+DATE: 2013-12-21
+TIME: 17:07:24
 */
 
 
@@ -5963,8 +5963,6 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
         size_active:            1,      // number of animated children
         size_total:             1,
 
-        __scene:                undefined,
-
         __next:                 null,
 
         __d_ax:                 -1,     // for drag-enabled actors.
@@ -6207,7 +6205,6 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          */
         setParent : function(parent) {
             this.parent= parent;
-            this.__scene= undefined;
 
             this.dirty= true;
             return this;
@@ -6356,17 +6353,13 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * @return {CAAT.Scene?}
          */
         getScene : function() {
-            if( this.__scene === undefined ) {
-                var parent= this.parent;
-                if( parent instanceof CAAT.Scene )
-                    this.__scene = parent;
-                else if( parent == null )
-                    this.__scene = null;
-                else
-                    this.__scene = parent.getScene();
-            }
+            var parent= this.parent;
+            if( parent == null )
+                return null;
+            if( parent instanceof CAAT.Scene )
+                return parent;
 
-            return this.__scene;
+            return parent.getScene();
         },
         /**
          * If GL is enables, get this background image's texture page, otherwise it will fail.
@@ -8480,7 +8473,17 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
     CAAT.TextActor.TRAVERSE_PATH_FORWARD= 1;
     CAAT.TextActor.TRAVERSE_PATH_BACKWARD= -1;
 
+    /**
+     * Calculate the text size
+     *
+     * @param text  {String}
+     * @param font  {String|CAAT.SpriteImage}
+     * @param [director]  {CAAT.Director}
+     * @returns {{width:Number, height:Number}}
+     */
     CAAT.TextActor.calcTextSize = function( text, font, director ) {
+        director = director || CAAT.currentDirector || CAAT.director[0];
+
         if ( typeof text != "string" )
             return { width: 0, height: 0 };
 
@@ -8536,13 +8539,13 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 		textBaseline:	    null,	// a valid canvas rendering context textBaseLine string. Any of:
                                     // top, hanging, middle, alphabetic, ideographic, bottom.
                                     // defaults to "top".
-		fill:			    true,   // a boolean indicating whether the text should be filled.
-        textFillStyle   :   '#eee', // text fill color
+        fill:               true,
+        textFillStyle:      "#eee", // text fill color
 		text:			    null,   // a string with the text to draw.
 		textWidth:		    0,      // an integer indicating text width in pixels.
         textHeight:         0,      // an integer indicating text height in pixels.
-		outline:		    false,  // a boolean indicating whether the text should be outlined.
-                                    // not all browsers support it.
+        outline:            false,  // boolean indicating whether to draw the outline
+		outlineSize:		0,      // the outline size
 		outlineColor:	    null,   // a valid color description string.
 
 		path:			    null,   // a CAAT.Path which will be traversed by the text. [Optional]
@@ -8553,26 +8556,23 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
         spriteTextAlignOffset: null,    // an integer indicating the text alignment position offset when drawing sprite text
 
         /**
-         * Set the text to be filled. The default Filling style will be set by calling setFillStyle method.
-         * Default value is true.
-         * @param fill {boolean} a boolean indicating whether the text will be filled.
+         * Set the text fill.
+         * @param style {String} The text fill style
          * @return this;
          */
-        setFill : function( fill ) {
-            this.fill= fill;
-            return this;
-        },
         setTextFillStyle : function( style ) {
             this.textFillStyle= style;
+            this.fill= style != null;
             return this;
         },
         /**
          * Sets whether the text will be outlined.
-         * @param outline {boolean} a boolean indicating whether the text will be outlined.
+         * @param outline {Number}
          * @return this;
          */
         setOutline : function( outline ) {
-            this.outline= outline;
+            this.outlineSize= outline;
+            this.outline= outline > 0 && this.outlineColor != null;
             return this;
         },
         setPathTraverseDirection : function(direction) {
@@ -8587,6 +8587,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          */
         setOutlineColor : function( color ) {
             this.outlineColor= color;
+            this.outline= this.outlineSize > 0 && color != null;
             return this;
         },
         /**
@@ -8599,7 +8600,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             if ( null===this.text || this.text==="" ) {
                 this.width= this.height= 0;
             }
-            this.calcTextSize( CAAT.director[0] );
+            this.calcTextSize();
 
             return this;
         },
@@ -8640,7 +8641,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
             }
 
             this.font= font;
-            this.calcTextSize( CAAT.director[0] );
+            this.calcTextSize();
 
             return this;
 		},
@@ -8649,7 +8650,7 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * Calculates the text dimension in pixels and stores the values in textWidth and textHeight
          * attributes.
          * If Actor's width and height were not set, the Actor's dimension will be set to these values.
-         * @param director a CAAT.Director instance.
+         * @param [director] a CAAT.Director instance.
          * @return this
          */
         calcTextSize : function(director) {
@@ -8704,15 +8705,15 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
 			if ( null!==this.textBaseline ) {
 				ctx.textBaseline= this.textBaseline;
 			}
-			if ( this.fill && null!==this.textFillStyle ) {
+			if ( this.fill ) {
                 ctx.fillStyle= this.textFillStyle;
 			}
-            if ( this.outline && null!==this.outlineColor ) {
+            if ( this.outline ) {
+                ctx.lineWidth= this.outlineSize;
                 ctx.strokeStyle= this.outlineColor;
             }
 
 			if (null===this.path) {
-
                 var tx=0;
                 if ( this.textAlign==='center') {
                     tx= (this.width/2)|0;
@@ -8720,25 +8721,10 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
                     tx= this.width;
                 }
 
-				if ( this.fill ) {
+				if( this.fill )
 					ctx.fillText( this.text, tx, 0 );
-					if ( this.outline ) {
-
-						// firefox necesita beginPath, si no, dibujara ademas el cuadrado del
-						// contenedor de los textos.
-//						if ( null!==this.outlineColor ) {
-//							ctx.strokeStyle= this.outlineColor;
-//						}
-						ctx.beginPath();
-						ctx.strokeText( this.text, tx, 0 );
-					}
-				} else {
-					if ( null!==this.outlineColor ) {
-						ctx.strokeStyle= this.outlineColor;
-					}
-                    ctx.beginPath();
-					ctx.strokeText( this.text, tx, 0 );
-				}
+                if( this.outline )
+                    ctx.strokeText( this.text, tx, 0 );
 			}
 			else {
 				this.drawOnPath(director,time);
