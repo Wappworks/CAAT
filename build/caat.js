@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 280
+Version: 0.4 build: 281
 
 Created on:
 DATE: 2014-01-14
-TIME: 12:04:10
+TIME: 12:58:02
 */
 
 
@@ -8046,7 +8046,10 @@ function proxyObject(object, preMethod, postMethod, errorMethod, getter, setter)
          * @return this
          */
         emptyChildren : function() {
+            var cl = this.childrenList;
             this.childrenList= [];
+            for(var num=cl.length,idx=0; idx < num; idx++)
+                cl[idx].setParent( null );
 
             return this;
         },

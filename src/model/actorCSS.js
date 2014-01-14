@@ -2069,7 +2069,10 @@
          */
         emptyChildren : function() {
             this.domElement.innerHTML='';
+            var cl = this.childrenList;
             this.childrenList= [];
+            for(var num=cl.length,idx=0; idx < num; idx++)
+                cl[idx].setParent( null );
 
             return this;
         },
