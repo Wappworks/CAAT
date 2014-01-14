@@ -21,11 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 279
+Version: 0.4 build: 280
 
 Created on:
-DATE: 2013-12-21
-TIME: 17:07:24
+DATE: 2014-01-14
+TIME: 12:04:10
 */
 
 
@@ -13860,10 +13860,16 @@ CAAT.RegisterDirector= function __CAATGlobal_RegisterDirector(director) {
 
             var sw = (el.width * (vx - ux)) >> 0;
             var sh = (el.height * (vy - uy)) >> 0;
+            if( sw <= 0 || sh <= 0 )
+                return this;
+
             if( dw == null )
                 dw = sw;
             if( dh == null )
                 dh = sh;
+            if( dw <= 0 || dh <= 0 )
+                return this;
+
             ctx.drawImage(
                 this.image,
                 el.x + ((el.width * ux) >> 0), el.y + ((el.height * uy) >> 0),

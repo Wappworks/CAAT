@@ -559,10 +559,16 @@
 
             var sw = (el.width * (vx - ux)) >> 0;
             var sh = (el.height * (vy - uy)) >> 0;
+            if( sw <= 0 || sh <= 0 )
+                return this;
+
             if( dw == null )
                 dw = sw;
             if( dh == null )
                 dh = sh;
+            if( dw <= 0 || dh <= 0 )
+                return this;
+
             ctx.drawImage(
                 this.image,
                 el.x + ((el.width * ux) >> 0), el.y + ((el.height * uy) >> 0),
