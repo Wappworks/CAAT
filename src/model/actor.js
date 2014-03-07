@@ -1520,6 +1520,9 @@
             this.dirty= false;
             this.invalid= false;
 
+            if( !this.inFrame )
+                this.fireEvent( 'inframe', time );
+
             this.inFrame= true;
 
             return this.alwaysPaint || this.AABB.intersects( director.AABB );
