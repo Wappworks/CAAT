@@ -22,11 +22,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Version: 0.4 build: 282
+Version: 0.4 build: 283
 
 Created on:
-DATE: 2014-03-07
-TIME: 10:18:21
+DATE: 2014-03-12
+TIME: 11:57:13
 */
 
 
@@ -150,7 +150,7 @@ ANCHOR_CUSTOM:9,fillStyle:null,strokeStyle:null,time:0,AABB:null,viewVertices:nu
 e,f,g,h){var i=this.getBehavior("__scaleTo");i||(i=(new CAAT.ScaleBehavior).setId("__scaleTo").setValues(1,1,1,1,0.5,0.5),this.addBehavior(i));i.setValues(this.scaleX,this.scaleY,a,b,f,g).setDelayTime(e?e:0,d);h&&i.setInterpolator(h);return this},scaleXTo:function(a,b,d,e,f,g){return this.__scale1To(CAAT.Scale1Behavior.AXIS_X,a,b,d,e,f,g)},scaleYTo:function(a,b,d,e,f,g){return this.__scale1To(CAAT.Scale1Behavior.AXIS_Y,a,b,d,e,f,g)},__scale1To:function(a,b,d,e,f,g,h){var i=this.getBehavior("__scaleXTo");
 i||(i=(new CAAT.Scale1Behavior).setId("__scaleXTo").setValues(1,1,a===CAAT.Scale1Behavior.AXIS_X,0.5,0.5),this.addBehavior(i));i.setValues(a?this.scaleX:this.scaleY,b,f,g).setDelayTime(e?e:0,d);h&&i.setInterpolator(h);return this},touchStart:function(){},touchMove:function(){},touchEnd:function(){},gestureStart:function(){},gestureChange:function(a,b,d){this.gestureEnabled&&(this.setRotation(a),this.setScale(b,d));return this},gestureEnd:function(){},isVisible:function(){return this.isVisible},setupCollission:function(a,
 b){this.collides=a;this.collidesAsRect=!b},invalidate:function(){this.invalid=!0},setGestureEnabled:function(a){this.gestureEnabled=!!a;return this},isGestureEnabled:function(){return this.gestureEnabled},getId:function(){return this.id},setId:function(a){this.id=a;return this},setParent:function(a){this.parent=a;this.dirty=!0;return this},setBackgroundImage:function(a,b){if(a){a instanceof CAAT.SpriteImage||(a=(new CAAT.SpriteImage).initialize(a,1,1));a.setOwner(this);this.backgroundImage=a;if("undefined"===
-typeof b||b)this.width=a.getWidth(),this.height=a.getHeight();this.glEnabled=!0}else this.backgroundImage=null;return this},setSpriteIndex:function(a){this.backgroundImage&&(this.backgroundImage.setSpriteIndex(a),this.invalidate());return this},setBackgroundImageOffset:function(a,b){this.backgroundImage&&this.backgroundImage.setOffset(a,b);return this},setAnimationImageIndex:function(a,b){this.backgroundImage&&(this.backgroundImage.resetAnimationTime(),this.backgroundImage.setAnimationImageIndex(a,
+typeof b||b)this.width=a.getWidth(),this.height=a.getHeight(),this.dirty=!0;this.glEnabled=!0}else this.backgroundImage=null;return this},setSpriteIndex:function(a){this.backgroundImage&&(this.backgroundImage.setSpriteIndex(a),this.invalidate());return this},setBackgroundImageOffset:function(a,b){this.backgroundImage&&this.backgroundImage.setOffset(a,b);return this},setAnimationImageIndex:function(a,b){this.backgroundImage&&(this.backgroundImage.resetAnimationTime(),this.backgroundImage.setAnimationImageIndex(a,
 b));return this},resetAnimationTime:function(){this.backgroundImage&&this.backgroundImage.resetAnimationTime();return this},setChangeFPS:function(a){this.backgroundImage&&this.backgroundImage.setChangeFPS(a);return this},setImageTransformation:function(a){this.backgroundImage&&this.backgroundImage.setSpriteTransformation(a);return this},centerOn:function(a,b){this.setPosition(a-this.width/2,b-this.height/2);return this},centerAt:function(a,b){return this.centerOn(a,b)},getScene:function(){var a=this.parent;
 return null==a?null:a instanceof CAAT.Scene?a:a.getScene()},getTextureGLPage:function(){return this.backgroundImage.image.__texturePage},setVisible:function(a){this.visible=a;return this},setOutOfFrameTime:function(){return this.expired?this:this.setFrameTime(-1,0)},addListener:function(a){this.lifecycleListenerList.push(a);return this},removeListener:function(a){for(var b=this.lifecycleListenerList.length;b--;)if(this.lifecycleListenerList[b]===a){this.lifecycleListenerList.splice(b,1);break}},setInheritAlpha:function(a){this.inheritAlpha=
 a;return this},fireEvent:function(a,b){for(var d=0;d<this.lifecycleListenerList.length;d++)this.lifecycleListenerList[d].actorLifeCycleEvent(this,a,b)},setExpired:function(a){this.expired=!0;this.fireEvent("expired",a);return this},enableEvents:function(a){this.mouseEnabled=a;return this},emptyBehaviorList:function(){this.behaviorList=[];return this},setFillStyle:function(a){this.fillStyle=a;return this},setStrokeStyle:function(a){this.strokeStyle=a;return this},setPaint:function(a){return this.setFillStyle(a)},

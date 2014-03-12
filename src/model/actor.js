@@ -446,6 +446,7 @@
                 if ( typeof adjust_size_to_image==='undefined' || adjust_size_to_image ) {
                     this.width= image.getWidth();
                     this.height= image.getHeight();
+                    this.dirty= true;
                 }
 
                 this.glEnabled= true;
